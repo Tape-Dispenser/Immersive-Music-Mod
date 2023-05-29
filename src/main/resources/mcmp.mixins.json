@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.fabricmc.mcmp.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "ExampleMixin",
+    "MCMP_Mixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
