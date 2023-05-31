@@ -6,6 +6,6 @@ This is a temporary landing page for the mod, it should be ready for download so
 
 https://www.patreon.com/TheMinecraftMusicProject
 
-discord.io/minecraftmusic
+http://discord.io/minecraftmusic
 
 https://www.youtube.com/@goldeagleproductions
