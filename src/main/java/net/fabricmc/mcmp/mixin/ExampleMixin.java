@@ -12,5 +12,6 @@ public class ExampleMixin {
 	@Inject(at = @At("HEAD"), method = "init()V")
 	private void init(CallbackInfo info) {
 		MCMP_main.LOGGER.info("This line is printed by an example mod mixin!");
+		MCMP_main.inGame = false;
 	}
 }

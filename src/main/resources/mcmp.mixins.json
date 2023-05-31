@@ -6,7 +6,9 @@
   "mixins": [],
   "client": [
     "ExampleMixin",
-    "MCMP_Mixin"
+    "MCMP_Mixin",
+    "ClientTickMixin",
+    "ClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,7 +1,6 @@
 package net.fabricmc.mcmp.mixin;
 
 import net.fabricmc.mcmp.MCMP_main;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.MusicTracker;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,9 +13,13 @@ public class MCMP_Mixin {
 	@Inject(method = "play()V", at = @At(value = "HEAD"), cancellable = true) // TODO: this will run every tick, a cleaner system is needed!!!!!
 	private void playMixin(CallbackInfo info) {
 		info.cancel();
-		if (MCMP_main.currentlyPlaying == null) {
-			MCMP_main.playSong(MCMP_main.MY_SOUND_EVENT, false, MinecraftClient.getInstance());
-			MCMP_main.LOGGER.info("song played");
-		}
+	}
+	
+
+	@Inject(method = "stop()V", at = @At(value = "HEAD"))
+	private void stopMixin(CallbackInfo info) {
+		info.cancel();
+		MCMP_main.currentlyPlaying = null;
+		MCMP_main.LOGGER.info("song stopped");
 	}
 }
