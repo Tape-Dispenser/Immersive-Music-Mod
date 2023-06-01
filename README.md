@@ -1,6 +1,7 @@
 # MCMusicProject
 
-## Download: https://github.com/Tape-Dispenser/MCMusicProject/releases
+## Download: 
+https://github.com/Tape-Dispenser/MCMusicProject/releases
 
 ## Installation
   1. Download .jar file from the link above
