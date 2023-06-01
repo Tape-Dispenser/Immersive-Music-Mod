@@ -1,6 +1,6 @@
 # MCMusicProject
 
-## DOWNLOAD: https://github.com/Tape-Dispenser/MCMusicProject/releases/tag/BETA
+## DOWNLOAD: https://github.com/Tape-Dispenser/MCMusicProject/releases
   ### Installation
     1. Download .jar file from the link above
     2. Download latest fabric api https://github.com/FabricMC/fabric/releases
