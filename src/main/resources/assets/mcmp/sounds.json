@@ -1,0 +1,140 @@
+{
+    "my_sound": {
+      "sounds": [
+        "mcmp:my_sound"
+      ]
+    },
+  
+    "basalt_deltas-01": {
+      "sounds": [
+        "mcmp:basalt_deltas-01"
+      ]
+    },
+
+    "birch_forest-01": {
+      "sounds": [
+        "mcmp:birch_forest-01"
+      ]
+    },
+
+    "birch_forest-02": {
+      "sounds": [
+        "mcmp:birch_forest-02"
+      ]
+    },
+    
+    "cherry_forest-01": {
+      "sounds": [
+        "mcmp:cherry_forest-01"
+      ]
+    },
+
+    "dark_oak_forest-01": {
+      "sounds": [
+        "mcmp:dark_oak_forest-01"
+      ]
+    },
+
+    "deep_dark-01": {
+      "sounds": [
+        "mcmp:deep_dark-01"
+      ]
+    },
+
+    "desert-01": {
+      "sounds": [
+        "mcmp:desert-01"
+      ]
+    },
+    
+    "forest-01": {
+      "sounds": [
+        "mcmp:forest-01"
+      ]
+    },
+
+    "jungle-01": {
+      "sounds": [
+        "mcmp:jungle-01"
+      ]
+    },
+
+    "lush_caves-01": {
+      "sounds": [
+        "mcmp:lush_caves-01"
+      ]
+    },
+
+    "lush_caves-02": {
+      "sounds": [
+        "mcmp:lush_caves-02"
+      ]
+    },
+
+    "menu-01": {
+      "sounds": [
+        "mcmp:menu-01"
+      ]
+    },
+
+    "menu-02": {
+      "sounds": [
+        "mcmp:menu-02"
+      ]
+    },
+
+    "mountain-01": {
+      "sounds": [
+        "mcmp:mountain-01"
+      ]
+    },
+
+    "mushroom_island-01": {
+      "sounds": [
+        "mcmp:mushroom_island-01"
+      ]
+    },
+
+    "nether_wastes-01": {
+      "sounds": [
+        "mcmp:nether_wastes-01"
+      ]
+    },
+
+    "plains-01": {
+      "sounds": [
+        "mcmp:plains-01"
+      ]
+    },
+
+    "snow_plains-01": {
+      "sounds": [
+        "mcmp:snow_plains-01"
+      ]
+    },
+
+    "soul_sand_valley-01": {
+      "sounds": [
+        "mcmp:soul_sand_valley-01"
+      ]
+    },
+
+    "taiga-01": {
+      "sounds": [
+        "mcmp:taiga-01"
+      ]
+    },
+
+    "taiga-02": {
+      "sounds": [
+        "mcmp:taiga-02"
+      ]
+    },
+
+    "warm_ocean-01": {
+      "sounds": [
+        "mcmp:warm_ocean-01"
+      ]
+    }
+  }
+
