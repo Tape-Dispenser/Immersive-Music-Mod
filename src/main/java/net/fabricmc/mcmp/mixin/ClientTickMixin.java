@@ -15,18 +15,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientTickMixin {
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	private void init(CallbackInfo info) {
-		SoundEvent x = MCMP_main.pickSong(MCMP_main.mc);
-		if (x != null) {
-			if (MCMP_main.currentlyPlaying == null) {
-				MCMP_main.playSong(x, false, MinecraftClient.getInstance());
-			} else  {
-				if (!MinecraftClient.getInstance().getSoundManager().isPlaying(MCMP_main.currentlyPlaying)) {
-					MCMP_main.playSong(x, false, MinecraftClient.getInstance());
-				}
-			}
+		SoundEvent x = MCMP_main.pickSong();
+		if (!MinecraftClient.getInstance().getSoundManager().isPlaying(MCMP_main.currentlyPlaying)) {
+			MCMP_main.playSong(x);
+			return;
+		}
+		if (MCMP_main.currentlyPlaying == null) {
+			MCMP_main.playSong(x);
 		}
 	}
 }
+
 
 
 
