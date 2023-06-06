@@ -66,7 +66,7 @@ public class MCMP_main implements ModInitializer {
 	public static MinecraftClient mc = MinecraftClient.getInstance();
 
 	public static boolean inMainMenu() {
-		if (MinecraftClient.getInstance().currentScreen == null) {
+		if (mc.player == null) {
 			return false;
 		}
 		return true;
