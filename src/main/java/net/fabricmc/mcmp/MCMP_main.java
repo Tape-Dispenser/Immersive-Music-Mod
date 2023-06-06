@@ -67,9 +67,9 @@ public class MCMP_main implements ModInitializer {
 
 	public static boolean inMainMenu() {
 		if (mc.player == null) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public static PositionedSoundInstance nowPlaying() {
@@ -77,20 +77,20 @@ public class MCMP_main implements ModInitializer {
 	}
 	
 	// literally just the vanilla playSong function but it won't be called by vanilla minecraft...
-	public static void playSong(SoundEvent songToPlay, boolean loop, MinecraftClient client) {
+	public static void playSong(SoundEvent songToPlay) {
         if (songToPlay != null) {
             if (currentlyPlaying != null)
-                client.getSoundManager().stop(currentlyPlaying);
+                mc.getSoundManager().stop(currentlyPlaying);
 
             currentlyPlaying = PositionedSoundInstance.ambient(songToPlay);
 
-            client.getSoundManager().play(currentlyPlaying);
+            mc.getSoundManager().play(currentlyPlaying);
         }
 	}
 
-	public static SoundEvent pickSong(MinecraftClient client) {
+	public static SoundEvent pickSong() {
 		if (!inMainMenu()) {
-			RegistryEntry<Biome> biome = client.player.world.getBiome(client.player.getBlockPos());
+			RegistryEntry<Biome> biome = mc.world.getBiome(mc.player.getBlockPos());
 			switch(biome.getKey().get().getValue().toString()) {
 				case "minecraft:basalt_deltas":
 					return SoundEvent.of(BASALT_DELTAS_1);
