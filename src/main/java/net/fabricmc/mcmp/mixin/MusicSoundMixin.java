@@ -18,7 +18,6 @@ public class MusicSoundMixin {
 
 	@Inject(method = "stop()V", at = @At(value = "HEAD"))
 	private void stopMixin(CallbackInfo info) {
-		info.cancel();
 		MCMP_main.currentlyPlaying = null;
 		MCMP_main.LOGGER.info("song stopped");
 	}
