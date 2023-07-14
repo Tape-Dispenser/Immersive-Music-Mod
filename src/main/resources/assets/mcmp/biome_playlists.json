@@ -1,5 +1,5 @@
 {
-  "fallback": [],
+  "fallback": ["vanilla"],
   "menu": ["mcmp:menu-01", "mcmp:menu-02"],
   "creative": [],
 
@@ -34,7 +34,7 @@
   "minecraft:badlands": [],
   "minecraft:eroded_badlands": [],
   "minecraft:wooded_badlands": [],
-  "minecraft:meadow": [],
+  "minecraft:meadow": ["mcmp:mountains_meadows-01"],
   "minecraft:cherry_grove": ["mcmp:cherry_forest-01"],
   "minecraft:grove": [],
   "minecraft:snowy_slopes": ["mcmp:mountain-01"],
