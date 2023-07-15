@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static net.fabricmc.mcmp.register_resources.*;
-import net.fabricmc.mcmp.register_resources;
+import net.fabricmc.mcmp.config_manager;
 
 public class MCMP_main implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -30,8 +30,12 @@ public class MCMP_main implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		LOGGER.info("Registering Resources");
 		register_resources.register_resources();
-		LOGGER.info("MC Music Project initialized.");
+		LOGGER.info("Resources Registered.");
+		LOGGER.info("Loading Config Values");
+		config_manager.init();
+
 	}
 
 	public static PositionedSoundInstance currentlyPlaying = null;
