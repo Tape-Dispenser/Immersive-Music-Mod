@@ -27,12 +27,13 @@ public class ClientTickMixin {
 			if (inTimer && timer == 0) {
 				MCMP_main.playSong(MCMP_main.pickSong());
 				inTimer = false;
-				LOGGER.info("timer done");
+				LOGGER.info("now playing: ".concat(currentlyPlaying.getId().toString()));
 			}
 			return;
 		}
 		if (MCMP_main.currentlyPlaying == null) {
 			MCMP_main.playSong(MCMP_main.pickSong());
+			LOGGER.info("now playing: ".concat(currentlyPlaying.getId().toString()));
 		}
 	}
 }
