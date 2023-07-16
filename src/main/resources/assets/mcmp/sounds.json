@@ -135,6 +135,48 @@
       "sounds": [
         "mcmp:warm_ocean-01"
       ]
+    },
+
+    "bamboo_jungle-01": {
+      "sounds": [
+        "mcmp:bamboo_jungle-01"
+      ]
+    },
+
+    "crimson_forest-01": {
+      "sounds": [
+        "mcmp:crimson_forest-01"
+      ]
+    },
+
+    "deep_dark-02": {
+      "sounds": [
+        "mcmp:deep_dark-02"
+      ]
+    },
+
+    "deep_ocean-01": {
+      "sounds": [
+        "mcmp:deep_ocean-01"
+      ]
+    },
+
+    "plains-02": {
+      "sounds": [
+        "mcmp:plains-02"
+      ]
+    },
+
+    "snow_plains-02": {
+      "sounds": [
+        "mcmp:snow_plains-02"
+      ]
+    },
+
+    "swamp-01": {
+      "sounds": [
+        "mcmp:swamp-01"
+      ]
     }
   }
 

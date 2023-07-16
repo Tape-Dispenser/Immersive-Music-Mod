@@ -80,12 +80,12 @@ public class config_manager {
                 writer.write("  \"creative\": [],\n");
                 writer.write("  \"vanilla\": [\"minecraft:music.game\"],\n");
                 writer.write("  \"minecraft:the_void\": [],\n");
-                writer.write("  \"minecraft:plains\": [\"mcmp:plains-01\"],\n");
+                writer.write("  \"minecraft:plains\": [\"mcmp:plains-01\", \"mcmp:plains-02\"],\n");
                 writer.write("  \"minecraft:sunflower_plains\": [],\n");
-                writer.write("  \"minecraft:snowy_plains\": [\"mcmp:snow_plains-01\"],\n");
+                writer.write("  \"minecraft:snowy_plains\": [\"mcmp:snow_plains-01\", \"mcmp:snow_plains-02\"],\n");
                 writer.write("  \"minecraft:ice_spikes\": [],\n");
                 writer.write("  \"minecraft:desert\": [\"mcmp:desert-01\"],\n");
-                writer.write("  \"minecraft:swamp\": [],\n");
+                writer.write("  \"minecraft:swamp\": [\"mcmp:swamp-01\"],\n");
                 writer.write("  \"minecraft:mangrove_swamp\": [],\n");
                 writer.write("  \"minecraft:forest\": [\"mcmp:forest-01\"],\n");
                 writer.write("  \"minecraft:flower_forest\": [],\n");
@@ -104,7 +104,7 @@ public class config_manager {
                 writer.write("  \"minecraft:windswept_savanna\": [],\n");
                 writer.write("  \"minecraft:jungle\": [\"mcmp:jungle-01\"],\n");
                 writer.write("  \"minecraft:sparse_jungle\": [],\n");
-                writer.write("  \"minecraft:bamboo_jungle\": [],\n");
+                writer.write("  \"minecraft:bamboo_jungle\": [\"mcmp:bamboo_jungle-01\"],\n");
                 writer.write("  \"minecraft:badlands\": [],\n");
                 writer.write("  \"minecraft:eroded_badlands\": [],\n");
                 writer.write("  \"minecraft:wooded_badlands\": [],\n");
@@ -124,7 +124,7 @@ public class config_manager {
                 writer.write("  \"minecraft:lukewarm_ocean\": [],\n");
                 writer.write("  \"minecraft:deep_lukewarm_ocean\": [],\n");
                 writer.write("  \"minecraft:ocean\": [],\n");
-                writer.write("  \"minecraft:deep_ocean\": [],\n");
+                writer.write("  \"minecraft:deep_ocean\": [\"mcmp:deep_ocean-01\"],\n");
                 writer.write("  \"minecraft:cold_ocean\": [],\n");
                 writer.write("  \"minecraft:deep_cold_ocean\": [],\n");
                 writer.write("  \"minecraft:frozen_ocean\": [],\n");
@@ -132,10 +132,10 @@ public class config_manager {
                 writer.write("  \"minecraft:mushroom_fields\": [\"mcmp:mushroom_island-01\"],\n");
                 writer.write("  \"minecraft:dripstone_caves\": [],\n");
                 writer.write("  \"minecraft:lush_caves\": [\"mcmp:lush_caves-01\", \"mcmp:lush_caves-02\"],\n");
-                writer.write("  \"minecraft:deep_dark\": [\"mcmp:deep_dark-01\"],\n");
+                writer.write("  \"minecraft:deep_dark\": [\"mcmp:deep_dark-01\", \"mcmp:deep_dark-02\"],\n");
                 writer.write("  \"minecraft:nether_wastes\": [\"mcmp:nether_wastes-01\"],\n");
                 writer.write("  \"minecraft:warped_forest\": [],\n");
-                writer.write("  \"minecraft:crimson_forest\": [],\n");
+                writer.write("  \"minecraft:crimson_forest\": [\"mcmp:crimson_forest-01\"],\n");
                 writer.write("  \"minecraft:soul_sand_valley\": [\"mcmp:soul_sand_valley-01\"],\n");
                 writer.write("  \"minecraft:basalt_deltas\": [\"mcmp:basalt_deltas-01\"],\n");
                 writer.write("  \"minecraft:the_end\": [],\n");

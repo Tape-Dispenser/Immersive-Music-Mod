@@ -1,5 +1,6 @@
 package net.fabricmc.mcmp;
 
+import net.minecraft.client.sound.Sound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
@@ -34,6 +35,13 @@ public class register_resources {
         Registry.register(Registries.SOUND_EVENT, register_resources.TAIGA_1, TAIGA_1_EVENT);
         Registry.register(Registries.SOUND_EVENT, register_resources.TAIGA_2, TAIGA_2_EVENT);
         Registry.register(Registries.SOUND_EVENT, register_resources.WARM_OCEAN_1, WARM_OCEAN_1_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.BAMBOO_JUNGLE_1, BAMBOO_JUNGLE_1_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.CRIMSON_FOREST_1, CRIMSON_FOREST_1_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.DEEP_DARK_2, DEEP_DARK_2_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.DEEP_OCEAN_1, DEEP_OCEAN_1_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.PLAINS_2, PLAINS_2_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.SNOW_PLAINS_2, SNOW_PLAINS_2_EVENT);
+        Registry.register(Registries.SOUND_EVENT, register_resources.SWAMP_1, SWAMP_1_EVENT);
         return;
     }
 
@@ -109,6 +117,27 @@ public class register_resources {
 
     public static final Identifier WARM_OCEAN_1 = new Identifier("mcmp:warm_ocean-01");
     public static SoundEvent WARM_OCEAN_1_EVENT = SoundEvent.of(WARM_OCEAN_1);
+
+    public static final Identifier BAMBOO_JUNGLE_1 = new Identifier("mcmp:bamboo_jungle-01");
+    public static SoundEvent BAMBOO_JUNGLE_1_EVENT = SoundEvent.of(BAMBOO_JUNGLE_1);
+
+    public static final Identifier CRIMSON_FOREST_1 = new Identifier("mcmp:crimson_forest-01");
+    public static SoundEvent CRIMSON_FOREST_1_EVENT = SoundEvent.of(CRIMSON_FOREST_1);
+
+    public static final Identifier DEEP_DARK_2 = new Identifier("mcmp:deep_dark-02");
+    public static SoundEvent DEEP_DARK_2_EVENT = SoundEvent.of(DEEP_DARK_2);
+
+    public static final Identifier DEEP_OCEAN_1 = new Identifier("mcmp:deep_ocean-01");
+    public static SoundEvent DEEP_OCEAN_1_EVENT = SoundEvent.of(DEEP_OCEAN_1);
+
+    public static final Identifier PLAINS_2 = new Identifier("mcmp:plains-02");
+    public static SoundEvent PLAINS_2_EVENT = SoundEvent.of(PLAINS_2);
+
+    public static final Identifier SNOW_PLAINS_2 = new Identifier("mcmp:snow_plains-02");
+    public static SoundEvent SNOW_PLAINS_2_EVENT = SoundEvent.of(SNOW_PLAINS_2);
+
+    public static final Identifier SWAMP_1 = new Identifier("mcmp:swamp-01");
+    public static SoundEvent SWAMP_1_EVENT = SoundEvent.of(SWAMP_1);
 
 
 }
