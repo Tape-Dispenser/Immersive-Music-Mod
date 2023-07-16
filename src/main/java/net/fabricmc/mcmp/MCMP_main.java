@@ -67,22 +67,34 @@ public class MCMP_main implements ModInitializer {
 	}
 
 	public static SoundEvent pickSong() {
+		Integer index = 0;
+		String biome = "menu";
 		if (!inMainMenu()) {
-			String biome = mc.world.getBiome(mc.player.getBlockPos()).getKey().get().getValue().toString();
-			Vector<String> playlist = biomes.get(biome);
-			if (playlist.size() == 0){
-				playlist = biomes.get("fallback");
-			}
-			String song = playlist.get(song_rng.nextInt() % playlist.size()).replaceAll("\"", "");
-			if (song.equals("vanilla")) {
-				song = biomes.get(song).get(song_rng.nextInt() % playlist.size()).replaceAll("\"", "");  // have fun understanding this when i'm not on a violent amount of cannabis
-			}
-			MCMP_main.LOGGER.info(biome.concat(", ".concat(song)));
-			return SoundEvent.of(Identifier.tryParse(song));
-
-		} else {
-			// menu music
-			return SoundEvent.of(MENU_1);
+			biome = mc.world.getBiome(mc.player.getBlockPos()).getKey().get().getValue().toString();
 		}
+		Vector<String> playlist = biomes.get(biome);											// get playlist
+		if (playlist.size() == 0){																// check if empty
+			playlist = biomes.get("fallback");
+		}
+		index = Math.abs(song_rng.nextInt() % playlist.size());									// pick random index inside playlist
+		String song = playlist.get(index).replaceAll("\"", "").strip();		// get the song
+		if (song.equals("vanilla")) {
+			index = Math.abs(song_rng.nextInt() % playlist.size());
+			try {
+				song = biomes.get(song).get(index).replaceAll("\"", "").strip(); // have fun understanding this when i'm not on a violent amount of cannabis
+			}
+			catch (ArrayIndexOutOfBoundsException e) {
+				MCMP_main.LOGGER.error("Make sure the fallback playlist (by default the vanilla playlist) isn't empty!");
+				throw new RuntimeException(e);
+			}
+		}
+
+		try {
+			return SoundEvent.of(Identifier.tryParse(song));
+		}
+		catch (NullPointerException e) {
+			return null;
+		}
+
 	}
 }

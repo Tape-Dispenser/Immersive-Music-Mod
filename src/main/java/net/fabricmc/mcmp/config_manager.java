@@ -54,6 +54,9 @@ public class config_manager {
             }
         }
         MCMP_main.LOGGER.info(biomes.toString());
+
+
+        MCMP_main.LOGGER.info("Resources Successfully Registered");
     }
 
     public static void first_launch() {
