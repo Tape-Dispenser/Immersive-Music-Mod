@@ -60,7 +60,7 @@ public class MCMP_main implements ModInitializer {
             if (currentlyPlaying != null)
                 mc.getSoundManager().stop(currentlyPlaying);
 
-            currentlyPlaying = PositionedSoundInstance.ambient(songToPlay);
+            currentlyPlaying = PositionedSoundInstance.music(songToPlay);
 
             mc.getSoundManager().play(currentlyPlaying);
         }
