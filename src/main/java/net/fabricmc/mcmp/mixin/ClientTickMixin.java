@@ -18,11 +18,7 @@ public class ClientTickMixin {
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	private void init(CallbackInfo info) {
 		if (!mc.getSoundManager().isPlaying(currentlyPlaying)) {
-			if (!inTimer) {
-				// initialize timer
-				timer = song_rng.nextInt(minDelay,maxDelay);
-				inTimer = true;
-			}
+			// timer initialization moved to MCMP.main.pickSong()
 			timer -= 1;
 			if (inTimer && timer == 0) {
 				MCMP_main.playSong(MCMP_main.pickSong());
@@ -30,10 +26,6 @@ public class ClientTickMixin {
 				LOGGER.info("now playing: ".concat(currentlyPlaying.getId().toString()));
 			}
 			return;
-		}
-		if (MCMP_main.currentlyPlaying == null) {
-			MCMP_main.playSong(MCMP_main.pickSong());
-			LOGGER.info("now playing: ".concat(currentlyPlaying.getId().toString()));
 		}
 	}
 }

@@ -42,10 +42,10 @@ public class MCMP_main implements ModInitializer {
 
 	public static PositionedSoundInstance currentlyPlaying = null;
 
-	public static Integer minDelay = 100;
-	public static Integer maxDelay = 1000;
-	public static Integer timer = 0;
-	public static boolean inTimer = false;
+	public static Integer minDelay = 12000;
+	public static Integer maxDelay = 24000;
+	public static Integer timer = 1;
+	public static boolean inTimer = true;
 
 	public static MinecraftClient mc = MinecraftClient.getInstance();
 
@@ -76,7 +76,11 @@ public class MCMP_main implements ModInitializer {
 		String biome = "menu";
 		if (!inMainMenu()) {
 			biome = mc.world.getBiome(mc.player.getBlockPos()).getKey().get().getValue().toString();
+			timer = song_rng.nextInt(minDelay,maxDelay);
+		} else {
+			timer = song_rng.nextInt(200,600);
 		}
+		inTimer = true;
 		Vector<String> playlist = biomes.get(biome);											// get playlist
 		if (playlist.size() == 0){																// check if empty
 			playlist = biomes.get("fallback");
