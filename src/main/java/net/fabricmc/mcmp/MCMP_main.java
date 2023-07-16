@@ -42,6 +42,11 @@ public class MCMP_main implements ModInitializer {
 
 	public static PositionedSoundInstance currentlyPlaying = null;
 
+	public static Integer minDelay = 100;
+	public static Integer maxDelay = 1000;
+	public static Integer timer = 0;
+	public static boolean inTimer = false;
+
 	public static MinecraftClient mc = MinecraftClient.getInstance();
 
 	public static boolean inMainMenu() {
