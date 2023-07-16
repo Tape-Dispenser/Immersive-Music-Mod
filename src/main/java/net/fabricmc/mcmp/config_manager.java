@@ -78,7 +78,7 @@ public class config_manager {
                 writer.write("  \"fallback\": [\"vanilla\"],\n");
                 writer.write("  \"menu\": [\"mcmp:menu-01\", \"mcmp:menu-02\"],\n");
                 writer.write("  \"creative\": [],\n");
-                writer.write("  \"vanilla\": [],\n");
+                writer.write("  \"vanilla\": [\"minecraft:music.game\"],\n");
                 writer.write("  \"minecraft:the_void\": [],\n");
                 writer.write("  \"minecraft:plains\": [\"mcmp:plains-01\"],\n");
                 writer.write("  \"minecraft:sunflower_plains\": [],\n");
