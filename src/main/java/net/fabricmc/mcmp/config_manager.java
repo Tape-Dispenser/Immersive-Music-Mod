@@ -1,6 +1,7 @@
 package net.fabricmc.mcmp;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resource.JsonDataLoader;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,21 +11,49 @@ import java.util.*;
 import java.io.*;
 import static java.nio.file.Files.readAllLines;
 
+
+
 public class config_manager {
     static HashMap<String, Vector<String>> biomes = new HashMap<String, Vector<String>>();
     static Path config_dir = FabricLoader.getInstance().getConfigDir();
+
+    static Vector<String> lines = new Vector<String>();
 
     public static void init() {
         // read config file
         try {
             String config_file = config_dir.toString().concat("/mcmp/biome_playlists.json");
-            List<String> lines = readAllLines(Paths.get(config_file), StandardCharsets.UTF_8);
-            // now i get to parse json!!!! yippeeee!!!!!!
-            // this should actually be pretty cool to do and a fun activity.
-        } catch (IOException e) {
+            lines = new Vector<String> (readAllLines(Paths.get(config_file), StandardCharsets.UTF_8));
+        }
+        catch (IOException e) {
             MCMP_main.LOGGER.info("Config file/directory not found, creating now");
             first_launch();
+            String config_file = config_dir.toString().concat("/mcmp/biome_playlists.json");
+            try {
+                lines = new Vector<String> (readAllLines(Paths.get(config_file), StandardCharsets.UTF_8));
+            }
+            catch (IOException f) {
+                MCMP_main.LOGGER.error("Failed to create biome_playlists.json");
+                throw new RuntimeException(f);
+            }
         }
+        for (String line : lines) {
+            line = line.strip();
+            if (!Objects.equals(line, "{") && !Objects.equals(line, "}") && !Objects.equals(line, "")) {
+
+                String[] splits = line.split("\":");
+                if (splits.length != 2) {
+                    MCMP_main.LOGGER.error("Invalid biome_playlists.json!"); // let player know how to reset to defaults eventually
+                    throw new RuntimeException();
+                }
+                String key = splits[0].strip().replaceAll("\"", "");
+
+                Vector<String> pair = new Vector<String>();
+                Collections.addAll(pair, (splits[1].strip().replaceAll("\\]|\\[","").split(","))); // java regex my beloved (warning included)
+                biomes.put(key,pair);
+            }
+        }
+        MCMP_main.LOGGER.info(biomes.toString());
     }
 
     public static void first_launch() {
@@ -41,7 +70,7 @@ public class config_manager {
         try {
             if (f.createNewFile()) {
                 // load initial values
-                FileWriter writer = new FileWriter(f.getPath());
+                FileWriter writer = new FileWriter(f.getPath()); // i need to find out how to compile data into a json file that i can load into registry
                 writer.write("{\n");
                 writer.write("  \"fallback\": [\"vanilla\"],\n");
                 writer.write("  \"menu\": [\"mcmp:menu-01\", \"mcmp:menu-02\"],\n");
