@@ -1,7 +1,7 @@
-# MCMusicProject
+# Immersive Music Mod
 
 ## Download: 
-https://github.com/Tape-Dispenser/MCMusicProject/releases
+https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 
 ## Installation:
   1. Download and install fabric 1.20 https://fabricmc.net/wiki/install
