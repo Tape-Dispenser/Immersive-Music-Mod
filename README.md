@@ -1,4 +1,4 @@
-# Immersive Music Mod
+# The Immersive Music Mod
 
 ## Download: 
 https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
