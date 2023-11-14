@@ -10,8 +10,7 @@ https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
   4. Move both mod and fabric api to your mods folder
 
 ## Links:
-
-https://www.patreon.com/TheMinecraftMusicProject
+https://www.patreon.com/ImmersiveMusicMod
 
 http://discord.io/minecraftmusic
 
