@@ -2,6 +2,7 @@ package net.fabricmc.mcmp.mixin;
 
 import net.fabricmc.mcmp.MCMP_main;
 import net.minecraft.client.sound.MusicTracker;
+import net.fabricmc.mcmp.song_controls;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +19,7 @@ public class MusicSoundMixin {
 
 	@Inject(method = "stop()V", at = @At(value = "HEAD"))
 	private void stopMixin(CallbackInfo info) {
-		MCMP_main.currentlyPlaying = null;
+		song_controls.currentlyPlaying = null;
 		MCMP_main.LOGGER.info("song stopped");
 	}
 }

@@ -14,10 +14,11 @@ import static java.nio.file.Files.readAllLines;
 
 
 public class config_manager {
-    static HashMap<String, Vector<String>> biomes = new HashMap<String, Vector<String>>();
+    public static HashMap<String, Vector<String>> biomes = new HashMap<String, Vector<String>>();
     static Path config_dir = FabricLoader.getInstance().getConfigDir();
 
     static Vector<String> lines = new Vector<String>();
+
 
     public static void init() {
         // read config file
