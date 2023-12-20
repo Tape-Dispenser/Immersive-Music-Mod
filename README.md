@@ -16,7 +16,7 @@ https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
   4. `./gradlew genSources`
   5. `./gradlew build`
 
-  The compiled mod will be output to The-Immersive-Music-Mod/build/libs
+  The compiled mod will be output to `The-Immersive-Music-Mod/build/libs`.
   Make sure you put `TIMM_version.jar` in your mods folder and not `TIMM_version-sources.jar`!
 
 ## Links:
