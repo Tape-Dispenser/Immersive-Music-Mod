@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static net.fabricmc.mcmp.config_manager.biomes;
+
 import static net.fabricmc.mcmp.register_resources.*;
 import net.fabricmc.mcmp.config_manager;
 
@@ -32,13 +32,16 @@ public class MCMP_main implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-		LOGGER.info("Registering Resources");
+		LOGGER.info("Registering Resources...");
 		register_resources.register_resources();
-		LOGGER.info("Resources Registered.");
-		LOGGER.info("Loading Config Values");
+		LOGGER.info("Resources Registered");
+		LOGGER.info("Initializing Playlists...");
+		biome_playlists.init();
+		LOGGER.info("Playlists Initialized.");
+		LOGGER.info("Loading Config Values...");
 		config_manager.init();
 		LOGGER.info("Config Values Loaded");
-		LOGGER.info("Initializing Song Controls");
+		LOGGER.info("Initializing Song Controls...");
 		song_controls.init();
 		LOGGER.info("Song Controls Initialized");
 
