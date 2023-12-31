@@ -9,135 +9,78 @@ import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.entry.RegistryEntry;
 
 public class register_resources {
-    public static void register_resources() {
+    public static void init() {
         //  iterate through all entries in biome_playlists.json and make a list of all unique songs
-        Registry.register(Registries.SOUND_EVENT, register_resources.MY_SOUND_ID, MY_SOUND_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.BASALT_DELTAS_1, BASALT_DELTAS_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.BIRCH_FOREST_1, BIRCH_FOREST_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.BIRCH_FOREST_2, BIRCH_FOREST_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.CHERRY_FOREST_1, CHERRY_FOREST_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.DARK_OAK_FOREST_1, DARK_OAK_FOREST_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.DEEP_DARK_1, DEEP_DARK_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.DESERT_1, DESERT_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.FOREST_1, FOREST_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.JUNGLE_1, JUNGLE_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.LUSH_CAVES_1, LUSH_CAVES_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.LUSH_CAVES_2, LUSH_CAVES_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.MENU_1, MENU_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.MENU_2, MENU_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.MOUNTAIN_1, MOUNTAIN_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.MOUNTAINS_MEADOWS_1, MOUNTAINS_MEADOWS_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.MUSHROOM_ISLAND_1, MUSHROOM_ISLAND_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.NETHER_WASTES_1, NETHER_WASTES_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.PLAINS_1, PLAINS_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.SNOW_PLAINS_1, SNOW_PLAINS_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.SOUL_SAND_VALLEY_1, SOUL_SAND_VALLEY_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.TAIGA_1, TAIGA_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.TAIGA_2, TAIGA_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.WARM_OCEAN_1, WARM_OCEAN_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.BAMBOO_JUNGLE_1, BAMBOO_JUNGLE_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.CRIMSON_FOREST_1, CRIMSON_FOREST_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.DEEP_DARK_2, DEEP_DARK_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.DEEP_OCEAN_1, DEEP_OCEAN_1_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.PLAINS_2, PLAINS_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.SNOW_PLAINS_2, SNOW_PLAINS_2_EVENT);
-        Registry.register(Registries.SOUND_EVENT, register_resources.SWAMP_1, SWAMP_1_EVENT);
-        return;
+        Registry.register(Registries.SOUND_EVENT, register_resources.MY_SOUND_ID, SoundEvent.of(MY_SOUND_ID));
+        Registry.register(Registries.SOUND_EVENT, register_resources.MENU, SoundEvent.of(MENU));
+        Registry.register(Registries.SOUND_EVENT, register_resources.BADLANDS, SoundEvent.of(BADLANDS));
+        Registry.register(Registries.SOUND_EVENT, register_resources.BAMBOO_JUNGLE, SoundEvent.of(BAMBOO_JUNGLE));
+        Registry.register(Registries.SOUND_EVENT, register_resources.BIRCH_FOREST, SoundEvent.of(BIRCH_FOREST));
+        Registry.register(Registries.SOUND_EVENT, register_resources.CHERRY_GROVE, SoundEvent.of(CHERRY_GROVE));
+        Registry.register(Registries.SOUND_EVENT, register_resources.COLD_OCEAN, SoundEvent.of(COLD_OCEAN));
+        Registry.register(Registries.SOUND_EVENT, register_resources.DARK_FOREST, SoundEvent.of(DARK_FOREST));
+        Registry.register(Registries.SOUND_EVENT, register_resources.DEEP_DARK, SoundEvent.of(DEEP_DARK));
+        Registry.register(Registries.SOUND_EVENT, register_resources.DESERT, SoundEvent.of(DESERT));
+        Registry.register(Registries.SOUND_EVENT, register_resources.DRIPSTONE_CAVES, SoundEvent.of(DRIPSTONE_CAVES));
+        Registry.register(Registries.SOUND_EVENT, register_resources.FLOWER_FOREST, SoundEvent.of(FLOWER_FOREST));
+        Registry.register(Registries.SOUND_EVENT, register_resources.FOREST, SoundEvent.of(FOREST));
+        Registry.register(Registries.SOUND_EVENT, register_resources.MOUNTAINS, SoundEvent.of(MOUNTAINS));
+        Registry.register(Registries.SOUND_EVENT, register_resources.JUNGLE, SoundEvent.of(JUNGLE));
+        Registry.register(Registries.SOUND_EVENT, register_resources.LUSH_CAVES, SoundEvent.of(LUSH_CAVES));
+        Registry.register(Registries.SOUND_EVENT, register_resources.MEADOW, SoundEvent.of(MEADOW));
+        Registry.register(Registries.SOUND_EVENT, register_resources.MUSHROOM, SoundEvent.of(MUSHROOM));
+        Registry.register(Registries.SOUND_EVENT, register_resources.OCEAN, SoundEvent.of(OCEAN));
+        Registry.register(Registries.SOUND_EVENT, register_resources.PLAINS, SoundEvent.of(PLAINS));
+        Registry.register(Registries.SOUND_EVENT, register_resources.SNOW_PLAINS, SoundEvent.of(SNOW_PLAINS));
+        Registry.register(Registries.SOUND_EVENT, register_resources.RIVER, SoundEvent.of(RIVER));
+        Registry.register(Registries.SOUND_EVENT, register_resources.SWAMP, SoundEvent.of(SWAMP));
+        Registry.register(Registries.SOUND_EVENT, register_resources.TAIGA, SoundEvent.of(TAIGA));
+        Registry.register(Registries.SOUND_EVENT, register_resources.WARM_OCEAN, SoundEvent.of(WARM_OCEAN));
+        Registry.register(Registries.SOUND_EVENT, register_resources.WINDY, SoundEvent.of(WINDY));
+
+        Registry.register(Registries.SOUND_EVENT, register_resources.BASALT_DELTAS, SoundEvent.of(BASALT_DELTAS));
+        Registry.register(Registries.SOUND_EVENT, register_resources.CRIMSON_FOREST, SoundEvent.of(CRIMSON_FOREST));
+        Registry.register(Registries.SOUND_EVENT, register_resources.NETHER_WASTES, SoundEvent.of(NETHER_WASTES));
+        Registry.register(Registries.SOUND_EVENT, register_resources.SOUL_SAND_VALLEY, SoundEvent.of(SOUL_SAND_VALLEY));
+
+        Registry.register(Registries.SOUND_EVENT, register_resources.END, SoundEvent.of(END));
     }
 
     public static final Identifier MY_SOUND_ID = new Identifier("mcmp:my_sound");
-    public static SoundEvent MY_SOUND_EVENT = SoundEvent.of(MY_SOUND_ID);
+    public static final Identifier MENU = new Identifier("mcmp:menu");
+    public static final Identifier BADLANDS = new Identifier("mcmp:badlands");
+    public static final Identifier BAMBOO_JUNGLE = new Identifier("mcmp:bamboo_jungle");
+    public static final Identifier BIRCH_FOREST = new Identifier("mcmp:birch_forest");
+    public static final Identifier CHERRY_GROVE = new Identifier("mcmp:cherry_grove");
+    public static final Identifier COLD_OCEAN = new Identifier("mcmp:cold_ocean");
+    public static final Identifier DARK_FOREST = new Identifier("mcmp:dark_forest");
+    public static final Identifier DEEP_DARK = new Identifier("mcmp:deep_dark");
+    public static final Identifier DESERT = new Identifier("mcmp:desert");
+    public static final Identifier DRIPSTONE_CAVES = new Identifier("mcmp:dripstone_caves");
+    public static final Identifier FLOWER_FOREST = new Identifier("mcmp:flower_forest");
+    public static final Identifier FOREST = new Identifier("mcmp:forest");
+    public static final Identifier MOUNTAINS = new Identifier("mcmp:mountains");
+    public static final Identifier JUNGLE = new Identifier("mcmp:jungle");
+    public static final Identifier LUSH_CAVES = new Identifier("mcmp:lush_caves");
+    public static final Identifier MEADOW = new Identifier("mcmp:meadow");
+    public static final Identifier MUSHROOM = new Identifier("mcmp:mushroom");
+    public static final Identifier OCEAN = new Identifier("mcmp:ocean");
+    public static final Identifier PLAINS = new Identifier("mcmp:plains");
+    public static final Identifier SNOW_PLAINS = new Identifier("mcmp:snow_plains");
+    public static final Identifier RIVER = new Identifier("mcmp:river");
+    public static final Identifier SWAMP = new Identifier("mcmp:swamp");
+    public static final Identifier TAIGA = new Identifier("mcmp:taiga");
+    public static final Identifier WARM_OCEAN = new Identifier("mcmp:warm_ocean");
+    public static final Identifier WINDY = new Identifier("mcmp:windy");
 
 
-    public static final Identifier BASALT_DELTAS_1 = new Identifier("mcmp:basalt_deltas-01");
-    public static SoundEvent BASALT_DELTAS_1_EVENT = SoundEvent.of(BASALT_DELTAS_1);
+    public static final Identifier BASALT_DELTAS = new Identifier("mcmp:basalt_deltas");
+    public static final Identifier CRIMSON_FOREST = new Identifier("mcmp:crimson_forest");
+    public static final Identifier NETHER_WASTES = new Identifier("mcmp:nether_wastes");
+    public static final Identifier SOUL_SAND_VALLEY = new Identifier("mcmp:soul_sand_valley");
 
-    public static final Identifier BIRCH_FOREST_1 = new Identifier("mcmp:birch_forest-01");
-    public static SoundEvent BIRCH_FOREST_1_EVENT = SoundEvent.of(BIRCH_FOREST_1);
 
-    public static final Identifier BIRCH_FOREST_2 = new Identifier("mcmp:birch_forest-02");
-    public static SoundEvent BIRCH_FOREST_2_EVENT = SoundEvent.of(BIRCH_FOREST_2);
 
-    public static final Identifier CHERRY_FOREST_1 = new Identifier("mcmp:cherry_forest-01");
-    public static SoundEvent CHERRY_FOREST_1_EVENT = SoundEvent.of(CHERRY_FOREST_1);
-
-    public static final Identifier DARK_OAK_FOREST_1 = new Identifier("mcmp:dark_oak_forest-01");
-    public static SoundEvent DARK_OAK_FOREST_1_EVENT = SoundEvent.of(DARK_OAK_FOREST_1);
-
-    public static final Identifier DEEP_DARK_1 = new Identifier("mcmp:deep_dark-01");
-    public static SoundEvent DEEP_DARK_1_EVENT = SoundEvent.of(DEEP_DARK_1);
-
-    public static final Identifier DESERT_1 = new Identifier("mcmp:desert-01");
-    public static SoundEvent DESERT_1_EVENT = SoundEvent.of(DESERT_1);
-
-    public static final Identifier FOREST_1 = new Identifier("mcmp:forest-01");
-    public static SoundEvent FOREST_1_EVENT = SoundEvent.of(FOREST_1);
-
-    public static final Identifier JUNGLE_1 = new Identifier("mcmp:jungle-01");
-    public static SoundEvent JUNGLE_1_EVENT = SoundEvent.of(JUNGLE_1);
-
-    public static final Identifier LUSH_CAVES_1 = new Identifier("mcmp:lush_caves-01");
-    public static SoundEvent LUSH_CAVES_1_EVENT = SoundEvent.of(LUSH_CAVES_1);
-
-    public static final Identifier LUSH_CAVES_2 = new Identifier("mcmp:lush_caves-02");
-    public static SoundEvent LUSH_CAVES_2_EVENT = SoundEvent.of(LUSH_CAVES_2);
-
-    public static final Identifier MENU_1 = new Identifier("mcmp:menu-01");
-    public static SoundEvent MENU_1_EVENT = SoundEvent.of(MENU_1);
-
-    public static final Identifier MENU_2 = new Identifier("mcmp:menu-02");
-    public static SoundEvent MENU_2_EVENT = SoundEvent.of(MENU_2);
-
-    public static final Identifier MOUNTAIN_1 = new Identifier("mcmp:mountain-01");
-    public static SoundEvent MOUNTAIN_1_EVENT = SoundEvent.of(MOUNTAIN_1);
-
-    public static final Identifier MOUNTAINS_MEADOWS_1 = new Identifier("mcmp:mountains_meadows-01");
-    public static SoundEvent MOUNTAINS_MEADOWS_1_EVENT = SoundEvent.of(MOUNTAINS_MEADOWS_1);
-
-    public static final Identifier MUSHROOM_ISLAND_1 = new Identifier("mcmp:mushroom_island-01");
-    public static SoundEvent MUSHROOM_ISLAND_1_EVENT = SoundEvent.of(MUSHROOM_ISLAND_1);
-
-    public static final Identifier NETHER_WASTES_1 = new Identifier("mcmp:nether_wastes-01");
-    public static SoundEvent NETHER_WASTES_1_EVENT = SoundEvent.of(NETHER_WASTES_1);
-
-    public static final Identifier PLAINS_1 = new Identifier("mcmp:plains-01");
-    public static SoundEvent PLAINS_1_EVENT = SoundEvent.of(PLAINS_1);
-
-    public static final Identifier SNOW_PLAINS_1 = new Identifier("mcmp:snow_plains-01");
-    public static SoundEvent SNOW_PLAINS_1_EVENT = SoundEvent.of(SNOW_PLAINS_1);
-
-    public static final Identifier SOUL_SAND_VALLEY_1 = new Identifier("mcmp:soul_sand_valley-01");
-    public static SoundEvent SOUL_SAND_VALLEY_1_EVENT = SoundEvent.of(SOUL_SAND_VALLEY_1);
-
-    public static final Identifier TAIGA_1 = new Identifier("mcmp:taiga-01");
-    public static SoundEvent TAIGA_1_EVENT = SoundEvent.of(TAIGA_1);
-
-    public static final Identifier TAIGA_2 = new Identifier("mcmp:taiga-02");
-    public static SoundEvent TAIGA_2_EVENT = SoundEvent.of(TAIGA_2);
-
-    public static final Identifier WARM_OCEAN_1 = new Identifier("mcmp:warm_ocean-01");
-    public static SoundEvent WARM_OCEAN_1_EVENT = SoundEvent.of(WARM_OCEAN_1);
-
-    public static final Identifier BAMBOO_JUNGLE_1 = new Identifier("mcmp:bamboo_jungle-01");
-    public static SoundEvent BAMBOO_JUNGLE_1_EVENT = SoundEvent.of(BAMBOO_JUNGLE_1);
-
-    public static final Identifier CRIMSON_FOREST_1 = new Identifier("mcmp:crimson_forest-01");
-    public static SoundEvent CRIMSON_FOREST_1_EVENT = SoundEvent.of(CRIMSON_FOREST_1);
-
-    public static final Identifier DEEP_DARK_2 = new Identifier("mcmp:deep_dark-02");
-    public static SoundEvent DEEP_DARK_2_EVENT = SoundEvent.of(DEEP_DARK_2);
-
-    public static final Identifier DEEP_OCEAN_1 = new Identifier("mcmp:deep_ocean-01");
-    public static SoundEvent DEEP_OCEAN_1_EVENT = SoundEvent.of(DEEP_OCEAN_1);
-
-    public static final Identifier PLAINS_2 = new Identifier("mcmp:plains-02");
-    public static SoundEvent PLAINS_2_EVENT = SoundEvent.of(PLAINS_2);
-
-    public static final Identifier SNOW_PLAINS_2 = new Identifier("mcmp:snow_plains-02");
-    public static SoundEvent SNOW_PLAINS_2_EVENT = SoundEvent.of(SNOW_PLAINS_2);
-
-    public static final Identifier SWAMP_1 = new Identifier("mcmp:swamp-01");
-    public static SoundEvent SWAMP_1_EVENT = SoundEvent.of(SWAMP_1);
-
+    public static final Identifier END = new Identifier("mcmp:end");
 
 }

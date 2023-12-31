@@ -33,7 +33,7 @@ public class MCMP_main implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		LOGGER.info("Registering Resources...");
-		register_resources.register_resources();
+		register_resources.init();
 		LOGGER.info("Resources Registered");
 		LOGGER.info("Initializing Playlists...");
 		biome_playlists.init();

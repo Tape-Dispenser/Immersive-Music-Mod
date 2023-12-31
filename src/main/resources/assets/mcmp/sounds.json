@@ -4,179 +4,210 @@
         "mcmp:my_sound"
       ]
     },
-  
-    "basalt_deltas-01": {
+
+    "menu": {
       "sounds": [
-        "mcmp:basalt_deltas-01"
+        "mcmp:menu-01",
+        "mcmp:menu-02",
+        "mcmp:menu-03"
       ]
     },
 
-    "birch_forest-01": {
-      "sounds": [
-        "mcmp:birch_forest-01"
-      ]
+
+
+
+
+
+    "badlands":{
+      "sounds": []
     },
 
-    "birch_forest-02": {
-      "sounds": [
-        "mcmp:birch_forest-02"
-      ]
-    },
-    
-    "cherry_forest-01": {
-      "sounds": [
-        "mcmp:cherry_forest-01"
-      ]
-    },
-
-    "dark_oak_forest-01": {
-      "sounds": [
-        "mcmp:dark_oak_forest-01"
-      ]
-    },
-
-    "deep_dark-01": {
-      "sounds": [
-        "mcmp:deep_dark-01"
-      ]
-    },
-
-    "desert-01": {
-      "sounds": [
-        "mcmp:desert-01"
-      ]
-    },
-    
-    "forest-01": {
-      "sounds": [
-        "mcmp:forest-01"
-      ]
-    },
-
-    "jungle-01": {
-      "sounds": [
-        "mcmp:jungle-01"
-      ]
-    },
-
-    "lush_caves-01": {
-      "sounds": [
-        "mcmp:lush_caves-01"
-      ]
-    },
-
-    "lush_caves-02": {
-      "sounds": [
-        "mcmp:lush_caves-02"
-      ]
-    },
-
-    "menu-01": {
-      "sounds": [
-        "mcmp:menu-01"
-      ]
-    },
-
-    "menu-02": {
-      "sounds": [
-        "mcmp:menu-02"
-      ]
-    },
-
-    "mountain-01": {
-      "sounds": [
-        "mcmp:mountain-01"
-      ]
-    },
-
-    "mushroom_island-01": {
-      "sounds": [
-        "mcmp:mushroom_island-01"
-      ]
-    },
-
-    "nether_wastes-01": {
-      "sounds": [
-        "mcmp:nether_wastes-01"
-      ]
-    },
-
-    "plains-01": {
-      "sounds": [
-        "mcmp:plains-01"
-      ]
-    },
-
-    "snow_plains-01": {
-      "sounds": [
-        "mcmp:snow_plains-01"
-      ]
-    },
-
-    "soul_sand_valley-01": {
-      "sounds": [
-        "mcmp:soul_sand_valley-01"
-      ]
-    },
-
-    "taiga-01": {
-      "sounds": [
-        "mcmp:taiga-01"
-      ]
-    },
-
-    "taiga-02": {
-      "sounds": [
-        "mcmp:taiga-02"
-      ]
-    },
-
-    "warm_ocean-01": {
-      "sounds": [
-        "mcmp:warm_ocean-01"
-      ]
-    },
-
-    "bamboo_jungle-01": {
+    "bamboo_jungle": {
       "sounds": [
         "mcmp:bamboo_jungle-01"
       ]
     },
 
-    "crimson_forest-01": {
+    "birch_forest": {
       "sounds": [
-        "mcmp:crimson_forest-01"
+        "mcmp:birch_forest-01",
+        "mcmp:birch_forest-02"
       ]
     },
 
-    "deep_dark-02": {
+    "cherry_grove": {
       "sounds": [
-        "mcmp:deep_dark-02"
+        "mcmp:cherry_grove-01",
+        "mcmp:cherry_grove-01"
       ]
     },
 
-    "deep_ocean-01": {
+    "cold_ocean": {
+      "sounds": [
+        "mcmp:cold_ocean-01",
+        "mcmp:cold_ocean-02",
+        "mcmp:deep_cold_ocean-01"
+      ]
+    },
+
+    "dark_forest": {
+      "sounds": [
+        "mcmp:dark_oak_forest-01",
+        "mcmp:dark_oak_forest-02"
+      ]
+    },
+
+    "deep_dark": {
+      "sounds": [
+        "mcmp:deep_dark-01",
+        "mcmp:deep_dark-02",
+        "mcmp:deep_dark-03"
+      ]
+    },
+
+    "desert": {
+      "sounds": [
+        "mcmp:desert-01",
+        "mcmp:desert-02"
+      ]
+    },
+
+    "dripstone_caves": {
+      "sounds": [
+        "mcmp:dripstone_cave-01"
+      ]
+    },
+
+    "flower_forest": {
+      "sounds": [
+        "mcmp:flower_forest-01"
+      ]
+    },
+
+    "forest": {
+      "sounds": [
+        "mcmp:forest-01",
+        "mcmp:forest-02"
+      ]
+    },
+
+    "mountains": {
+      "sounds": [
+        "mcmp:mountains-01",
+        "mcmp:mountains-02",
+        "mcmp:mountains-03"
+      ]
+    },
+
+    "jungle": {
+      "sounds": [
+        "mcmp:jungle-01"
+      ]
+    },
+
+    "lush_caves": {
+      "sounds": [
+        "mcmp:lush_caves-01",
+        "mcmp:lush_caves-02"
+      ]
+    },
+
+    "meadow": {
+      "sounds": []
+    },
+
+    "mushroom": {
+      "sounds": [
+        "mcmp:mushroom_island-01"
+      ]
+    },
+
+    "ocean": {
       "sounds": [
         "mcmp:deep_ocean-01"
       ]
     },
 
-    "plains-02": {
+    "plains": {
       "sounds": [
+        "mcmp:plains-01",
         "mcmp:plains-02"
       ]
     },
 
-    "snow_plains-02": {
+    "snow_plains": {
       "sounds": [
-        "mcmp:snow_plains-02"
+        "mcmp:snow_plains-01",
+        "mcmp:snow_plains-02",
+        "mcmp:snow_plains-03"
       ]
     },
 
-    "swamp-01": {
+    "river": {
+      "sounds": []
+    },
+
+    "swamp": {
       "sounds": [
-        "mcmp:swamp-01"
+        "mcmp:swamp-01",
+        "mcmp:swamp-02"
+      ]
+    },
+
+    "taiga": {
+      "sounds": [
+        "mcmp:taiga-01",
+        "mcmp:taiga-02",
+        "mcmp:taiga-03"
+      ]
+    },
+
+    "warm_ocean": {
+      "sounds": [
+        "mcmp:warm_ocean-01"
+      ]
+    },
+
+    "windy_hills": {
+      "sounds": []
+    },
+
+
+
+
+    "basalt_deltas": {
+      "sounds": [
+        "mcmp:basalt_deltas-01"
+      ]
+    },
+
+    "crimson_forest": {
+      "sounds": [
+        "mcmp:crimson_forest-01"
+      ]
+    },
+
+    "nether_wastes": {
+      "sounds": [
+        "mcmp:nether_wastes-01"
+      ]
+    },
+
+    "soul_sand_valley": {
+      "sounds": [
+        "mcmp:soul_sand_valley-01"
+      ]
+    },
+
+
+
+
+    "end": {
+      "sounds": [
+        "mcmp:end-01",
+        "mcmp:end-02"
       ]
     }
+
   }
 
