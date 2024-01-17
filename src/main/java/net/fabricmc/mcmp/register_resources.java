@@ -71,7 +71,7 @@ public class register_resources {
     public static final Identifier SWAMP = new Identifier("mcmp:swamp");
     public static final Identifier TAIGA = new Identifier("mcmp:taiga");
     public static final Identifier WARM_OCEAN = new Identifier("mcmp:warm_ocean");
-    public static final Identifier WINDY = new Identifier("mcmp:windy");
+    public static final Identifier WINDY = new Identifier("mcmp:windy_hills");
 
 
     public static final Identifier BASALT_DELTAS = new Identifier("mcmp:basalt_deltas");

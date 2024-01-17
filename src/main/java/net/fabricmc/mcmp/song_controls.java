@@ -13,7 +13,7 @@ import java.util.*;
 public class song_controls {
 
     public static MinecraftClient mc;
-    public static Map<String, String[]> bp;
+    public static Map<String, String[]> bp = biome_playlists.biomePlaylists;
     public static PositionedSoundInstance currentlyPlaying;
     public static Integer minDelay;
     public static Integer maxDelay;
@@ -24,7 +24,6 @@ public class song_controls {
 
     public static void init() {
         mc = MinecraftClient.getInstance();
-        bp = biome_playlists.biomePlaylists;
         currentlyPlaying = null;
         minDelay = 1;
         maxDelay = 2;

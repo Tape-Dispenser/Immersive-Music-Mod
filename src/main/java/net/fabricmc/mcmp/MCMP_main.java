@@ -38,6 +38,9 @@ public class MCMP_main implements ModInitializer {
 		LOGGER.info("Initializing Playlists...");
 		biome_playlists.init();
 		LOGGER.info("Playlists Initialized.");
+		LOGGER.info("Loading Default Config Values...");
+		mod_config.init();
+		LOGGER.info("Loaded Default Config Values.");
 		LOGGER.info("Loading Config Values...");
 		config_manager.init();
 		LOGGER.info("Config Values Loaded");
@@ -53,6 +56,8 @@ public class MCMP_main implements ModInitializer {
 
 
 	public static MinecraftClient mc = MinecraftClient.getInstance();
+
+	public static boolean debugLogging = true;
 
 	public static boolean inMainMenu() {
 		return mc.player == null;
