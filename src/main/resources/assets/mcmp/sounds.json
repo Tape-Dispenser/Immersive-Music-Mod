@@ -53,7 +53,8 @@
     "dark_forest": {
       "sounds": [
         "mcmp:dark_oak_forest-01",
-        "mcmp:dark_oak_forest-02"
+        "mcmp:dark_oak_forest-02",
+        "mcmp:dark_oak_forest-03"
       ]
     },
 
@@ -87,7 +88,8 @@
     "forest": {
       "sounds": [
         "mcmp:forest-01",
-        "mcmp:forest-02"
+        "mcmp:forest-02",
+        "mcmp:forest-04"
       ]
     },
 
@@ -124,7 +126,8 @@
 
     "ocean": {
       "sounds": [
-        "mcmp:deep_ocean-01"
+        "mcmp:deep_ocean-01",
+        "mcmp:ocean-01"
       ]
     },
 
@@ -169,7 +172,9 @@
     },
 
     "windy_hills": {
-      "sounds": []
+      "sounds": [
+        "mcmp:windswept_hills-01"
+      ]
     },
 
 
