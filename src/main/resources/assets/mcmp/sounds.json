@@ -95,9 +95,9 @@
 
     "mountains": {
       "sounds": [
-        "mcmp:mountains-01",
-        "mcmp:mountains-02",
-        "mcmp:mountains-03"
+        "mcmp:mountain-01",
+        "mcmp:mountain-02",
+        "mcmp:mountain-03"
       ]
     },
 
