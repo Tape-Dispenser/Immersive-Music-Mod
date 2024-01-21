@@ -15,8 +15,6 @@ public class song_controls {
     public static MinecraftClient mc;
     public static Map<String, String[]> bp = biome_playlists.biomePlaylists;
     public static PositionedSoundInstance currentlyPlaying;
-    public static Integer minDelay;
-    public static Integer maxDelay;
     public static Integer timer;
     public static boolean inTimer;
     public static Random song_rng;
@@ -25,8 +23,6 @@ public class song_controls {
     public static void init() {
         mc = MinecraftClient.getInstance();
         currentlyPlaying = null;
-        minDelay = 1;
-        maxDelay = 2;
         timer = 1;
         inTimer = true;
         song_rng = new Random();
@@ -56,7 +52,7 @@ public class song_controls {
 
 
     public static SoundEvent pickSong() {
-        String playlistName= "menu";
+        String playlistName = "menu";
 
         if (mc.world != null) {
             assert mc.player != null;
@@ -64,26 +60,31 @@ public class song_controls {
             if (temp.isPresent()) {
                 playlistName = temp.get().getValue().toString();
                 MCMP_main.LOGGER.info(playlistName);
-                timer = song_rng.nextInt(minDelay,maxDelay);
+                timer = song_rng.nextInt(mod_config.minSongDelay, mod_config.maxSongDelay);
             }
         } else {
-            timer = song_rng.nextInt(200,600);
+            timer = song_rng.nextInt(mod_config.minMenuDelay, mod_config.maxMenuDelay);
         }
         inTimer = true;
 
-        List<String> playlist = Arrays.asList(bp.get(playlistName));										// get playlist
-
-        if (playlist.isEmpty()){
+        List<String> playlist;
+        try {
+            playlist = Arrays.asList(bp.get(playlistName));
+        } catch (NullPointerException e) {
             playlist = Arrays.asList(bp.get("fallback"));
         }
+
+        if (playlist.isEmpty()) {
+            playlist = Arrays.asList(bp.get("fallback"));
+        }
+
 
         int index = Math.abs(song_rng.nextInt() % playlist.size());
         String songName = playlist.get(index);
 
         try {
             return SoundEvent.of(Identifier.tryParse(songName));
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             MCMP_main.LOGGER.error(String.format("failed to find %s", songName));
             throw new RuntimeException(e);
         }
