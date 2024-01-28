@@ -22,6 +22,6 @@ https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 ## Links:
 https://www.patreon.com/ImmersiveMusicMod
 
-http://discord.io/minecraftmusic
+https://discord.com/invite/zPZP9RT253
 
 https://www.youtube.com/@goldeagleproductions
