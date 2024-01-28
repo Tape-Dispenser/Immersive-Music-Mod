@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.fabricmc.timm.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "ExampleMixin",
+    "MusicSoundMixin",
+    "ClientTickMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

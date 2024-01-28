@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "mcmp",
+  "id": "timm",
   "version": "${version}",
 
-  "name": "Minecraft Music Project",
+  "name": "The Immersive Music Mod",
   "description": "A complete overhaul to minecraft music.",
   "authors": [
     "Music Author\t:\tNate#8765 Mod Developer\t:\tTape"
@@ -11,20 +11,20 @@
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/Tape-Dispenser/MCMusicProject"
+    "sources": "https://github.com/Tape-Dispenser/Immersive-Music-Mod"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/mcmp/icon.png",
+  "icon": "assets/timm/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.mcmp.MCMP_main"
+      "net.fabricmc.timm.timm_main"
     ]
   },
   "mixins": [
-    "mcmp.mixins.json"
+    "timm.mixins.json"
   ],
 
   "depends": {
