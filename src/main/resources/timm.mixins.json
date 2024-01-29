@@ -5,9 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
-    "ExampleMixin",
-    "MusicSoundMixin",
-    "ClientTickMixin"
+    "net.tape.timm.mixin.ExampleMixin",
+    "net.tape.timm.mixin.MusicSoundMixin",
+    "net.tape.timm.mixin.ClientTickMixin"
   ],
   "injectors": {
     "defaultRequire": 1

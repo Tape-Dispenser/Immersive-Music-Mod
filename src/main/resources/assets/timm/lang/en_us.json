@@ -1,0 +1,5 @@
+{
+  "commands.foo.success": "foo command returned %s",
+
+  "commands.nowPlaying.success": "Now Playing: %s"
+}

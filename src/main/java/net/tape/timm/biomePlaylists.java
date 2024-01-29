@@ -1,13 +1,13 @@
-package net.fabricmc.timm;
+package net.tape.timm;
 
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.fabricmc.timm.timm_main.LOGGER;
+import static net.tape.timm.timmMain.LOGGER;
 
 
-public class biome_playlists {
+public class biomePlaylists {
     public static Map<String, String[]> biomePlaylists = new HashMap<String, String[]>();
 
     public static final Map<String, String[]> defaultPlaylists = new HashMap<String, String[]>();

@@ -1,4 +1,4 @@
-package net.fabricmc.timm;
+package net.tape.timm;
 
 
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import static java.lang.Boolean.parseBoolean;
 
 
-public class mod_config {
+public class modConfig {
     public static Map<String, String[]> configMap = new HashMap<String, String[]>();
 
     public static final Map<String, String[]> defaultConfig = new HashMap<String, String[]>();

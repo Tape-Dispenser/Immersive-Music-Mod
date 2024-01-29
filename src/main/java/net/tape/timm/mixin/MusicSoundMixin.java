@@ -1,9 +1,9 @@
-package net.fabricmc.timm.mixin;
+package net.tape.timm.mixin;
 
-import static net.fabricmc.timm.timm_main.LOGGER;
 import net.minecraft.client.sound.MusicTracker;
-import net.fabricmc.timm.song_controls;
+import net.tape.timm.songControls;
 
+import net.tape.timm.timmMain;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +19,7 @@ public class MusicSoundMixin {
 
 	@Inject(method = "stop()V", at = @At(value = "HEAD"))
 	private void stopMixin(CallbackInfo info) {
-		song_controls.currentlyPlaying = null;
-		LOGGER.info("song stopped");
+		songControls.currentlyPlaying = null;
+		timmMain.LOGGER.info("song stopped");
 	}
 }

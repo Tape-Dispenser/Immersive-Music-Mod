@@ -20,7 +20,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.timm.timm_main"
+      "net.tape.timm.timmMain"
     ]
   },
   "mixins": [

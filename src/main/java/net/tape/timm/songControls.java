@@ -1,4 +1,4 @@
-package net.fabricmc.timm;
+package net.tape.timm;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -10,10 +10,10 @@ import net.minecraft.world.biome.Biome;
 import java.util.*;
 
 
-public class song_controls {
+public class songControls {
 
     public static MinecraftClient mc;
-    public static Map<String, String[]> bp = biome_playlists.biomePlaylists;
+    public static Map<String, String[]> bp = biomePlaylists.biomePlaylists;
     public static PositionedSoundInstance currentlyPlaying;
     public static Integer timer;
     public static boolean inTimer;
@@ -59,11 +59,11 @@ public class song_controls {
             Optional<RegistryKey<Biome>> temp = mc.world.getBiome(mc.player.getBlockPos()).getKey();
             if (temp.isPresent()) {
                 playlistName = temp.get().getValue().toString();
-                timm_main.LOGGER.info(playlistName);
-                timer = song_rng.nextInt(mod_config.minSongDelay, mod_config.maxSongDelay);
+                timmMain.LOGGER.info(playlistName);
+                timer = song_rng.nextInt(modConfig.minSongDelay, modConfig.maxSongDelay);
             }
         } else {
-            timer = song_rng.nextInt(mod_config.minMenuDelay, mod_config.maxMenuDelay);
+            timer = song_rng.nextInt(modConfig.minMenuDelay, modConfig.maxMenuDelay);
         }
         inTimer = true;
 
@@ -85,7 +85,7 @@ public class song_controls {
         try {
             return SoundEvent.of(Identifier.tryParse(songName));
         } catch (NullPointerException e) {
-            timm_main.LOGGER.error(String.format("failed to find %s", songName));
+            timmMain.LOGGER.error(String.format("failed to find %s", songName));
             throw new RuntimeException(e);
         }
 
