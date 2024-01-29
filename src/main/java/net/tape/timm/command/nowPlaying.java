@@ -1,12 +1,11 @@
 package net.tape.timm.command;
-
+import net.tape.timm.songControls;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
-import net.tape.timm.songControls;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 
