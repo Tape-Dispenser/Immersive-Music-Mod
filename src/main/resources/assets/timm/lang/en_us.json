@@ -1,5 +1,6 @@
 {
   "commands.foo.success": "foo command returned %s",
 
-  "commands.nowPlaying.success": "Now Playing: %s"
+  "commands.nowPlaying.song": "Now Playing: %s",
+  "commands.nowPlaying.null": "Not playing any song!"
 }

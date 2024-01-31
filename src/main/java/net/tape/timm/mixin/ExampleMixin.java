@@ -14,13 +14,10 @@ import static net.tape.timm.timmMain.mc;
 public class ExampleMixin {
 	@Inject(at = @At("HEAD"), method = "init()V")
 	private void init(CallbackInfo info) {
-		if (songControls.currentlyPlaying == null) {
-			songControls.playSong(songControls.pickSong());
-			LOGGER.info("now playing: ".concat(songControls.currentlyPlaying.getId().toString()));
-		}
-		if (!mc.getSoundManager().isPlaying(songControls.currentlyPlaying)) {
-			songControls.playSong(songControls.pickSong());
-			LOGGER.info("now playing: ".concat(songControls.currentlyPlaying.getId().toString()));
+		String x = songControls.nowPlaying();
+		if (x == null) {
+			songControls.play(songControls.pickSong());
+			LOGGER.info("now playing: ".concat(songControls.nowPlaying()));
 		}
 	}
 }

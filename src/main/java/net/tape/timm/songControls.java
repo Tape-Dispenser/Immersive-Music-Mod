@@ -14,7 +14,7 @@ public class songControls {
 
     public static MinecraftClient mc;
     public static Map<String, String[]> bp = biomePlaylists.biomePlaylists;
-    public static PositionedSoundInstance currentlyPlaying;
+    public static PositionedSoundInstance lastSong;
     public static Integer timer;
     public static boolean inTimer;
     public static Random song_rng;
@@ -22,34 +22,21 @@ public class songControls {
 
     public static void init() {
         mc = MinecraftClient.getInstance();
-        currentlyPlaying = null;
+        lastSong = null;
         timer = 1;
         inTimer = true;
         song_rng = new Random();
     }
 
-
-    public static PositionedSoundInstance nowPlaying() {
-        return currentlyPlaying;
-    }
-
-
-    public static void playSong(SoundEvent songToPlay) {
+    public static void play(SoundEvent songToPlay) {
         // literally just the vanilla playSong function but it won't be called by vanilla minecraft...
         if (songToPlay != null) {
-            if (currentlyPlaying != null)
-                mc.getSoundManager().stop(currentlyPlaying);
-
-            currentlyPlaying = PositionedSoundInstance.music(songToPlay);
-
-            mc.getSoundManager().play(currentlyPlaying);
+            if (nowPlaying() != null)
+                mc.getSoundManager().stop(lastSong);
+            lastSong = PositionedSoundInstance.music(songToPlay);
+            mc.getSoundManager().play(lastSong);
         }
     }
-
-
-
-
-
 
     public static SoundEvent pickSong() {
         String playlistName = "menu";
@@ -90,6 +77,22 @@ public class songControls {
         }
 
     }
+
+    public static String nowPlaying() {
+        if (mc.getSoundManager().isPlaying(lastSong)) {
+            return lastSong.getSound().getIdentifier().toString();
+        } else {
+            return null;
+        }
+    }
+
+
+
+
+
+
+
+
 
 
 }

@@ -25,10 +25,16 @@ public class nowPlaying {
     }
 
     private static int printNowPlaying(FabricClientCommandSource source) {
-        String song = songControls.currentlyPlaying.getId().toString();
+        if (songControls.nowPlaying() != null) {
+            String song = songControls.nowPlaying();
+            source.sendFeedback(Text.translatable("commands.nowPlaying.song", song));
+        } else {
+            source.sendFeedback(Text.translatable("commands.nowPlaying.null"));
+        }
 
-        source.sendFeedback(Text.translatable("commands.nowPlaying.success", song));
         return Command.SINGLE_SUCCESS;
+
+
     }
 
 }
