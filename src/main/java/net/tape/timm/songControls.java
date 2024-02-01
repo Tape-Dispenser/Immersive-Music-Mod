@@ -38,6 +38,21 @@ public class songControls {
         }
     }
 
+    public static void stop() {
+        if (nowPlaying() != null) {
+            mc.getSoundManager().stop(lastSong);
+        }
+    }
+
+    public static void skip(SoundEvent next) {
+        if (nowPlaying() != null) {stop();}
+        play(next);
+    }
+
+    public static void skip() {
+        play(pickSong());
+    }
+
     public static SoundEvent pickSong() {
         String playlistName = "menu";
 

@@ -1,6 +1,12 @@
 {
-  "commands.foo.success": "foo command returned %s",
+  "commands.foo": "foo command returned %s",
 
   "commands.nowPlaying.song": "Now Playing: %s",
-  "commands.nowPlaying.null": "Not playing any song!"
+  "commands.nowPlaying.null": "Not playing any song!",
+
+  "commands.stop": "Stopped playback.",
+
+  "commands.skip.success": "Skipped to %s",
+  "commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
+  "": ""
 }

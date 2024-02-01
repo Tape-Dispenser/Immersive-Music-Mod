@@ -8,9 +8,11 @@ import net.tape.timm.command.foo;
 import net.tape.timm.command.nowPlaying;
 
 public class registerCommands {
-    static void init(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess cRA) {
-        foo.register(dispatcher);
-        nowPlaying.register(dispatcher);
+    static void init(CommandDispatcher<FabricClientCommandSource> dispatch, CommandRegistryAccess cRA) {
+        foo.register(dispatch);
+        nowPlaying.register(dispatch);
+        stop.register(dispatch);
+        skip.register(dispatch);
     }
 
 
