@@ -1,6 +1,10 @@
 package net.tape.timm.command;
 
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.tape.timm.configScreen;
+
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -9,14 +13,17 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
+import net.tape.timm.timmMain;
 
 import java.util.Collection;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 import static net.minecraft.command.argument.GameProfileArgumentType.gameProfile;
 
+
 public class foo {
 
+    static MinecraftClient mc = timmMain.mc;
     // Credit to Earthcomputer for writing most of this code
     // i couldn't have done command interface shit if it weren't for clientcommands being open source
     // earthcomputer a real one for that
@@ -31,6 +38,9 @@ public class foo {
 
     private static int fooCommand(FabricClientCommandSource source) throws CommandSyntaxException {
         source.sendFeedback(Text.translatable("commands.foo", "bar"));
+        configScreen cfg = new configScreen();
+        timmMain.LOGGER.info(Thread.currentThread().getName());
+        mc.send(() -> mc.setScreen(cfg));
         return Command.SINGLE_SUCCESS;
     }
 
