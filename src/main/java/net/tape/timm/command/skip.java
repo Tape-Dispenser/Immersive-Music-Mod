@@ -18,7 +18,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 
 public class skip {
 
-    // Credit to Earthcomputer for writing most of this code
+    // Credit to Earthcomputer for writing most of the command handling code
     // I couldn't have done command interface shit if it weren't for clientcommands being open source
     // Earthcomputer a real one for that
     // https://github.com/Earthcomputer/clientcommands
@@ -53,7 +53,7 @@ public class skip {
 
     private static int skipNoSong(FabricClientCommandSource source) {
         songControls.skip();
-        source.sendFeedback(Text.translatable("commands.skip.success", songControls.lastSong.toString()));
+        source.sendFeedback(Text.translatable("timm.commands.skip.success", songControls.lastSong.toString()));
         return Command.SINGLE_SUCCESS;
     }
 
@@ -63,10 +63,10 @@ public class skip {
         if (id != null && id.getClass().getTypeName().equals("SoundEvent")) {
             SoundEvent sound = SoundEvent.of(id);
             songControls.skip(sound);
-            source.sendFeedback(Text.translatable("commands.skip.success", song));
+            source.sendFeedback(Text.translatable("timm.commands.skip.success", song));
             return Command.SINGLE_SUCCESS;
         } else {
-            source.sendFeedback(Text.translatable("commands.skip.badId", song));
+            source.sendFeedback(Text.translatable("timm.commands.skip.badId", song));
             return -1; // apparently there isn't a constant defined for command failure???
         }
     }

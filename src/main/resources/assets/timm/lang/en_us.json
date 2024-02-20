@@ -1,12 +1,21 @@
 {
-  "commands.foo": "foo command returned %s",
+  "timm.commands.foo": "foo command returned %s",
 
-  "commands.nowPlaying.song": "Now Playing: %s",
-  "commands.nowPlaying.null": "Not playing any song!",
+  "timm.commands.nowPlaying.song": "Now Playing: %s",
+  "timm.commands.nowPlaying.null": "Not playing any song!",
 
-  "commands.stop": "Stopped playback.",
+  "timm.commands.stop": "Stopped playback.",
 
-  "commands.skip.success": "Skipped to %s",
-  "commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
-  "": ""
+  "timm.commands.skip.success": "Skipped to %s",
+  "timm.commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
+
+  "timm.config.button1.text": "Button 1",
+  "timm.config.button1.tooltip": "lorem ipsum dolor sit amet.",
+  "timm.config.button1.click": "Button 1 clicked!",
+
+  "timm.config.close.text": "Close",
+  "timm.config.close.tooltip": "Close this menu.",
+  "timm.config.close.click": "Close button pressed!",
+
+  "timm.": ""
 }

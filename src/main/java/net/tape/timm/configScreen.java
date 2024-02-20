@@ -14,7 +14,7 @@ public class configScreen extends Screen {
     }
 
     public ButtonWidget button1;
-    public ButtonWidget close;
+    public ButtonWidget closeButton;
 
     @Override
     public void init() {
@@ -23,13 +23,13 @@ public class configScreen extends Screen {
                 .tooltip(Tooltip.of(Text.translatable("timm.config.button1.tooltip")))
                 .build();
 
-        close = ButtonWidget.builder(Text.translatable("timm.config.close.text"), button -> button1Click())
+        closeButton = ButtonWidget.builder(Text.translatable("timm.config.close.text"), button -> closeClick())
                 .dimensions(width/4 * 3, height/2, 200, 20)
                 .tooltip(Tooltip.of(Text.translatable("timm.config.close.tooltip")))
                 .build();
 
         addDrawableChild(button1);
-        addDrawableChild(close);
+        addDrawableChild(closeButton);
     }
 
 
@@ -37,11 +37,11 @@ public class configScreen extends Screen {
 
 
     static void button1Click() {
-        timmMain.LOGGER.info(Text.translatable("timm.config.button1.click").toString());
+        timmMain.LOGGER.info(Text.translatable("timm.config.button1.click").getString());
     }
 
     void closeClick() {
         close();
-        timmMain.LOGGER.info(Text.translatable("timm.config.close.click").toString());
+        timmMain.LOGGER.info(Text.translatable("timm.config.close.click").getString());
     }
 }
