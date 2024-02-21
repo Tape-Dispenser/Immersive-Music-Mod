@@ -1,4 +1,4 @@
-package net.tape.timm;
+package net.tape.timm.gui;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
+import net.tape.timm.timmMain;
 
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
