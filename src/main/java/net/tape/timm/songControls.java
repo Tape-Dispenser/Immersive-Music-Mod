@@ -28,12 +28,11 @@ public class songControls {
         song_rng = new Random();
     }
 
-    public static void play(SoundEvent songToPlay) {
-        // literally just the vanilla playSong function but it won't be called by vanilla minecraft...
-        if (songToPlay != null) {
+    public static void play(SoundEvent song) {
+        if (song != null) {
             if (nowPlaying() != null)
                 mc.getSoundManager().stop(lastSong);
-            lastSong = PositionedSoundInstance.music(songToPlay);
+            lastSong = PositionedSoundInstance.music(song);
             mc.getSoundManager().play(lastSong);
         }
     }
