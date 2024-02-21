@@ -2,23 +2,17 @@ package net.tape.timm.command;
 
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.tape.timm.configScreen;
+import net.tape.timm.gui.configScreen;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
 import net.tape.timm.timmMain;
 
-import java.util.Collection;
-
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
-import static net.minecraft.command.argument.GameProfileArgumentType.gameProfile;
 
 
 public class foo {

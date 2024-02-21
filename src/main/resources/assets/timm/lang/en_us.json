@@ -9,13 +9,22 @@
   "timm.commands.skip.success": "Skipped to %s",
   "timm.commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
 
-  "timm.config.button1.text": "Button 1",
-  "timm.config.button1.tooltip": "lorem ipsum dolor sit amet.",
-  "timm.config.button1.click": "Button 1 clicked!",
+
+  "timm.config.text": "Config Menu",
 
   "timm.config.close.text": "Close",
   "timm.config.close.tooltip": "Close this menu.",
-  "timm.config.close.click": "Close button pressed!",
+
+  "timm.config.songMin.text": "Minimum Game Song Delay",
+
+  "timm.config.songMax.text": "Maximum Game Song Delay",
+
+  "timm.config.menuMin.text": "Minimum Menu Song Delay",
+
+  "timm.config.menuMax.text": "Maximum Menu Song Delay",
+
+  "timm.config.debug.text": "Enable Debug Logs",
+
 
   "timm.": ""
 }
