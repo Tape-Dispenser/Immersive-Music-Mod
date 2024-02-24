@@ -34,47 +34,47 @@ public class configManager {
             String pl_file = config_dir.toString().concat("/timm/biome_playlists.json");
             PLcontent = new String(readAllBytes(Paths.get(pl_file)));
 
-            if (timmMain.debugLogging) {
-                timmMain.LOGGER.info(PLcontent);}
+            if (modConfig.debugLogging) {timmMain.LOGGER.info(PLcontent);}
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
+            // biome playlists doesn't exist, create it now
             timmMain.LOGGER.info("Biome playlists file/directory not found, creating now...");
             first_launch();
             String pl_file = config_dir.toString().concat("/timm/biome_playlists.json");
             try {
                 PLcontent = new String (readAllBytes(Paths.get(pl_file)));
 
-                if (timmMain.debugLogging) {
-                    timmMain.LOGGER.info(PLcontent);
-                }
-            }
-            catch (IOException f) {
+                if (modConfig.debugLogging) {timmMain.LOGGER.info(PLcontent);}
+
+            } catch (IOException f) {
+                // something really wrong happened, either a permissions issue or config directory doesn't exist.
                 timmMain.LOGGER.error("Failed to create biome_playlists.json");
                 throw new RuntimeException(f);
             }
         }
 
+        // read config file
         String cfgContent;
         try {
             String cfg_file = config_dir.toString().concat("/timm/TIMM.config");
             cfgContent = new String(readAllBytes(Paths.get(cfg_file)));
 
-            if (timmMain.debugLogging) {
-                timmMain.LOGGER.info(cfgContent);}
-        }
-        catch (IOException e) {
-            timmMain.LOGGER.info("Main Config file not found, creating now...");
+            if (modConfig.debugLogging) {timmMain.LOGGER.info(cfgContent);}
+
+        } catch (IOException e) {
+            // config file doesn't exist, create it now
+
+            if (modConfig.debugLogging) {timmMain.LOGGER.info("Main Config file not found, creating now...");}
+
             first_launch();
             String cfg_file = config_dir.toString().concat("/timm/TIMM.config");
             try {
                 cfgContent = new String (readAllBytes(Paths.get(cfg_file)));
 
-                if (timmMain.debugLogging) {
-                    timmMain.LOGGER.info(cfgContent);
-                }
-            }
-            catch (IOException f) {
+                if (modConfig.debugLogging) {timmMain.LOGGER.info(cfgContent);}
+
+            } catch (IOException f) {
+                // something went really wrong, likely some permissions issue, or maybe config directory doesn't exist
                 timmMain.LOGGER.error("Failed to create TIMM.config");
                 throw new RuntimeException(f);
             }
@@ -92,6 +92,8 @@ public class configManager {
         if (currentVersionPair == null) {
             timmMain.LOGGER.error("Current biome_playlists.json version is using an outdated format!");
             timmMain.LOGGER.warn("To update to most recent version of biome_playlists, simply delete your current one.");
+            // TODO: delete old biome playlist file and replace it with new one instead of crashing the game
+            // TODO: maybe read old file and transfer it to the new format?
             throw new RuntimeException("Outdated biome_playlists.json");
         }
         int currentVersion = Integer.parseInt(Arrays.asList(currentVersionPair).get(0));
@@ -100,6 +102,7 @@ public class configManager {
         if (defaultVersion > currentVersion) {
             timmMain.LOGGER.warn("Warning: Current biome_playlists.json version is behind default, consider updating!");
             timmMain.LOGGER.warn("To update to most recent version of biome_playlists, simply delete your current one.");
+            // TODO: make a menu/gui option to update biome playlists automatically
         }
 
 
@@ -108,18 +111,37 @@ public class configManager {
 
 
         timmMain.LOGGER.info("Resources Successfully Registered");
+    }
 
+    public static void update_cfg(String key, String value) {
+        File f = new File(config_dir.toString().concat("/timm/TIMM.config"));
+        Gson gson = new GsonBuilder().create();
+
+        String configJSON = gson.toJson(modConfig.configMap);
+
+        if (modConfig.debugLogging) {timmMain.LOGGER.info("successfully updated ".concat(key).concat(" to ".concat(value)));}
+
+        try {
+            FileWriter writer = new FileWriter(f.getPath());
+            writer.write(configJSON);
+            writer.close();
+
+        } catch (IOException e) {
+            timmMain.LOGGER.error("Something went wrong while trying to update config file.");
+            throw new RuntimeException(e);
+        }
 
     }
 
-    public static void first_launch() {
+
+    private static void first_launch() {
         // create timm directory in .minecraft/config and add biome_playlists.json
         if (!Files.isDirectory(Paths.get(config_dir.toString().concat("/timm/")))) {
             try {
                 Files.createDirectories(Paths.get(config_dir.toString().concat("/timm")));
-                if (timmMain.debugLogging) {
-                    timmMain.LOGGER.info("created directory ".concat(config_dir.toString().concat("/timm")) );
-                }
+
+                if (modConfig.debugLogging) {timmMain.LOGGER.info("created directory ".concat(config_dir.toString().concat("/timm")) );}
+
             } catch (IOException e) {
                 timmMain.LOGGER.error("Failed to create .minecraft/config/timm folder!");
                 timmMain.LOGGER.warn("This may be because .minecraft/config does not exist, or because of some permissions issue.");
@@ -137,7 +159,7 @@ public class configManager {
             String playlistJSON = gson.toJson(biomePlaylists.defaultPlaylists);
 
             //debug
-            if (timmMain.debugLogging) {
+            if (modConfig.debugLogging) {
                 timmMain.LOGGER.info(biomePlaylists.defaultPlaylists.toString());
                 timmMain.LOGGER.info(playlistJSON);
             }
@@ -148,7 +170,7 @@ public class configManager {
                 writer.close();
 
                 //debug
-                if (timmMain.debugLogging) {
+                if (modConfig.debugLogging) {
                     timmMain.LOGGER.info("created file ".concat(config_dir.toString().concat("/timm/biome_playlists.json")) );
                 }
 
