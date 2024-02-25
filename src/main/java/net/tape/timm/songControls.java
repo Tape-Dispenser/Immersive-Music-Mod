@@ -15,7 +15,7 @@ public class songControls {
     public static MinecraftClient mc;
     public static Map<String, String[]> bp = biomePlaylists.biomePlaylists;
     public static PositionedSoundInstance lastSong;
-    public static Integer timer;
+    public static long timer;
     public static boolean inTimer;
     public static Random song_rng;
 
@@ -61,10 +61,10 @@ public class songControls {
             if (temp.isPresent()) {
                 playlistName = temp.get().getValue().toString();
                 timmMain.LOGGER.info(playlistName);
-                timer = song_rng.nextInt(modConfig.minSongDelay, modConfig.maxSongDelay);
+                timer = song_rng.nextLong(modConfig.minSongDelay, modConfig.maxSongDelay);
             }
         } else {
-            timer = song_rng.nextInt(modConfig.minMenuDelay, modConfig.maxMenuDelay);
+            timer = song_rng.nextLong(modConfig.minMenuDelay, modConfig.maxMenuDelay);
         }
         inTimer = true;
 
