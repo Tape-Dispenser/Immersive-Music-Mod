@@ -1,17 +1,13 @@
 package net.tape.timm.gui.widget;
 
-import com.sun.jdi.IntegerValue;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.text.Text;
-import net.tape.timm.timmMain;
 
-public class minSlider extends SliderWidget {
-    public minSlider(int x, int y, int w, int h, Text text, int val, ReleaseAction callback) {
+public class configSlider extends SliderWidget {
+    public configSlider(int x, int y, int w, int h, Text text, int val, ReleaseAction callback) {
         super(x, y, w, h, text, val);
         this.lambda = callback;
 

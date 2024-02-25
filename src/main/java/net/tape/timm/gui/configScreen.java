@@ -4,13 +4,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.text.Text;
 import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.closeButton;
-import net.tape.timm.gui.widget.minSlider;
+import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
@@ -27,8 +25,8 @@ public class configScreen extends Screen {
     @Override
     public void init() {
 
-        minSlider menuMin;
-        menuMin = new minSlider(0,0,100,20, Text.literal("foo"),0, value -> updateMenuMin(value));
+        configSlider menuMin;
+        menuMin = new configSlider(0,0,100,20, Text.literal("foo"),0, value -> updateMenuMin(value));
 
         addDrawableChild(new closeButton(this));
         addDrawableChild(menuMin);
