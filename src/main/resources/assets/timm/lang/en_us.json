@@ -20,6 +20,7 @@
   "timm.config.songMax.text": "Maximum Game Song Delay",
 
   "timm.config.menuMin.text": "Minimum Menu Song Delay",
+  "timm.config.menuMin.slider": "Minimum: %d",
 
   "timm.config.menuMax.text": "Maximum Menu Song Delay",
 

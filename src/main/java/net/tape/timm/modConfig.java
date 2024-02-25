@@ -12,10 +12,10 @@ public class modConfig {
 
     public static final Map<String, String[]> defaultConfig = new HashMap<String, String[]>();
 
-    public static int minSongDelay;
-    public static int maxSongDelay;
-    public static int minMenuDelay;
-    public static int maxMenuDelay;
+    public static long minSongDelay;
+    public static long maxSongDelay;
+    public static long minMenuDelay;
+    public static long maxMenuDelay;
     public static boolean debugLogging;
 
     public static void init() {
@@ -23,12 +23,12 @@ public class modConfig {
 
 
         // menu delays
-        defaultConfig.put("menuMinDelay", new String[]{"u32", "20" /* delay times are in ticks (20ths of a second) */ });
-        defaultConfig.put("menuMaxDelay", new String[]{"u32", "600" });
+        defaultConfig.put("menuMinDelay", new String[]{"long", "20" /* delay times are in ticks (20ths of a second) */ });
+        defaultConfig.put("menuMaxDelay", new String[]{"long", "600" });
 
         // game delay                                                          TODO: eventually songs need their own individual delays
-        defaultConfig.put("gameMinDelay", new String[]{"u32", "1200"});
-        defaultConfig.put("gameMaxDelay", new String[]{"u32", "12000"});
+        defaultConfig.put("gameMinDelay", new String[]{"long", "1200"});
+        defaultConfig.put("gameMaxDelay", new String[]{"long", "12000"});
 
     }
 

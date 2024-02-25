@@ -27,14 +27,15 @@ public class configScreen extends Screen {
     @Override
     public void init() {
 
-        minSlider menuMin = new minSlider(0,0,100,20, Text.literal("foo"),0);
+        minSlider menuMin;
+        menuMin = new minSlider(0,0,100,20, Text.literal("foo"),0, value -> updateMenuMin(value));
 
         addDrawableChild(new closeButton(this));
         addDrawableChild(menuMin);
 
         debugLogs = CheckboxWidget.builder(Text.translatable("timm.config.debugLogs.text"), timmMain.mc.textRenderer)
                 .checked(modConfig.debugLogging)
-                .callback((checkbox, checked) -> debugClick(checked))
+                .callback((checkbox, checked) -> updateDebug(checked))
                 .build();
         debugLogs.setPosition(width - 10 - debugLogs.getWidth(), 130);
         addDrawableChild(debugLogs);
@@ -58,21 +59,28 @@ public class configScreen extends Screen {
 
     }
 
-    private void debugClick(boolean check) {
+    private void updateDebug(boolean check) {
         modConfig.debugLogging = check;
-        modConfig.configMap.replace("debug", new String[]{"bool", String.valueOf(check)});
-        configManager.update_cfg("debug logging", String.valueOf(check));
-
+        String checkString = String.valueOf(check);
+        modConfig.configMap.replace("debug", new String[]{"bool", checkString});
+        configManager.update_cfg("debug logging", checkString);
     }
 
-
-
-
-
-
-
-    void closeClick() {
-        close();
-        timmMain.LOGGER.info(Text.translatable("timm.config.close.click").getString());
+    public long lerp(long min, long max, double t) {
+        if ((t > 1.0) || (t < 0.0)) {
+            throw new ArithmeticException("lerp value out of bounds");
+        } else {
+            return Math.round(max*t + min*(1-t));
+        }
     }
+
+    private long updateMenuMin(double value) {
+        long realVal = lerp(0, modConfig.maxMenuDelay, value);
+        String valString = String.valueOf(realVal);
+        modConfig.minMenuDelay = realVal;
+        modConfig.configMap.replace("menuMinDelay", new String[]{"long", valString});
+        configManager.update_cfg("menu min delay", valString);
+        return realVal;
+    }
+
 }

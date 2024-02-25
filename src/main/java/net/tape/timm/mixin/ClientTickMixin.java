@@ -19,7 +19,7 @@ public class ClientTickMixin {
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	private void init(CallbackInfo info) {
 		if (songControls.nowPlaying() == null) {
-			// timer initialization moved to song_controls.pickSong()
+			// TODO: check if game is paused
 			songControls.timer -= 1;
 			if (songControls.inTimer && songControls.timer == 0) {
 				songControls.play(songControls.pickSong());
