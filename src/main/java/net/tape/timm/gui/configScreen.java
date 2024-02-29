@@ -28,10 +28,10 @@ public class configScreen extends Screen {
     public void init() {
 
 
-        menuMinSlider = new configSlider(width/2,30,100,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
-        menuMaxSlider = new configSlider(width/2,50,100,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
-        songMinSlider = new configSlider(width/2,80,100,20, "timm.config.songMin.slider",(double) modConfig.minSongDelay / modConfig.maxSongDelay, modConfig.minSongDelay, this::updateSongMin);
-        songMaxSlider = new configSlider(width/2,100,100,20, "timm.config.songMax.slider",(double) modConfig.maxSongDelay / (36000-modConfig.minSongDelay), modConfig.maxSongDelay, this::updateSongMax);
+        menuMinSlider = new configSlider(width/2,30,150,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
+        menuMaxSlider = new configSlider(width/2,50,150,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
+        songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minSongDelay / modConfig.maxSongDelay, modConfig.minSongDelay, this::updateSongMin);
+        songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxSongDelay / (36000-modConfig.minSongDelay), modConfig.maxSongDelay, this::updateSongMax);
 
 
 
