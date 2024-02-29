@@ -16,13 +16,16 @@
   "timm.config.close.tooltip": "Close this menu.",
 
   "timm.config.songMin.text": "Minimum Game Song Delay",
+  "timm.config.songMin.slider": "Minimum: %d",
 
   "timm.config.songMax.text": "Maximum Game Song Delay",
+  "timm.config.songMax.slider": "Maximum: %d",
 
   "timm.config.menuMin.text": "Minimum Menu Song Delay",
   "timm.config.menuMin.slider": "Minimum: %d",
 
   "timm.config.menuMax.text": "Maximum Menu Song Delay",
+  "timm.config.menuMax.slider": "Maximum: %d",
 
   "timm.config.debug.text": "Enable Debug Logs",
 

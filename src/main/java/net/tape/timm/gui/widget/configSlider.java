@@ -5,25 +5,37 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.text.Text;
+import net.tape.timm.modConfig;
+import net.tape.timm.timmMain;
 
 public class configSlider extends SliderWidget {
-    public configSlider(int x, int y, int w, int h, Text text, int val, ReleaseAction callback) {
-        super(x, y, w, h, text, val);
+    public configSlider(int x, int y, int w, int h, String key, double val, long real, ReleaseAction callback) {
+        super(x, y, w, h, Text.stringifiedTranslatable(key, real), val);
         this.lambda = callback;
+        this.translationKey = key;
 
     }
 
-    protected ReleaseAction lambda;
+    final protected ReleaseAction lambda;
     private long realVal;
+    final private String translationKey;
 
     @Override
     protected void updateMessage() {
-        this.setMessage(Text.translatable("timm.config.menuMin.slider", this.realVal));
+        this.setMessage(Text.stringifiedTranslatable(translationKey, this.realVal));
     }
 
     @Override
     public void onRelease(double mouseX, double mouseY) {
         super.playDownSound(MinecraftClient.getInstance().getSoundManager());
+
+        if (modConfig.debugLogging) {
+            String[] temp = this.translationKey.split("\\.");
+            temp[temp.length - 1] = "text";
+            String temp1 = String.join(".", temp);
+            String message = temp1.concat(" = ").concat(String.valueOf(this.realVal));
+            timmMain.LOGGER.info(message);
+        }
     }
 
     @Override

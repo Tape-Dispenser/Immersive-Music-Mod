@@ -22,21 +22,33 @@ public class configScreen extends Screen {
 
     public CheckboxWidget debugLogs;
 
+    configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
+
     @Override
     public void init() {
 
-        configSlider menuMin;
-        menuMin = new configSlider(0,0,100,20, Text.literal("foo"),0, value -> updateMenuMin(value));
 
-        addDrawableChild(new closeButton(this));
-        addDrawableChild(menuMin);
+        menuMinSlider = new configSlider(width/2,30,100,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
+        menuMaxSlider = new configSlider(width/2,50,100,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (modConfig.minMenuDelay*36000), modConfig.maxMenuDelay, this::updateMenuMax);
+        songMinSlider = new configSlider(width/2,80,100,20, "timm.config.songMin.slider",(double) modConfig.minSongDelay / modConfig.maxSongDelay, modConfig.minSongDelay, this::updateSongMin);
+        songMaxSlider = new configSlider(width/2,100,100,20, "timm.config.songMax.slider",(double) modConfig.maxSongDelay / (modConfig.minSongDelay*36000), modConfig.maxSongDelay, this::updateSongMax);
+
+
 
         debugLogs = CheckboxWidget.builder(Text.translatable("timm.config.debugLogs.text"), timmMain.mc.textRenderer)
                 .checked(modConfig.debugLogging)
                 .callback((checkbox, checked) -> updateDebug(checked))
                 .build();
         debugLogs.setPosition(width - 10 - debugLogs.getWidth(), 130);
+
         addDrawableChild(debugLogs);
+
+        addDrawableChild(new closeButton(this));
+
+        addDrawableChild(menuMinSlider);
+        addDrawableChild(menuMaxSlider);
+        addDrawableChild(songMinSlider);
+        addDrawableChild(songMaxSlider);
 
     }
 
@@ -61,7 +73,7 @@ public class configScreen extends Screen {
         modConfig.debugLogging = check;
         String checkString = String.valueOf(check);
         modConfig.configMap.replace("debug", new String[]{"bool", checkString});
-        configManager.update_cfg("debug logging", checkString);
+        configManager.update_cfg();
     }
 
     public long lerp(long min, long max, double t) {
@@ -73,11 +85,39 @@ public class configScreen extends Screen {
     }
 
     private long updateMenuMin(double value) {
-        long realVal = lerp(0, modConfig.maxMenuDelay, value);
+        long realVal = lerp(1, modConfig.maxMenuDelay, value);
         String valString = String.valueOf(realVal);
         modConfig.minMenuDelay = realVal;
         modConfig.configMap.replace("menuMinDelay", new String[]{"long", valString});
-        configManager.update_cfg("menu min delay", valString);
+        configManager.update_cfg();
+
+        return realVal;
+    }
+
+    private long updateMenuMax(double value) {
+        long realVal = lerp(modConfig.minMenuDelay, 36000, value);
+        String valString = String.valueOf(realVal);
+        modConfig.maxMenuDelay = realVal;
+        modConfig.configMap.replace("menuMaxDelay", new String[]{"long", valString});
+        configManager.update_cfg();
+        return realVal;
+    }
+
+    private long updateSongMin(double value) {
+        long realVal = lerp(1, modConfig.maxSongDelay, value);
+        String valString = String.valueOf(realVal);
+        modConfig.minSongDelay = realVal;
+        modConfig.configMap.replace("songMinDelay", new String[]{"long", valString});
+        configManager.update_cfg();
+        return realVal;
+    }
+
+    private long updateSongMax(double value) {
+        long realVal = lerp(modConfig.minSongDelay, 36000, value);
+        String valString = String.valueOf(realVal);
+        modConfig.maxSongDelay = realVal;
+        modConfig.configMap.replace("songMaxDelay", new String[]{"long", valString});
+        configManager.update_cfg();
         return realVal;
     }
 

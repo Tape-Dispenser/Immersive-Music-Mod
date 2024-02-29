@@ -113,13 +113,11 @@ public class configManager {
         timmMain.LOGGER.info("Resources Successfully Registered");
     }
 
-    public static void update_cfg(String key, String value) {
+    public static void update_cfg() {
         File f = new File(config_dir.toString().concat("/timm/TIMM.config"));
         Gson gson = new GsonBuilder().create();
 
         String configJSON = gson.toJson(modConfig.configMap);
-
-        if (modConfig.debugLogging) {timmMain.LOGGER.info("successfully updated ".concat(key).concat(" to ".concat(value)));}
 
         try {
             FileWriter writer = new FileWriter(f.getPath());
