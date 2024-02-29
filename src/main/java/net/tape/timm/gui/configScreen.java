@@ -35,11 +35,11 @@ public class configScreen extends Screen {
 
 
 
-        debugLogs = CheckboxWidget.builder(Text.translatable("timm.config.debugLogs.text"), timmMain.mc.textRenderer)
+        debugLogs = CheckboxWidget.builder(Text.literal(""), timmMain.mc.textRenderer)
                 .checked(modConfig.debugLogging)
                 .callback((checkbox, checked) -> updateDebug(checked))
                 .build();
-        debugLogs.setPosition(width - 10 - debugLogs.getWidth(), 130);
+        debugLogs.setPosition(width/2, 130);
 
         addDrawableChild(debugLogs);
 
