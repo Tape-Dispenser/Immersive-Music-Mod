@@ -43,7 +43,8 @@ public class configScreen extends Screen {
 
         addDrawableChild(debugLogs);
 
-        addDrawableChild(new closeButton(this));
+        addDrawableChild(new closeButton(this)); // TODO: remove the class for this it isn't really necessary
+        // TODO: add a "load defaults" button
 
         addDrawableChild(menuMinSlider);
         addDrawableChild(menuMaxSlider);
