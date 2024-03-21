@@ -38,17 +38,7 @@ public class skip {
                     return skipWithSong(src, songName);
                 })
             ));
-
-        /*
-        dispatcher.register(
-                literal("s")
-                    // samsaassaaswade thing with a different name
-                    .executes(ctx -> skipNoSong(ctx.getSource()))
-                    .then(argument("song", StringArgumentType.string()))
-                        .executes(ctx -> skipWithSong(ctx.getSource(), StringArgumentType.getString(ctx, "song")))
-        );
-
-        */
+        
     }
 
     private static int skipNoSong(FabricClientCommandSource source) {

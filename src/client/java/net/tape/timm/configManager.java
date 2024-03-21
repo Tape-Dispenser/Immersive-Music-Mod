@@ -184,7 +184,7 @@ public class configManager {
 
             String configJSON = gson.toJson(modConfig.defaultConfig);
 
-            if (timmMain.debugLogging) {
+            if (modConfig.debugLogging) {
                 timmMain.LOGGER.info(biomePlaylists.defaultPlaylists.toString());
                 timmMain.LOGGER.info(configJSON);
             }

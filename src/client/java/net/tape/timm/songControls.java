@@ -52,6 +52,16 @@ public class songControls {
         play(pickSong());
     }
 
+    public static long pickDelay(long min, long max, Random rng) {
+        if (min == max) {
+            return min;
+        } else if (max < min) {
+            return rng.nextLong(max, min);
+        } else {
+            return rng.nextLong(min, max);
+        }
+    }
+
     public static SoundEvent pickSong() {
         String playlistName = "menu";
 
@@ -61,10 +71,11 @@ public class songControls {
             if (temp.isPresent()) {
                 playlistName = temp.get().getValue().toString();
                 timmMain.LOGGER.info(playlistName);
-                timer = song_rng.nextLong(modConfig.minSongDelay, modConfig.maxSongDelay);
+                timer = pickDelay(modConfig.minSongDelay, modConfig.maxSongDelay, song_rng);
             }
         } else {
-            timer = song_rng.nextLong(modConfig.minMenuDelay, modConfig.maxMenuDelay);
+            playlistName = "menu";
+            timer = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
         }
         inTimer = true;
 

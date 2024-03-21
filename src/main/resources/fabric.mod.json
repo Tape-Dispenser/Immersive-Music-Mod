@@ -19,7 +19,7 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "client": [
       "net.tape.timm.timmMain"
     ]
   },

@@ -17,7 +17,7 @@ public class ExampleMixin {
 		String x = songControls.nowPlaying();
 		if (x == null) {
 			songControls.play(songControls.pickSong());
-			LOGGER.info("now playing: ".concat(songControls.nowPlaying()));
+			LOGGER.info("now playing: ".concat(songControls.nowPlaying())); // this gives a warning but because a song is picked it shouldn't give a null song ever (unless playlist is null maybe)
 		}
 	}
 }
