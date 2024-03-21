@@ -14,7 +14,7 @@
     "sources": "https://github.com/Tape-Dispenser/Immersive-Music-Mod"
   },
 
-  "license": "CC0-1.0",
+  "license": "GNU GPL-3",
   "icon": "assets/timm/icon.png",
 
   "environment": "*",
