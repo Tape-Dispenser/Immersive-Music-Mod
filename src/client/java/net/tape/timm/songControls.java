@@ -79,12 +79,14 @@ public class songControls {
         }
         inTimer = true;
 
+
         List<String> playlist;
         try {
             playlist = Arrays.asList(bp.get(playlistName));
         } catch (NullPointerException e) {
             playlist = Arrays.asList(bp.get("fallback"));
         }
+
 
         if (playlist.isEmpty()) {
             playlist = Arrays.asList(bp.get("fallback"));

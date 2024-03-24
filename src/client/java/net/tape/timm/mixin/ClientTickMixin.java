@@ -11,6 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.tape.timm.timmMain.LOGGER;
+
 
 @Mixin(MinecraftClient.class)
 public class ClientTickMixin {
@@ -24,9 +26,14 @@ public class ClientTickMixin {
 			if (songControls.inTimer && songControls.timer == 0) {
 				songControls.play(songControls.pickSong());
 				songControls.inTimer = false;
-				timmMain.LOGGER.info("now playing: ".concat(songControls.lastSong.getId().toString()));
+
+				String x = songControls.nowPlaying();
+				if (x != null) {
+					LOGGER.info("now playing : ".concat(x));
+				} else {
+					LOGGER.warn("failed to pick song!");
+				}
 			}
-			return;
 		}
 	}
 }
