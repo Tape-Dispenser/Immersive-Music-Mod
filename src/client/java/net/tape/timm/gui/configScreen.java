@@ -35,12 +35,7 @@ public class configScreen extends Screen {
 
 
 
-        debugLogs = CheckboxWidget.builder(Text.literal(""), timmMain.mc.textRenderer)
-                .checked(modConfig.debugLogging)
-                .callback((checkbox, checked) -> updateDebug(checked))
-                .build();
-        debugLogs.setPosition(width/2, 130);
-
+        debugLogs = new CheckboxWidget(width/2, 130, 20, 20, Text.literal(""), modConfig.debugLogging);
         addDrawableChild(debugLogs);
 
         addDrawableChild(new closeButton(this)); // TODO: remove the class for this it isn't really necessary

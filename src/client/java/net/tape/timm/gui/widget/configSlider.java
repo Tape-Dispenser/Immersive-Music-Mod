@@ -10,7 +10,7 @@ import net.tape.timm.timmMain;
 
 public class configSlider extends SliderWidget {
     public configSlider(int x, int y, int w, int h, String key, double val, long real, ReleaseAction callback) {
-        super(x, y, w, h, Text.stringifiedTranslatable(key, real), val);
+        super(x, y, w, h, Text.translatable(key, real), val);
         this.lambda = callback;
         this.translationKey = key;
 
@@ -22,7 +22,7 @@ public class configSlider extends SliderWidget {
 
     @Override
     protected void updateMessage() {
-        this.setMessage(Text.stringifiedTranslatable(translationKey, this.realVal));
+        this.setMessage(Text.translatable(translationKey, this.realVal));
     }
 
     @Override
