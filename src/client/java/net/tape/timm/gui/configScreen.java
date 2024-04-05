@@ -2,15 +2,17 @@ package net.tape.timm.gui;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CheckboxWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.tape.timm.configManager;
-import net.tape.timm.gui.widget.closeButton;
 import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
+
+import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
@@ -38,7 +40,7 @@ public class configScreen extends Screen {
         debugLogs = new CheckboxWidget(width/2, 130, 20, 20, Text.literal(""), modConfig.debugLogging);
         addDrawableChild(debugLogs);
 
-        addDrawableChild(new closeButton(this)); // TODO: remove the class for this it isn't really necessary
+        addDrawableChild(new ButtonWidget(width-120-10 /* screen width - button width - 10 pixel offset */, height-20-10, 120, 20, Text.translatable("timm.config.close.text"), button -> this.close()));
         // TODO: add a "load defaults" button
 
         addDrawableChild(menuMinSlider);
@@ -49,16 +51,16 @@ public class configScreen extends Screen {
     }
 
     @Override
-    public void render(DrawContext ctx, int mouseX, int mouseY, float delta) {
-        super.render(ctx, mouseX, mouseY, delta);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        super.render(matrices, mouseX, mouseY, delta);
 
 
 
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 30, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 50, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 80, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 100, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol, false);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 30, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 50, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 80, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 100, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol);
 
 
 

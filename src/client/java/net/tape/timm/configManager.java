@@ -1,11 +1,12 @@
 package net.tape.timm;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import net.fabricmc.loader.api.FabricLoader;
 
 
-
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -83,10 +84,11 @@ public class configManager {
 
 
         // parse biome playlists file
-        Gson gson = new Gson();
-        TypeToken<Map<String, String[]>> mapType = new TypeToken<Map<String, String[]>>(){}; // java my beloved (this line isn't even that bad)
-
-        biomePlaylists.biomePlaylists = gson.fromJson(PLcontent, mapType);
+        Gson gson = new GsonBuilder()
+                .enableComplexMapKeySerialization()
+                .create();
+        Type typeMap = new TypeToken<Map<String, String[]>>(){}.getType();
+        biomePlaylists.biomePlaylists = gson.fromJson(PLcontent, typeMap);
 
         String[] currentVersionPair = biomePlaylists.biomePlaylists.get("version");
         if (currentVersionPair == null) {
@@ -107,7 +109,7 @@ public class configManager {
 
 
         // parse config file
-        modConfig.configMap = gson.fromJson(cfgContent, mapType);
+        modConfig.configMap = gson.fromJson(cfgContent, typeMap);
 
 
         timmMain.LOGGER.info("Resources Successfully Registered");

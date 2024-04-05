@@ -51,7 +51,7 @@ public class skip {
 
         Identifier id = Identifier.tryParse(song);
         if (id != null && id.getClass().getTypeName().equals("SoundEvent")) {
-            SoundEvent sound = SoundEvent.of(id);
+            SoundEvent sound = new SoundEvent(id);
             songControls.skip(sound);
             source.sendFeedback(Text.translatable("timm.commands.skip.success", song));
             return Command.SINGLE_SUCCESS;
