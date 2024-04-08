@@ -30,8 +30,8 @@ public class configScreen extends Screen {
 
         menuMinSlider = new configSlider(width/2,30,150,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
         menuMaxSlider = new configSlider(width/2,50,150,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
-        songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minSongDelay / modConfig.maxSongDelay, modConfig.minSongDelay, this::updateSongMin);
-        songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxSongDelay / (36000-modConfig.minSongDelay), modConfig.maxSongDelay, this::updateSongMax);
+        songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minGameDelay / modConfig.maxGameDelay, modConfig.minGameDelay, this::updateGameMin);
+        songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxGameDelay / (36000-modConfig.minGameDelay), modConfig.maxGameDelay, this::updateGameMax);
 
 
 
@@ -54,10 +54,10 @@ public class configScreen extends Screen {
 
 
 
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 30, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 50, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 80, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 100, txtcol, false);
+        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol, false);
+        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol, false);
+        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol, false);
+        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol, false);
         ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol, false);
 
 
@@ -99,20 +99,20 @@ public class configScreen extends Screen {
         return realVal;
     }
 
-    private long updateSongMin(double value) {
-        long realVal = lerp(1, modConfig.maxSongDelay, value);
+    private long updateGameMin(double value) {
+        long realVal = lerp(1, modConfig.maxGameDelay, value);
         String valString = String.valueOf(realVal);
-        modConfig.minSongDelay = realVal;
-        modConfig.configMap.replace("songMinDelay", new String[]{"long", valString});
+        modConfig.minGameDelay = realVal;
+        modConfig.configMap.replace("gameMinDelay", new String[]{"long", valString});
         configManager.update_cfg();
         return realVal;
     }
 
-    private long updateSongMax(double value) {
-        long realVal = lerp(modConfig.minSongDelay, 36000, value);
+    private long updateGameMax(double value) {
+        long realVal = lerp(modConfig.minGameDelay, 36000, value);
         String valString = String.valueOf(realVal);
-        modConfig.maxSongDelay = realVal;
-        modConfig.configMap.replace("songMaxDelay", new String[]{"long", valString});
+        modConfig.maxGameDelay = realVal;
+        modConfig.configMap.replace("gameMaxDelay", new String[]{"long", valString});
         configManager.update_cfg();
         return realVal;
     }

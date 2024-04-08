@@ -12,8 +12,8 @@ public class modConfig {
 
     public static final Map<String, String[]> defaultConfig = new HashMap<String, String[]>();
 
-    public static long minSongDelay;
-    public static long maxSongDelay;
+    public static long minGameDelay;
+    public static long maxGameDelay;
     public static long minMenuDelay;
     public static long maxMenuDelay;
     public static boolean debugLogging;
@@ -33,8 +33,8 @@ public class modConfig {
     }
 
     public static void copyVals() {
-        minSongDelay = Integer.parseInt(configMap.get("gameMinDelay")[1]); // get the second index of the list and parse as integer.
-        maxSongDelay = Integer.parseInt(configMap.get("gameMaxDelay")[1]);
+        minGameDelay = Integer.parseInt(configMap.get("gameMinDelay")[1]); // get the second index of the list and parse as integer.
+        maxGameDelay = Integer.parseInt(configMap.get("gameMaxDelay")[1]);
 
         minMenuDelay = Integer.parseInt(configMap.get("menuMinDelay")[1]); // get the second index of the list and parse as integer.
         maxMenuDelay = Integer.parseInt(configMap.get("menuMaxDelay")[1]);
