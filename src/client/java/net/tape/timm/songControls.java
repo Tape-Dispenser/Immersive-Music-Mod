@@ -6,15 +6,20 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.tape.timm.util.Song;
 
 import java.util.*;
+
+import static net.tape.timm.timmMain.LOGGER;
 
 
 public class songControls {
 
     public static MinecraftClient mc;
     public static Map<String, String[]> bp = biomePlaylists.biomePlaylists;
-    public static PositionedSoundInstance lastSong;
+    public static PositionedSoundInstance lastSoundInstance;
+
+    public static Song lastSong;
     public static long timer;
     public static boolean inTimer;
     public static Random song_rng;
@@ -23,23 +28,60 @@ public class songControls {
     public static void init() {
         mc = MinecraftClient.getInstance();
         lastSong = null;
-        timer = 1;
+        timer = 10;
         inTimer = true;
         song_rng = new Random();
+    }
+
+    public static void play(Song song) {
+        if (song != null) {
+            if (nowPlaying() != null)
+                mc.getSoundManager().stop(lastSoundInstance);
+            lastSoundInstance = PositionedSoundInstance.music(song.soundEvent);
+            mc.getSoundManager().play(lastSoundInstance);
+            lastSong = song;
+        }
     }
 
     public static void play(SoundEvent song) {
         if (song != null) {
             if (nowPlaying() != null)
-                mc.getSoundManager().stop(lastSong);
-            lastSong = PositionedSoundInstance.music(song);
-            mc.getSoundManager().play(lastSong);
+                mc.getSoundManager().stop(lastSoundInstance);
+            lastSoundInstance = PositionedSoundInstance.music(song);
+            mc.getSoundManager().play(lastSoundInstance);
+            lastSong = null;
         }
     }
 
+
+
     public static void stop() {
         if (nowPlaying() != null) {
-            mc.getSoundManager().stop(lastSong);
+            mc.getSoundManager().stop(lastSoundInstance);
+
+            // set timer and rng delay time
+            inTimer = true;
+            long x; // delay time
+            if (lastSong == null) {
+                x = 10;
+            } else {
+                if (lastSong.playlist != null) {
+                    if (Objects.equals(lastSong.playlist, "menu")) {
+                        x = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
+                    } else {
+                        x = pickDelay(modConfig.minGameDelay, modConfig.maxGameDelay, song_rng);
+                    }
+                } else {
+                    x = 10;
+                }
+            }
+            timer = x;
+
+            // debug logging
+            if (modConfig.debugLogging) {
+                LOGGER.info("ticks until next song: ".concat(String.valueOf(x)));
+            }
+
         }
     }
 
@@ -49,7 +91,10 @@ public class songControls {
     }
 
     public static void skip() {
-        play(pickSong());
+        Song x = pickSong();
+        if (x != null) {
+            play(x.soundEvent);
+        }
     }
 
     public static long pickDelay(long min, long max, Random rng) {
@@ -62,7 +107,10 @@ public class songControls {
         }
     }
 
-    public static SoundEvent pickSong() {
+
+    public static Song pickSong() {
+
+        // determine playlist and set delay
         String playlistName = "menu";
 
         if (mc.world != null) {
@@ -70,8 +118,10 @@ public class songControls {
             Optional<RegistryKey<Biome>> temp = mc.world.getBiome(mc.player.getBlockPos()).getKey();
             if (temp.isPresent()) {
                 playlistName = temp.get().getValue().toString();
-                timmMain.LOGGER.info(playlistName);
-                timer = pickDelay(modConfig.minSongDelay, modConfig.maxSongDelay, song_rng);
+
+                if (modConfig.debugLogging) {
+                    timmMain.LOGGER.info(playlistName);
+                }
             }
         } else {
             playlistName = "menu";
@@ -80,6 +130,7 @@ public class songControls {
         inTimer = true;
 
 
+        // get playlist
         List<String> playlist;
         try {
             playlist = Arrays.asList(bp.get(playlistName));
@@ -92,22 +143,22 @@ public class songControls {
             playlist = Arrays.asList(bp.get("fallback"));
         }
 
-
+        // pick song in playlist
         int index = Math.abs(song_rng.nextInt() % playlist.size());
         String songName = playlist.get(index);
 
         try {
-            return new SoundEvent(Identifier.tryParse(songName));
+            return new Song(new SoundEvent(Identifier.tryParse(songName)), playlistName);
         } catch (NullPointerException e) {
-            timmMain.LOGGER.error(String.format("failed to find %s", songName));
-            throw new RuntimeException(e);
+            timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
+            return null;
         }
 
     }
 
     public static String nowPlaying() {
-        if (mc.getSoundManager().isPlaying(lastSong)) {
-            return lastSong.getSound().getIdentifier().toString();
+        if (mc.getSoundManager().isPlaying(lastSoundInstance)) {
+            return lastSoundInstance.getSound().getIdentifier().toString();
         } else {
             return null;
         }
