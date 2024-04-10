@@ -1,9 +1,9 @@
 # The Immersive Music Mod
 
-## NOTICE:
-*Update 1.0.0 is currently in patreon-exclusive release, stay tuned for the public release!*
-
 ## Download:
+https://modrinth.com/mod/immersivemusicmod
+
+Old versions can be found at:
 https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 
 ## Installation:
@@ -14,7 +14,6 @@ https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 
 ## Usage:
 ### Commands:
-*NOTE: Commands are not implemented in versions below 1.0.0!*
 * `/skip [song name]` : skips to the next song, if no song name is provided the mod will pick a song
 * `/stop` : stops currently playing song, a new song will play after allotted delay time
 * `/nowplaying`, `/np` : displays currently playing song in chat
@@ -31,8 +30,12 @@ The compiled mod will be output to `The-Immersive-Music-Mod/build/libs`.
 Make sure you put `TIMM_version.jar` in your mods folder and not `TIMM_version-sources.jar`!
 
 ## Links:
+https://modrinth.com/mod/immersivemusicmod
+
 https://www.patreon.com/ImmersiveMusicMod
 
 https://discord.com/invite/zPZP9RT253
 
 https://www.youtube.com/@goldeagleproductions
+
+https://www.buymeacoffee.com/immersivemusicmod?status=1
