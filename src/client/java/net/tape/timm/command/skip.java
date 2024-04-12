@@ -43,7 +43,7 @@ public class skip {
 
     private static int skipNoSong(FabricClientCommandSource source) {
         songControls.skip();
-        source.sendFeedback(Text.translatable("timm.commands.skip.success", songControls.lastSong.toString()));
+        source.sendFeedback(Text.translatable("timm.commands.skip.success", songControls.lastSoundInstance.getSound().getIdentifier().toString()));
         return Command.SINGLE_SUCCESS;
     }
 
