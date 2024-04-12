@@ -15,7 +15,7 @@ https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 ## Usage:
 ### Commands:
 * `/skip [song name]` : skips to the next song, if no song name is provided the mod will pick a song
-* `/stop` : stops currently playing song, a new song will play after allotted delay time
+* `/timmstop`, `/stp` : stops currently playing song, a new song will play after allotted delay time
 * `/nowplaying`, `/np` : displays currently playing song in chat
 * `/cfg` : opens config menu
 
