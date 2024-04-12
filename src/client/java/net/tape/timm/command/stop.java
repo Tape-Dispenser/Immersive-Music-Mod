@@ -19,7 +19,9 @@ public class stop {
     // https://github.com/Earthcomputer/clientcommands
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(literal("stop").executes(ctx -> stopSong(ctx.getSource())));
+        // had to change the command name, /stop can't stop servers otherwise 🤣
+        dispatcher.register(literal("timmstop").executes(ctx -> stopSong(ctx.getSource())));
+        dispatcher.register(literal("stp").executes(ctx -> stopSong(ctx.getSource())));
     }
 
     private static int stopSong(FabricClientCommandSource source) {
