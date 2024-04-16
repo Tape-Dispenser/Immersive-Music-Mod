@@ -127,7 +127,6 @@ public class songControls {
             playlistName = "menu";
             timer = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
         }
-        inTimer = true;
 
 
         // get playlist

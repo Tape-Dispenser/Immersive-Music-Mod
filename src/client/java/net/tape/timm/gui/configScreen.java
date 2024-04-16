@@ -8,9 +8,11 @@ import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.tape.timm.configManager;
+import net.tape.timm.gui.widget.configCheckbox;
 import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
+import net.tape.timm.gui.widget.configCheckbox.PressAction;
 
 import java.awt.*;
 
@@ -33,6 +35,7 @@ public class configScreen extends Screen {
         menuMaxSlider = new configSlider(width/2,50,150,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
         songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minGameDelay / modConfig.maxGameDelay, modConfig.minGameDelay, this::updateGameMin);
         songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxGameDelay / (36000-modConfig.minGameDelay), modConfig.maxGameDelay, this::updateGameMax);
+
 
 
 
