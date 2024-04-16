@@ -12,7 +12,6 @@ import net.tape.timm.gui.widget.configCheckbox;
 import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
-import net.tape.timm.gui.widget.configCheckbox.PressAction;
 
 import java.awt.*;
 
@@ -23,7 +22,7 @@ public class configScreen extends Screen {
     }
     int txtcol = 0xffffff;
 
-    public CheckboxWidget debugLogs;
+    public configCheckbox debugLogs;
 
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
@@ -39,7 +38,7 @@ public class configScreen extends Screen {
 
 
 
-        debugLogs = new CheckboxWidget(width/2, 130, 20, 20, Text.literal(""), modConfig.debugLogging);
+        debugLogs = new configCheckbox(width/2, 130, 20, 20, "debug", modConfig.debugLogging);
         addDrawableChild(debugLogs);
 
         addDrawableChild(new ButtonWidget(width-120-10 /* screen width - button width - 10 pixel offset */, height-20-10, 120, 20, Text.translatable("timm.config.close.text"), button -> this.close()));

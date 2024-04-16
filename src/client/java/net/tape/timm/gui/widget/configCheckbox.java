@@ -1,27 +1,72 @@
 package net.tape.timm.gui.widget;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.widget.CheckboxWidget;
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.screen.narration.NarrationPart;
+import net.minecraft.client.gui.widget.PressableWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.tape.timm.configManager;
+import net.tape.timm.modConfig;
+import net.tape.timm.timmMain;
 
-public class configCheckbox extends CheckboxWidget {
-    public configCheckbox(int x, int y, int width, int height, Text message, boolean checked, boolean showMessage, PressAction lambda) {
-        super(x, y, width, height, message, checked, showMessage);
-        this.lambda = lambda;
+@Environment(value=EnvType.CLIENT)
+public class configCheckbox extends PressableWidget {
+    private static final Identifier TEXTURE = new Identifier("textures/gui/checkbox.png");
+    private boolean checked;
+    private final String configKey;
 
+
+
+    public configCheckbox(int x, int y, int width, int height, String cfgKey, boolean checked) {
+        super(x, y, width, height, Text.literal(""));
+        this.checked = checked;
+        this.configKey = cfgKey;
     }
-
-    final protected PressAction lambda;
 
     @Override
     public void onPress() {
-        this.lambda.onPress(this.isChecked());
+        this.checked = !this.checked;
+        String checkString = String.valueOf(this.checked);
+        modConfig.configMap.replace(configKey, new String[]{"bool", checkString});
+        modConfig.copyVals(); // eventually some way to only copy one specific value from config map would be cool i think
+        configManager.update_cfg();
     }
 
+    public boolean isChecked() {
+        return this.checked;
+    }
 
-    @Environment(value= EnvType.CLIENT)
-    public static interface PressAction {
-        public void onPress(boolean check);
+    @Override
+    public void appendNarrations(NarrationMessageBuilder builder) {
+        builder.put(NarrationPart.TITLE, (Text)this.getNarrationMessage());
+        if (this.active) {
+            if (this.isFocused()) {
+                builder.put(NarrationPart.USAGE, (Text)Text.translatable((String)"narration.checkbox.usage.focused"));
+            } else {
+                builder.put(NarrationPart.USAGE, (Text)Text.translatable((String)"narration.checkbox.usage.hovered"));
+            }
+        }
+    }
+
+    @Override
+    public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        RenderSystem.enableDepthTest();
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+        configCheckbox.drawTexture(matrices, this.x, this.y, this.isFocused() ? 20.0f : 0.0f, this.checked ? 20.0f : 0.0f, 20, this.height, 64, 64);
+        this.renderBackground(matrices, timmMain.mc, mouseX, mouseY);
     }
 }
+
+
+
+
+
