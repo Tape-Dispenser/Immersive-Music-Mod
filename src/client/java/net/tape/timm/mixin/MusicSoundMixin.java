@@ -19,7 +19,7 @@ public class MusicSoundMixin {
 
 	@Inject(method = "stop()V", at = @At(value = "HEAD"))
 	private void stopMixin(CallbackInfo info) {
-		songControls.lastSong = null;
+		songControls.stop();
 		timmMain.LOGGER.info("song stopped");
 	}
 }

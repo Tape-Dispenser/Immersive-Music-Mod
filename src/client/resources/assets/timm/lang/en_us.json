@@ -9,6 +9,14 @@
   "timm.commands.skip.success": "Skipped to %s",
   "timm.commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
 
+  "timm.commands.setSong.success": "Set song #%d to %s",
+  "timm.commands.setSong.badID": "Error while executing setSong: Unknown Identifier \"%s\"",
+  "timm.commands.setSong.badType": "Error while executing setSong: Identifier %s returned type %s, not SoundEvent",
+  "timm.commands.setSong.badNum": "Error while executing setSong: Bad song id #%d",
+
+  "timm.commands.play1": "Playing %s",
+  "timm.commands.play2": "Playing %s",
+
 
   "timm.config.text": "Config Menu",
 

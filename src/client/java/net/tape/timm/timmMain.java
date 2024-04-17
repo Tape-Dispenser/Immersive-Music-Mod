@@ -25,40 +25,46 @@ public class timmMain implements ClientModInitializer {
 		// Proceed with mild caution.
 
 
-		LOGGER.info("Registering Resources...");
-		registerResources.init();
-		LOGGER.info("Resources Registered");
+		//LOGGER.info("Registering Resources...");
+		//registerResources.init();
+		//LOGGER.info("Resources Registered");
+
+		LOGGER.info("who needs to register resources anyways XD");
 
 
+		//LOGGER.info("Initializing Playlists...");
+		//biomePlaylists.init();
+		//LOGGER.info("Playlists Initialized.");
 
-		LOGGER.info("Initializing Playlists...");
-		biomePlaylists.init();
-		LOGGER.info("Playlists Initialized.");
-
-
-
-		LOGGER.info("Loading Default Config Values...");
-		modConfig.init();
-		LOGGER.info("Loaded Default Config Values.");
+		LOGGER.info("don't really need playlists if you don't have songs to put in them...");
 
 
+		//LOGGER.info("Loading Default Config Values...");
+		//modConfig.init();
+		//LOGGER.info("Loaded Default Config Values.");
 
-		LOGGER.info("Loading Config Values...");
-		configManager.init();
-		LOGGER.info("Config Values Loaded");
-
-
-
-		LOGGER.info("Copying config values to memory...");
-		modConfig.copyVals();
-		LOGGER.info("Config values copied to memory.");
+		LOGGER.info("config values seem kinda bloat to me ngl");
 
 
+		//LOGGER.info("Loading Config Values...");
+		//configManager.init();
+		//LOGGER.info("Config Values Loaded");
 
-		LOGGER.info("Initializing Song Controls...");
-		songControls.init();
-		LOGGER.info("Song Controls Initialized.");
+		LOGGER.info("bro this dumbass really needs two separate functions just to load config values smh");
 
+
+		//LOGGER.info("Copying config values to memory...");
+		//modConfig.copyVals();
+		//LOGGER.info("Config values copied to memory.");
+
+		LOGGER.info("we aint copying shit to memory bitch");
+
+
+		//LOGGER.info("Initializing Song Controls...");
+		//songControls.init();
+		//LOGGER.info("Song Controls Initialized.");
+
+		LOGGER.info("bro why would you have to initialize song controls they're literally just control functions");
 
 
 		LOGGER.info("Initializing Commands...");
@@ -70,9 +76,4 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("TIMM successfully initialized.");
 
 	}
-
-
-
-	public static MinecraftClient mc = MinecraftClient.getInstance();
-
 }
