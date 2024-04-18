@@ -7,6 +7,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.configCheckbox;
 import net.tape.timm.gui.widget.configSlider;
@@ -18,7 +19,7 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
     public configScreen() {
-        super(Text.translatable("timm.config.text"));
+        super(new TranslatableText("timm.config.text"));
     }
     int txtcol = 0xffffff;
 
@@ -41,7 +42,7 @@ public class configScreen extends Screen {
         debugLogs = new configCheckbox(width/2, 130, 20, 20, "debug", modConfig.debugLogging);
         addDrawableChild(debugLogs);
 
-        addDrawableChild(new ButtonWidget(width-120-10 /* screen width - button width - 10 pixel offset */, height-20-10, 120, 20, Text.translatable("timm.config.close.text"), button -> this.close()));
+        addDrawableChild(new ButtonWidget(width-120-10 /* screen width - button width - 10 pixel offset */, height-20-10, 120, 20, new TranslatableText("timm.config.close.text"), button -> this.close()));
         // TODO: add a "load defaults" button
 
         addDrawableChild(menuMinSlider);
@@ -57,11 +58,11 @@ public class configScreen extends Screen {
 
 
 
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, new TranslatableText("timm.config.menuMin.text"), 10, 30, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, new TranslatableText("timm.config.menuMax.text"), 10, 50, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, new TranslatableText("timm.config.songMin.text"), 10, 80, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, new TranslatableText("timm.config.songMax.text"), 10, 100, txtcol);
+        drawCenteredText(matrices, timmMain.mc.textRenderer, new TranslatableText("timm.config.debug.text"), 10, 130, txtcol);
 
 
 

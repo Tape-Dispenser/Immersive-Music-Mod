@@ -5,12 +5,13 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
 public class configSlider extends SliderWidget {
     public configSlider(int x, int y, int w, int h, String key, double val, long real, ReleaseAction callback) {
-        super(x, y, w, h, Text.translatable(key, real), val);
+        super(x, y, w, h, new TranslatableText(key, real), val);
         this.lambda = callback;
         this.translationKey = key;
 
@@ -22,7 +23,7 @@ public class configSlider extends SliderWidget {
 
     @Override
     protected void updateMessage() {
-        this.setMessage(Text.translatable(translationKey, this.realVal));
+        this.setMessage(new TranslatableText(translationKey, this.realVal));
     }
 
     @Override

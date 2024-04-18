@@ -2,7 +2,8 @@ package net.tape.timm;
 
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 
 
@@ -62,7 +63,7 @@ public class timmMain implements ClientModInitializer {
 
 
 		LOGGER.info("Initializing Commands...");
-		ClientCommandRegistrationCallback.EVENT.register(registerCommands::init);
+		registerCommands.init(ClientCommandManager.DISPATCHER);
 		LOGGER.info("Commands Initialized.");
 
 

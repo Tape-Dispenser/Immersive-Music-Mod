@@ -1,13 +1,14 @@
 package net.tape.timm.command;
+import net.minecraft.text.TranslatableText;
 import net.tape.timm.songControls;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
+import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.*;
 
 public class nowPlaying {
 
@@ -27,9 +28,9 @@ public class nowPlaying {
     private static int printNowPlaying(FabricClientCommandSource source) {
         if (songControls.nowPlaying() != null) {
             String song = songControls.nowPlaying();
-            source.sendFeedback(Text.translatable("timm.commands.nowPlaying.song", song));
+            source.sendFeedback(new TranslatableText("timm.commands.nowPlaying.song", song));
         } else {
-            source.sendFeedback(Text.translatable("timm.commands.nowPlaying.null"));
+            source.sendFeedback(new TranslatableText("timm.commands.nowPlaying.null"));
         }
 
         return Command.SINGLE_SUCCESS;

@@ -4,17 +4,18 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.Sound;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.tape.timm.songControls;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
 import net.tape.timm.timmMain;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
+import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.*;
 
 public class skip {
 
@@ -43,7 +44,7 @@ public class skip {
 
     private static int skipNoSong(FabricClientCommandSource source) {
         songControls.skip();
-        source.sendFeedback(Text.translatable("timm.commands.skip.success", songControls.lastSoundInstance.getSound().getIdentifier().toString()));
+        source.sendFeedback(new TranslatableText("timm.commands.skip.success", songControls.lastSoundInstance.getSound().getIdentifier().toString()));
         return Command.SINGLE_SUCCESS;
     }
 
@@ -53,10 +54,10 @@ public class skip {
         if (id != null && id.getClass().getTypeName().equals("SoundEvent")) {
             SoundEvent sound = new SoundEvent(id);
             songControls.skip(sound);
-            source.sendFeedback(Text.translatable("timm.commands.skip.success", song));
+            source.sendFeedback(new TranslatableText("timm.commands.skip.success", song));
             return Command.SINGLE_SUCCESS;
         } else {
-            source.sendFeedback(Text.translatable("timm.commands.skip.badId", song));
+            source.sendFeedback(new TranslatableText("timm.commands.skip.badId", song));
             return -1; // apparently there isn't a constant defined for command failure???
         }
     }

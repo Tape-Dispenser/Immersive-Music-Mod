@@ -1,15 +1,16 @@
 package net.tape.timm.command;
 
 
+import net.minecraft.text.TranslatableText;
 import net.tape.timm.songControls;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
+import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.*;
 
 public class stop {
 
@@ -27,7 +28,7 @@ public class stop {
     private static int stopSong(FabricClientCommandSource source) {
 
         songControls.stop();
-        source.sendFeedback(Text.translatable("timm.commands.stop"));
+        source.sendFeedback(new TranslatableText("timm.commands.stop"));
 
 
         return Command.SINGLE_SUCCESS;

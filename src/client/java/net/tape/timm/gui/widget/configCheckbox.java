@@ -8,7 +8,9 @@ import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.widget.PressableWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.tape.timm.configManager;
 import net.tape.timm.modConfig;
@@ -23,7 +25,7 @@ public class configCheckbox extends PressableWidget {
 
 
     public configCheckbox(int x, int y, int width, int height, String cfgKey, boolean checked) {
-        super(x, y, width, height, Text.literal(""));
+        super(x, y, width, height, new LiteralText(""));
         this.checked = checked;
         this.configKey = cfgKey;
     }
@@ -43,12 +45,12 @@ public class configCheckbox extends PressableWidget {
 
     @Override
     public void appendNarrations(NarrationMessageBuilder builder) {
-        builder.put(NarrationPart.TITLE, (Text)this.getNarrationMessage());
+        builder.put(NarrationPart.TITLE, this.getNarrationMessage());
         if (this.active) {
             if (this.isFocused()) {
-                builder.put(NarrationPart.USAGE, (Text)Text.translatable((String)"narration.checkbox.usage.focused"));
+                builder.put(NarrationPart.USAGE, new TranslatableText("narration.checkbox.usage.focused"));
             } else {
-                builder.put(NarrationPart.USAGE, (Text)Text.translatable((String)"narration.checkbox.usage.hovered"));
+                builder.put(NarrationPart.USAGE, new TranslatableText("narration.checkbox.usage.hovered"));
             }
         }
     }
