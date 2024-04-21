@@ -6,7 +6,8 @@
   "mixins": [],
   "client": [
     "MusicSoundMixin",
-    "ClientTickMixin"
+    "ClientTickMixin",
+    "SoundSystemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
