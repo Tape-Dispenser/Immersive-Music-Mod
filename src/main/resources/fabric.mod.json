@@ -21,6 +21,9 @@
   "entrypoints": {
     "client": [
       "net.tape.timm.timmMain"
+    ],
+    "modmenu": [
+      "net.tape.timm.gui.modMenuIntegration"
     ]
   },
   "mixins": [
@@ -35,5 +38,18 @@
   },
   "suggests": {
     "another-mod": "*"
+  },
+
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.com/invite/zPZP9RT253",
+        "modmenu.buymeacoffee": "https://www.buymeacoffee.com/immersivemusicmod?status=1",
+        "modmenu.patreon": "https://www.patreon.com/ImmersiveMusicMod",
+        "modmenu.modrinth": "https://modrinth.com/mod/immersivemusicmod",
+        "modmenu.youtube": "https://www.youtube.com/@goldeagleproductions"
+      },
+      "update_checker": true
+    }
   }
 }
