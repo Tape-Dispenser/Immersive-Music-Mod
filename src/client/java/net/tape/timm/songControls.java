@@ -88,13 +88,17 @@ public class songControls {
 
     public static void skip(SoundEvent next) {
         if (nowPlaying() != null) {stop();}
+        if (inTimer) {
+            inTimer = false;
+            timer = 10;
+        }
         play(next);
     }
 
     public static void skip() {
         Song song = pickSong();
         if (song != null) {
-            play(song);
+            skip(song.soundEvent);
         }
     }
 
