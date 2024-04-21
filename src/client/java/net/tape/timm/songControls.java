@@ -23,6 +23,7 @@ public class songControls {
     public static long timer;
     public static boolean inTimer;
     public static Random song_rng;
+    public static boolean soundEngineStarted = false;
 
 
     public static void init() {
