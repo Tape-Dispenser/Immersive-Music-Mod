@@ -27,6 +27,10 @@ public class configScreen extends Screen {
 
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
+    public configScreen(Screen screen) {
+        super(Text.translatable("timm.config.text"));
+    }
+
     @Override
     public void init() {
 
