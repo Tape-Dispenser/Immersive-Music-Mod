@@ -98,7 +98,10 @@ public class songControls {
     public static void skip() {
         Song song = pickSong();
         if (song != null) {
-            skip(song.soundEvent);
+            if (inTimer) {
+                inTimer = false;
+            }
+            play(song);
         }
     }
 
