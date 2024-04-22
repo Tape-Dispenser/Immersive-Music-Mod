@@ -110,7 +110,8 @@
     "lush_caves": {
       "sounds": [
         "timm:lush_caves-01",
-        "timm:lush_caves-02"
+        "timm:lush_caves-02",
+        "timm:lush_caves-03"
       ]
     },
 
