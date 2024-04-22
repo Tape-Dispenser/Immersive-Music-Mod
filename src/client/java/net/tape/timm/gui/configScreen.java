@@ -57,15 +57,15 @@ public class configScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackgroundTexture(0);
+
         super.render(matrices, mouseX, mouseY, delta);
 
-
-
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol);
+        timmMain.mc.textRenderer.draw(matrices, Text.translatable("timm.config.menuMin.text"), (float) 10, (float) 30, txtcol);
+        timmMain.mc.textRenderer.draw(matrices, Text.translatable("timm.config.menuMax.text"), (float) 10, (float) 50, txtcol);
+        timmMain.mc.textRenderer.draw(matrices, Text.translatable("timm.config.songMin.text"), (float) 10, (float) 80, txtcol);
+        timmMain.mc.textRenderer.draw(matrices, Text.translatable("timm.config.songMax.text"), (float) 10, (float) 100, txtcol);
+        timmMain.mc.textRenderer.draw(matrices, Text.translatable("timm.config.debug.text"), (float) 10, (float) 130, txtcol);
 
 
 
