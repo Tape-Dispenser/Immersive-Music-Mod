@@ -54,6 +54,8 @@ public class configScreen extends Screen {
 
     @Override
     public void render(DrawContext ctx, int mouseX, int mouseY, float delta) {
+        renderBackgroundTexture(ctx);
+
         super.render(ctx, mouseX, mouseY, delta);
 
 
