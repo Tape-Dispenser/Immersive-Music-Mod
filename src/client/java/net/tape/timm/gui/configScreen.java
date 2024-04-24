@@ -15,37 +15,37 @@ import net.tape.timm.timmMain;
 
 import java.awt.*;
 
+import static net.tape.timm.timmMain.mc;
+
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
-    public configScreen() {
+    public configScreen(Screen screen) {
         super(Text.translatable("timm.config.text"));
+        this.parent = screen;
     }
-    int txtcol = 0xffffff;
+    static final int txtcol = 0xffffff;
+    static final int margin = 10;
 
     public configCheckbox debugLogs;
+    private final Screen parent;
 
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
-    public configScreen(Screen screen) {
-        super(Text.translatable("timm.config.text"));
-    }
-
     @Override
     public void init() {
-
 
         menuMinSlider = new configSlider(width/2,30,150,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
         menuMaxSlider = new configSlider(width/2,50,150,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
         songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minGameDelay / modConfig.maxGameDelay, modConfig.minGameDelay, this::updateGameMin);
         songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxGameDelay / (36000-modConfig.minGameDelay), modConfig.maxGameDelay, this::updateGameMax);
 
-
-
-
         debugLogs = new configCheckbox(width/2, 130, 20, 20, "debug", modConfig.debugLogging);
         addDrawableChild(debugLogs);
 
-        addDrawableChild(new ButtonWidget(width-120-10 /* screen width - button width - 10 pixel offset */, height-20-10, 120, 20, Text.translatable("timm.config.close.text"), button -> this.close()));
+        addDrawableChild(ButtonWidget.builder(Text.translatable("timm.config.close.text"), button -> this.close())
+                .dimensions(width-120-margin, height-20-margin, 120, 20)
+                .build());
+
         // TODO: add a "load defaults" button
 
         addDrawableChild(menuMinSlider);
@@ -57,19 +57,24 @@ public class configScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackgroundTexture(matrices);
+
         super.render(matrices, mouseX, mouseY, delta);
 
-
-
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol);
-        drawCenteredText(matrices, timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol);
+        mc.textRenderer.draw(matrices, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol);
+        mc.textRenderer.draw(matrices, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol);
+        mc.textRenderer.draw(matrices, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol);
+        mc.textRenderer.draw(matrices, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol);
+        mc.textRenderer.draw(matrices, Text.translatable("timm.config.debug.text"), 10, 130, txtcol);
 
 
 
 
+    }
+
+    @Override
+    public void close() {
+        mc.setScreen(this.parent);
     }
 
     private void updateDebug(boolean check) {

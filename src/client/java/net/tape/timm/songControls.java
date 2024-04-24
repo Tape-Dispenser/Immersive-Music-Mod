@@ -2,7 +2,7 @@ package net.tape.timm;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
@@ -155,7 +155,7 @@ public class songControls {
         String songName = playlist.get(index);
 
         try {
-            return new Song(new SoundEvent(Identifier.tryParse(songName)), playlistName);
+            return new Song(SoundEvent.of(Identifier.tryParse(songName)), playlistName);
         } catch (NullPointerException e) {
             timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
             return null;

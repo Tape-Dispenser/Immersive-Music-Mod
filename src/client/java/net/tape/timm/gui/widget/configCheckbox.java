@@ -4,12 +4,15 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.widget.PressableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.tape.timm.configManager;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
@@ -42,31 +45,24 @@ public class configCheckbox extends PressableWidget {
     }
 
     @Override
-    public void appendNarrations(NarrationMessageBuilder builder) {
+    public void appendClickableNarrations(NarrationMessageBuilder builder) {
         builder.put(NarrationPart.TITLE, (Text)this.getNarrationMessage());
         if (this.active) {
             if (this.isFocused()) {
-                builder.put(NarrationPart.USAGE, (Text)Text.translatable((String)"narration.checkbox.usage.focused"));
+                builder.put(NarrationPart.USAGE, Text.translatable("narration.checkbox.usage.focused"));
             } else {
-                builder.put(NarrationPart.USAGE, (Text)Text.translatable((String)"narration.checkbox.usage.hovered"));
+                builder.put(NarrationPart.USAGE, Text.translatable("narration.checkbox.usage.hovered"));
             }
         }
     }
 
-    @Override
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.enableDepthTest();
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
         RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
-        configCheckbox.drawTexture(matrices, this.x, this.y, this.isFocused() ? 20.0f : 0.0f, this.checked ? 20.0f : 0.0f, 20, this.height, 64, 64);
-        this.renderBackground(matrices, timmMain.mc, mouseX, mouseY);
+        drawTexture(matrices, this.getX(), this.getY(), this.isFocused() ? 20.0F : 0.0F, this.checked ? 20.0F : 0.0F, 20, this.height, 64, 64);
+
     }
+
 }
-
-
-
-
-

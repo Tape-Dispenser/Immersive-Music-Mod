@@ -13,11 +13,11 @@ import net.minecraft.text.Text;
 import net.tape.timm.timmMain;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
+import static net.tape.timm.timmMain.mc;
 
 
 public class openCfg {
 
-    static MinecraftClient mc = timmMain.mc;
     // Credit to Earthcomputer for writing most of the command handling code
     // i couldn't have done command interface shit if it weren't for clientcommands being open source
     // earthcomputer a real one for that
@@ -31,7 +31,7 @@ public class openCfg {
     }
 
     private static int fooCommand(FabricClientCommandSource source) throws CommandSyntaxException {
-        configScreen cfg = new configScreen();
+        configScreen cfg = new configScreen(mc.currentScreen);
         timmMain.LOGGER.info(Thread.currentThread().getName());
         mc.send(() -> mc.setScreen(cfg));
         return Command.SINGLE_SUCCESS;
