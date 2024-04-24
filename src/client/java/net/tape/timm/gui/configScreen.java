@@ -15,20 +15,22 @@ import net.tape.timm.timmMain;
 
 import java.awt.*;
 
+import static net.tape.timm.timmMain.mc;
+
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
-    public configScreen() {
+    public configScreen(Screen parent) {
         super(Text.translatable("timm.config.text"));
+        this.parent = parent;
     }
     int txtcol = 0xffffff;
 
+    private final Screen parent;
     public configCheckbox debugLogs;
 
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
-    public configScreen(Screen screen) {
-        super(Text.translatable("timm.config.text"));
-    }
+
 
     @Override
     public void init() {
@@ -70,6 +72,11 @@ public class configScreen extends Screen {
 
 
 
+    }
+
+    @Override
+    public void close() {
+        mc.setScreen(parent);
     }
 
     private void updateDebug(boolean check) {
