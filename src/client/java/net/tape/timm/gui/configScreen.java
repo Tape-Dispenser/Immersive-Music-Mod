@@ -16,20 +16,24 @@ import net.tape.timm.timmMain;
 
 import java.awt.*;
 
+import static net.tape.timm.timmMain.mc;
+
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
-    public configScreen() {
+
+    public configScreen(Screen parent) {
         super(new TranslatableText("timm.config.text"));
+        this.parent = parent;
     }
     int txtcol = 0xffffff;
 
     public configCheckbox debugLogs;
+    private final Screen parent;
 
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
-    public configScreen(Screen screen) {
-        super(new TranslatableText("timm.config.text"));
-    }
+
+
 
     @Override
     public void init() {
@@ -63,15 +67,20 @@ public class configScreen extends Screen {
 
         super.render(matrices, mouseX, mouseY, delta);
 
-        timmMain.mc.textRenderer.draw(matrices, new TranslatableText("timm.config.menuMin.text"), (float) 10, (float) 30, txtcol);
-        timmMain.mc.textRenderer.draw(matrices, new TranslatableText("timm.config.menuMax.text"), (float) 10, (float) 50, txtcol);
-        timmMain.mc.textRenderer.draw(matrices, new TranslatableText("timm.config.songMin.text"), (float) 10, (float) 80, txtcol);
-        timmMain.mc.textRenderer.draw(matrices, new TranslatableText("timm.config.songMax.text"), (float) 10, (float) 100, txtcol);
-        timmMain.mc.textRenderer.draw(matrices, new TranslatableText("timm.config.debug.text"), (float) 10, (float) 130, txtcol);
+        mc.textRenderer.draw(matrices, new TranslatableText("timm.config.menuMin.text"), (float) 10, (float) 30, txtcol);
+        mc.textRenderer.draw(matrices, new TranslatableText("timm.config.menuMax.text"), (float) 10, (float) 50, txtcol);
+        mc.textRenderer.draw(matrices, new TranslatableText("timm.config.songMin.text"), (float) 10, (float) 80, txtcol);
+        mc.textRenderer.draw(matrices, new TranslatableText("timm.config.songMax.text"), (float) 10, (float) 100, txtcol);
+        mc.textRenderer.draw(matrices, new TranslatableText("timm.config.debug.text"), (float) 10, (float) 130, txtcol);
 
 
 
 
+    }
+
+    @Override
+    public void close() {
+        mc.setScreen(parent);
     }
 
     private void updateDebug(boolean check) {

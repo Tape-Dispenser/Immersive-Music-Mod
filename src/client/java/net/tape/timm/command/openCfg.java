@@ -31,7 +31,7 @@ public class openCfg {
     }
 
     private static int fooCommand(FabricClientCommandSource source) throws CommandSyntaxException {
-        configScreen cfg = new configScreen();
+        configScreen cfg = new configScreen(mc.currentScreen);
         timmMain.LOGGER.info(Thread.currentThread().getName());
         mc.send(() -> mc.setScreen(cfg));
         return Command.SINGLE_SUCCESS;
