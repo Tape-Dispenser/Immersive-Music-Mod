@@ -12,21 +12,23 @@ import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
+import static net.tape.timm.timmMain.mc;
+
 @Environment(EnvType.CLIENT)
 public class configScreen extends Screen {
-    public configScreen() {
+    public configScreen(Screen parent) {
         super(Text.translatable("timm.config.text"));
+        this.parent = parent;
     }
 
     int txtcol = 0xffffff;
 
     public CheckboxWidget debugLogs;
+    private final Screen parent;
 
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
-    public configScreen(Screen screen) {
-        super(Text.translatable("timm.config.text"));
-    }
+
 
     @Override
     public void init() {
@@ -60,15 +62,20 @@ public class configScreen extends Screen {
 
 
 
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol, false);
-        ctx.drawText(timmMain.mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol, false);
+        ctx.drawText(mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol, false);
+        ctx.drawText(mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol, false);
+        ctx.drawText(mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol, false);
+        ctx.drawText(mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol, false);
+        ctx.drawText(mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol, false);
 
 
 
 
+    }
+
+    @Override
+    public void close() {
+        mc.setScreen(parent);
     }
 
     private void updateDebug(boolean check) {
