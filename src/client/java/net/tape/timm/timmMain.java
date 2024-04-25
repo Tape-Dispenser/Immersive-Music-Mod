@@ -3,12 +3,15 @@ package net.tape.timm;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 
 
 import net.fabricmc.api.ClientModInitializer;
 
 
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,6 +73,10 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Initializing Commands...");
 		ClientCommandRegistrationCallback.EVENT.register(registerCommands::init);
 		LOGGER.info("Commands Initialized.");
+
+
+		//LOGGER.info("attempting to download from aws...");
+		//AWStest.test();
 
 
 
