@@ -6,18 +6,17 @@ https://modrinth.com/mod/immersivemusicmod
 Old versions can be found at:
 https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 
-## Installation:
-1. Download and install fabric 1.20.4 https://fabricmc.net/wiki/install
-2. Download .jar file from the link above
-3. Download latest fabric api for your selected version https://github.com/FabricMC/fabric/releases
-4. Move both mod and fabric api to your mods folder
+## NOTICE:
+This version is an experimental testing version, it is not meant for public release!
+if you really want to try it out, you must build from source!
 
 ## Usage:
 ### Commands:
-* `/skip [song name]` : skips to the next song, if no song name is provided the mod will pick a song
+* `/setnum <num> <song>` : set song number `num` to whatever song is declared by `song`. `num` is limited to either 1 or 2.
 * `/timmstop`, `/stp` : stops currently playing song, a new song will play after allotted delay time
 * `/nowplaying`, `/np` : displays currently playing song in chat
-* `/cfg` : opens config menu
+* `/play1` : plays song 1
+* `/play2` : plays song 2
 
 ## Building from source:
 1. Navigate to your desired build directory in a command line
