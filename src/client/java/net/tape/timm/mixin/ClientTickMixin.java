@@ -56,8 +56,8 @@ public class ClientTickMixin {
 				if (songControls.lastSong == null) {
 					x = 10;
 				} else {
-					if (songControls.lastSong.getPlaylist() != null) {
-						if (Objects.equals(songControls.lastSong.getPlaylist(), "menu")) {
+					if (songControls.lastSong.playlist != null) {
+						if (Objects.equals(songControls.lastSong.playlist, "menu")) {
 							x = songControls.pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, songControls.song_rng);
 						} else {
 							x = songControls.pickDelay(modConfig.minGameDelay, modConfig.maxGameDelay, songControls.song_rng);
