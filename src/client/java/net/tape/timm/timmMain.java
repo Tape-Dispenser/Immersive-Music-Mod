@@ -9,6 +9,10 @@ import net.minecraft.client.MinecraftClient;
 import net.fabricmc.api.ClientModInitializer;
 
 
+import net.minecraft.client.sound.SoundManager;
+import net.minecraft.client.sound.SoundSystem;
+import net.tape.timm.access.SoundManagerAccess;
+import net.tape.timm.access.SoundSystemAccess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,10 +70,11 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Commands Initialized.");
 
 
-
 		LOGGER.info("TIMM successfully initialized.");
 
 	}
+
+
 
 
 

@@ -5,8 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
-    "MusicSoundMixin",
     "ClientTickMixin",
+    "MusicSoundMixin",
+    "SoundManagerMixin",
     "SoundSystemMixin"
   ],
   "injectors": {

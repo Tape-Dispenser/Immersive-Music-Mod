@@ -38,9 +38,13 @@ public class songControls {
         if (song != null) {
             if (nowPlaying() != null)
                 mc.getSoundManager().stop(lastSoundInstance);
-            lastSoundInstance = PositionedSoundInstance.music(song.soundEvent);
-            mc.getSoundManager().play(lastSoundInstance);
-            lastSong = song;
+            if (!song.isFile()) {
+                lastSoundInstance = PositionedSoundInstance.music(song.getSoundEvent());
+                mc.getSoundManager().play(lastSoundInstance);
+                lastSong = song;
+            } else {
+
+            }
         }
     }
 
@@ -66,8 +70,8 @@ public class songControls {
             if (lastSong == null) {
                 x = 10;
             } else {
-                if (lastSong.playlist != null) {
-                    if (Objects.equals(lastSong.playlist, "menu")) {
+                if (lastSong.getPlaylist() != null) {
+                    if (Objects.equals(lastSong.getPlaylist(), "menu")) {
                         x = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
                     } else {
                         x = pickDelay(modConfig.minGameDelay, modConfig.maxGameDelay, song_rng);
@@ -147,7 +151,7 @@ public class songControls {
         int index = Math.abs(song_rng.nextInt() % playlist.size());
         String songName = playlist.get(index);
         try {
-            return new Song(SoundEvent.of(Identifier.tryParse(songName)), playlistName);
+            return new Song(SoundEvent.of(Identifier.tryParse(songName)), playlistName, "");
         } catch (NullPointerException e) {
             timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
             return null;
