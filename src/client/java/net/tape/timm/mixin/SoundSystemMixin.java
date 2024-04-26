@@ -52,6 +52,10 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 
 	@Shadow @Final private SoundLoader soundLoader;
 
+	@Shadow @Final private List<TickableSoundInstance> tickingSounds;
+
+	@Shadow public abstract void play(SoundInstance sound2);
+
 	@Inject(method = "start()V",
 			at = @At(value = "INVOKE", target = "org/slf4j/Logger.info (Lorg/slf4j/Marker;Ljava/lang/String;)V", ordinal = 0),
 			slice = @Slice(
@@ -67,9 +71,14 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 		return "i jailbroke the system.\nthe sound system has started.\nthe previous statement is ".concat(String.valueOf(this.started)).concat(".");
 	}
 
-	@Override
+	/*@Override
 	public void play(Song song) {
 		if (!this.started) {
+			return;
+		}
+
+		if (!song.isFile()) {
+			play(PositionedSoundInstance.music(song.getSoundEvent()));
 			return;
 		}
 
@@ -134,5 +143,5 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 		if (sound2 instanceof TickableSoundInstance) {
 			this.tickingSounds.add((TickableSoundInstance)sound2);
 		}
-	}
+	}*/
 }

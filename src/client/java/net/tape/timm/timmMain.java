@@ -70,6 +70,10 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Commands Initialized.");
 
 
+		LOGGER.info("Checking Server for new songs...");
+		getSongs.getNewSongs();
+
+
 		LOGGER.info("TIMM successfully initialized.");
 
 	}

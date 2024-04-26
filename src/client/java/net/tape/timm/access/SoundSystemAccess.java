@@ -5,5 +5,5 @@ import net.tape.timm.util.Song;
 public interface SoundSystemAccess {
     String access();
 
-    void play(Song song);
+    //void play(Song song);
 }
