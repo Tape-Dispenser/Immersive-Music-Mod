@@ -22,7 +22,8 @@ https://github.com/Tape-Dispenser/Immersive-Music-Mod/releases
 ## Building from source:
 1. Navigate to your desired build directory in a command line
 2. `git clone https://github.com/Tape-Dispenser/Immersive-Music-Mod`
-3. `cd ./Immersive-Music-Mod`
+3. Open build.gradle in a text editor of your choice and set `compileJava.options.forkOptions.executable = '/home/tape/.jdks/corretto-21.0.3/bin/javac'`\n to whatever the path to your javac installation is
+3. in the terminal window you used to clone the source code, run:`cd ./Immersive-Music-Mod`
 4. `./gradlew genSources`
 5. `./gradlew build`
 
