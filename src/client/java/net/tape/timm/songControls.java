@@ -151,7 +151,7 @@ public class songControls {
         int index = Math.abs(song_rng.nextInt() % playlist.size());
         String songName = playlist.get(index);
         try {
-            return new Song(SoundEvent.of(Identifier.tryParse(songName)), playlistName, "");
+            return new Song(SoundEvent.of(Identifier.tryParse(songName)), "");
         } catch (NullPointerException e) {
             timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
             return null;
@@ -165,6 +165,33 @@ public class songControls {
         } else {
             return null;
         }
+    }
+
+    public static ArrayList<Song> getPlaylists() {
+        ArrayList<Song> selectionPool = new ArrayList<>();
+
+        if (mc.world == null) {
+            // game has not started, therefore must be in main menu
+
+        }
+
+
+        return selectionPool;
+    }
+
+    public static ArrayList<Song> getPlaylist(String name) {
+        ArrayList<Song> playlist = new ArrayList<>();
+
+        ArrayList<String> strings = new ArrayList<String>(List.of(bp.get(name)));
+
+
+        return playlist;
+    }
+
+    public static Song songLookup(String name) {
+
+
+
     }
 
 
