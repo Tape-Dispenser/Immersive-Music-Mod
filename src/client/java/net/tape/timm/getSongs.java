@@ -9,10 +9,12 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
 import net.fabricmc.loader.api.FabricLoader;
+import net.tape.timm.util.awsHelper;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -26,32 +28,7 @@ public class getSongs {
             .withRegion(String.valueOf(region))
             .build();
 
-    public static ArrayList<S3ObjectSummary> getServerSongs() {
 
-        // get list of songs on the AWS S3 server
-
-        // variable initialization
-        String nextContinuationToken = null;
-        int totalObjects = 0;
-        ArrayList<S3ObjectSummary> objects = new ArrayList<>() {};
-
-        do {
-            // construct request to AWS server
-            ListObjectsV2Request request = new ListObjectsV2Request();
-            request.setBucketName(bucketName);
-            request.setContinuationToken(nextContinuationToken);
-
-            // send request
-            ListObjectsV2Result result = client.listObjectsV2(request);
-
-            // parse result and prepare for next page (if necessary)
-            totalObjects += result.getKeyCount();
-            objects.addAll(result.getObjectSummaries());
-            nextContinuationToken = result.getContinuationToken();
-        } while (nextContinuationToken != null);
-
-        return objects;
-    }
 
     public static ArrayList<String> getLocalSongs() {
         // get a list of files in .minecraft/music/TIMM
@@ -73,8 +50,10 @@ public class getSongs {
     }
 
     public static void getNewSongs() {
-        ArrayList<S3ObjectSummary> objectSummaries = getServerSongs();
+        // get list of files on server
+        ArrayList<S3ObjectSummary> objectSummaries = awsHelper.getFileList(bucketName, client);
         ArrayList<String> songsToGet = new ArrayList<>();
+        // get list of local songs
         ArrayList<String> songsOnDisk = getLocalSongs();
 
         for (S3ObjectSummary objectSummary : objectSummaries) {
@@ -87,13 +66,23 @@ public class getSongs {
 
         for (String song : songsToGet) {
             timmMain.LOGGER.info(String.format("Missing song %s, downloading now...", song));
-            downloadSong(song);
+            awsHelper.downloadFile(song, bucketName, client);
         }
     }
 
-    public static void downloadSong(String song) {
-        File localFile = new File(String.format("%s/music/TIMM/%s", String.valueOf(FabricLoader.getInstance().getGameDir()), song));
-        ObjectMetadata object = client.getObject(new GetObjectRequest(bucketName, song), localFile);
+    public static ArrayList<String> getDiffs() {
+        // get list of all songs that need to update
+
+        // load local songList.json into a list of Song objects
+        Map<String, >
+        // load server songList.json into a list of Song objects
+        // iterate through all server songs
+            // query local version
+                // if local version doesn't exist, add song name to diff list
+                // if local version does exist, check for any changes
+                    // if changes exist, add song name to diff list
+
+                // return list of differences
     }
 
 

@@ -151,7 +151,7 @@ public class songControls {
         int index = Math.abs(song_rng.nextInt() % playlist.size());
         String songName = playlist.get(index);
         try {
-            return new Song(SoundEvent.of(Identifier.tryParse(songName)), "");
+            return new Song(SoundEvent.of(Identifier.tryParse(songName)), "", "Unknown");
         } catch (NullPointerException e) {
             timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
             return null;
