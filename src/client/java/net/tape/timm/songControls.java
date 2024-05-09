@@ -70,15 +70,8 @@ public class songControls {
             if (lastSong == null) {
                 x = 10;
             } else {
-                if (lastSong.getPlaylist() != null) {
-                    if (Objects.equals(lastSong.getPlaylist(), "menu")) {
+                // TODO: FIX THIS
                         x = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
-                    } else {
-                        x = pickDelay(modConfig.minGameDelay, modConfig.maxGameDelay, song_rng);
-                    }
-                } else {
-                    x = 10;
-                }
             }
             timer = x;
 
@@ -179,6 +172,7 @@ public class songControls {
         return selectionPool;
     }
 
+    /*
     public static ArrayList<Song> getPlaylist(String name) {
         ArrayList<Song> playlist = new ArrayList<>();
 
@@ -193,6 +187,7 @@ public class songControls {
 
 
     }
+     */
 
 
 

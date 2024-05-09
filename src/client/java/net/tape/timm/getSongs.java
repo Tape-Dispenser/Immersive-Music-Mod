@@ -70,6 +70,7 @@ public class getSongs {
         }
     }
 
+    /*
     public static ArrayList<String> getDiffs() {
         // get list of all songs that need to update
 
@@ -84,6 +85,6 @@ public class getSongs {
 
                 // return list of differences
     }
-
+    */
 
 }

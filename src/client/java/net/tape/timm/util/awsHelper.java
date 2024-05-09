@@ -49,6 +49,7 @@ public class awsHelper {
         return client.getObject(new GetObjectRequest(bucketName, file), localFile);
     }
 
+    /*
     public static ArrayList<String> getDiffs() {
         // get list of all songs that need to update
 
@@ -66,5 +67,7 @@ public class awsHelper {
 
         // return list of differences
     }
+
+     */
 
 }
