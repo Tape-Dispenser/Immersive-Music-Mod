@@ -33,7 +33,53 @@ public class jsonParser {
         }
     }
 
-    public String parseString(int index) {
+    public String skipWhitespace(int index) {
+        String val = "";
+        while (index < this.JSON.length()) {
+            Character c = this.JSON.charAt(index);
+            switch (c) {
+                case ' ','\n','\r','\t':
+                    val = val.concat(String.valueOf(c));
+                    break;
+                default:
+                    return val;
+            }
+            index++;
+        }
+        return val;
+    }
+
+    public jsonValue lexValue(int index) {
+        String val;
+        String type;
+
+        char temp = this.JSON.charAt(index);
+
+        switch (temp) {
+            case '{':
+                type = "object";
+                val = lexObject(index);
+                break;
+            case '[':
+                type = "array";
+                val = lexArray(index);
+                break;
+            case '"':
+                type = "string";
+                val = lexString(index);
+                break;
+            case 't','f','n':
+                type = "constant";
+                val = lexConstant(index);
+            default:
+                type = "number";
+                val = lexNumber(index);
+                break;
+        }
+        return new jsonValue(type, val);
+    }
+
+    public String lexString(int index) {
         int start = index;
         String key = "";
 
@@ -107,66 +153,57 @@ public class jsonParser {
         throw new jsonParseException(String.format("Syntax Error: Unclosed string starting at index %d", start));
     }
 
-    public String parseNumber(int index) {
-
-    }
-
-    public jsonValue parseValue(int index) {
-        String val;
-        String type;
-
-        char temp = this.JSON.charAt(index);
-
-        switch (temp) {
-            case '{':
-                type = "object";
-                // parse object
-            case '[':
-                type = "array";
-                // parse array
-            case '"':
-                type = "string";
-                // parse string
-            case 't':
-                type = "constant";
-                // parse true
-            case 'f':
-                type = "constant";
-                // parse false
-            case 'n':
-                type = "constant";
-                // parse null
-            default:
-                type = "number";
-                // parse number
-
-
-        }
-    }
-
-    public String parseWhitespace(int index) {
+    public String lexNumber(int index) {
         String val = "";
-        while (index < this.JSON.length()) {
-            Character c = this.JSON.charAt(index);
-            switch (c) {
-                case ' ','\n','\r','\t':
-                    val = val.concat(String.valueOf(c));
-                    break;
-                default:
-                    return val;
-            }
-            index++;
+
+        val = getMatch("(?<![eE])-?(([1-9][0-9]*)|(0))(\\.[0-9]+)?([eE][+-]?[0-9]+)?", this.JSON.substring(index));
+        int newIndex;
+        try {
+            newIndex = index + val.length();
+        } catch (NullPointerException e) {
+            throw new jsonParseException(String.format("Unrecognized value starting at index %d", index), e);
+        }
+        switch (this.JSON.charAt(newIndex)) {
+            case ' ','\n','\r','\t',',','}',']':
+                break;
+            default:
+                throw new jsonParseException(String.format("Unrecognized value starting at index %d", index));
         }
         return val;
     }
 
-    public String parseObject(int index) {
+    public String lexConstant(int index) {
+        int start = index;
+        String val = "";
+
+        while (index < this.JSON.length()) {
+            char c = this.JSON.charAt(index);
+            val = val.concat(String.valueOf(c));
+
+            switch (val) {
+                case "true", "false", "null":
+                    return val;
+            }
+
+            if (index-start > 4) {
+                throw new jsonParseException(String.format("Unrecognized Constant \"%s\" starting at index %d", val, start));
+            }
+
+            index++;
+        }
+        throw new jsonParseException(String.format("Unrecognized Constant \"%s\" starting at index %d", val, start));
+    }
+
+
+
+    public String lexObject(int index) {
         // return first found object starting at specified index
         int start = index;
         int leftBraces = 0;
         int rightBraces = 0;
 
         String val = "";
+
         while (index < this.JSON.length()) {
             char c = this.JSON.charAt(index);
             switch (c) {
@@ -190,25 +227,44 @@ public class jsonParser {
         throw new jsonParseException(String.format("Syntax Error: Unclosed JSON Object starting at index %d", start));
     }
 
+    public String lexArray(int index) {
+        // return first found object starting at specified index
+        int start = index;
+        int leftBraces = 0;
+        int rightBraces = 0;
 
-    public Map<String, String> getKeyPairs() {
+        String val = "";
+        while (index < this.JSON.length()) {
+            char c = this.JSON.charAt(index);
+            val = val.concat(String.valueOf(c));
+            switch (c) {
+                case '[':
+                    leftBraces += 1;
+                    break;
+                case ']':
+                    rightBraces += 1;
+                    if (leftBraces == rightBraces) {
+                        return val;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            index++;
+        }
+        throw new jsonParseException(String.format("Syntax Error: Unclosed Array starting at index %d", start));
+    }
+
+
+    public Map<String, jsonValue> getKeyPairs() {
 
         // variable initialization
-        boolean inList = false;
-        boolean inObject = false;
-        boolean isKey = true;
-
-        int leftCurlies = 0;
-        int rightCurlies = 0;
-        int leftSquares = 0;
-        int rightSquares = 0;
-
-        String value;
-        String key;
+        jsonValue value;
+        String key = null;
         String temp;
         String expectedType = "string";
 
-        Map<String, String> pairs = new HashMap<>() {};
+        Map<String, jsonValue> pairs = new HashMap<>() {};
 
 
         int i = 0;
@@ -218,32 +274,52 @@ public class jsonParser {
             switch (expectedType) {
                 case "string":
                     // string in this case is a key value and should have a ':' after it
-                    key = parseString(i);
-                    i = i + key.length() + 1;
+                    key = lexString(i);
+                    i = i + key.length();
 
-                    temp = parseWhitespace(i);
-                    i = i + temp.length() + 1;
+                    temp = skipWhitespace(i);
+                    i = i + temp.length();
 
                     if (this.JSON.charAt(i) != ':') {
                         throw new jsonParseException(String.format("Syntax Error: missing semicolon at index %d while parsing key value", i));
                     }
 
-                    temp = parseWhitespace(++i);
-                    i = i + temp.length() + 1;
+                    temp = skipWhitespace(i);
+                    i = i + temp.length();
                     expectedType = "value";
                     break;
 
-
-                case "whitespace":
-                    // either a space, linefeed, carriage return, or horizontal tab
                 case "value":
-                    // either a string, number, object, or array, or literal true, false, or null
+                    value = lexValue(i);
+                    i = i + value.getSource().length();
+
+                    if (key == null) {
+                        throw new jsonParseException("to be completely honest idk what went wrong here maybe you forgor the key?");
+                    }
+
+                    if (pairs.containsKey(key)) {
+                        throw new jsonParseException(String.format("Duplicate keys \"%s\"", key));
+                    }
+
+                    pairs.put(key, value);
+
+                    temp = skipWhitespace(i);
+                    i += temp.length();
+
+                    key = null;
+
+                    // parse comma/bracket
+
+
+
                 case "end":
                     // either a ',' or a '}'
             }
 
 
         }
+
+        return pairs;
     }
 
 
