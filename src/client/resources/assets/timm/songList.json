@@ -763,11 +763,19 @@
       "revision": 0
     },
 
-    "": {
-      "file_name": "",
+    "forest-07": {
+      "file_name": "Forest_007.ogg",
       "is_file?": true,
-      "author": "",
-      "song_name": "",
+      "author": "Gold Eagle Productions",
+      "song_name": "There, In The Trees",
+      "revision": 0
+    },
+
+    "badlands-01": {
+      "file_name": "Badlands_001.ogg",
+      "is_file?": true,
+      "author": "Gold Eagle Productions",
+      "song_name": "Track 6",
       "revision": 0
     }
   }

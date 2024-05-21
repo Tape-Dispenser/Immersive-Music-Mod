@@ -7,7 +7,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 
 
-import net.tape.TapeSON.jsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,15 +64,12 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Commands Initialized.");
 
 
-		LOGGER.info("Checking Server for new songs...");
-		getSongs.getNewSongs();
-		LOGGER.info("Downloaded songs from AWS Server");
+		//LOGGER.info("Checking Server for new songs...");
+		//getSongs.getNewSongs();
+		//LOGGER.info("Downloaded songs from AWS Server");
 
 		LOGGER.info("Checking for updates...");
-
-		jsonParser JSON = new jsonParser(FabricLoader.getInstance().getConfigDir().toString().concat("/timm/songList.json"));
-
-		LOGGER.info(JSON.parseString(0));
+		getSongs.test();
 
 
 		LOGGER.info("TIMM successfully initialized.");

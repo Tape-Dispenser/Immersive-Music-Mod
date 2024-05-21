@@ -66,8 +66,12 @@ public class getSongs {
 
         for (String song : songsToGet) {
             timmMain.LOGGER.info(String.format("Missing song %s, downloading now...", song));
-            awsHelper.downloadFile(song, bucketName, client);
+            awsHelper.downloadFile(song, String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), song), bucketName, client);
         }
+    }
+
+    public static void test() {
+        awsHelper.getDiffs(bucketName, client);
     }
 
     /*
