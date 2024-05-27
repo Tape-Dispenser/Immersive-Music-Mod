@@ -64,12 +64,10 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Commands Initialized.");
 
 
-		//LOGGER.info("Checking Server for new songs...");
-		//getSongs.getNewSongs();
-		//LOGGER.info("Downloaded songs from AWS Server");
 
-		LOGGER.info("Checking for updates...");
-		getSongs.test();
+		LOGGER.info("Checking for song updates...");
+		getSongs.update();
+		LOGGER.info("Successfully updated any applicable songs.");
 
 
 		LOGGER.info("TIMM successfully initialized.");

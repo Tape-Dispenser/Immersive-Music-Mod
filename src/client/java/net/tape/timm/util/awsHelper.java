@@ -24,36 +24,23 @@ public class awsHelper {
 
      */
 
-    public static ArrayList<S3ObjectSummary> getFileList(String bucketName, AmazonS3Client client) {
 
-        // get list of songs on the AWS S3 server
-
-        // variable initialization
-        String nextContinuationToken = null;;
-        ArrayList<S3ObjectSummary> objects = new ArrayList<>() {};
-
-        do {
-            // construct request to AWS server
-            ListObjectsV2Request request = new ListObjectsV2Request();
-            request.setBucketName(bucketName);
-            request.setContinuationToken(nextContinuationToken);
-
-            // send request
-            ListObjectsV2Result result = client.listObjectsV2(request);
-
-            // parse result and prepare for next page (if necessary)
-            objects.addAll(result.getObjectSummaries());
-            nextContinuationToken = result.getContinuationToken();
-        } while (nextContinuationToken != null);
-
-        return objects;
-    }
-
-    public static ObjectMetadata downloadFile(String file, String dest, String bucketName, AmazonS3Client client) {
+    public static void downloadFile(String file, String dest, String bucketName, AmazonS3Client client) {
         // create new file object at .minecraft/music/TIMM/<song>
         File localFile = new File(dest);
-        // download file and return metadata
-        return client.getObject(new GetObjectRequest(bucketName, file), localFile);
+
+        if (modConfig.debugLogging) {
+            timmMain.LOGGER.info(String.format("Attempting to download aws file %s to local file %s", file, dest));
+        }
+
+        try {
+            // download file and return metadata
+            client.getObject(new GetObjectRequest(bucketName, file), localFile);
+        } catch (AmazonS3Exception e) {
+            timmMain.LOGGER.warn(String.format("Failed to download file %s from aws server!", file));
+            timmMain.LOGGER.warn(e.getMessage());
+        }
+        return;
     }
 
     public static void validateLocal(String bucket, AmazonS3Client client) {
@@ -80,7 +67,7 @@ public class awsHelper {
             if (isFile) {
                 // check if file exists
                 String fileName = song.get("file_name").getAsString();
-                String path = FabricLoader.getInstance().getGameDir() + fileName;
+                String path = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
                 File f = new File(path);
                 if (!f.isFile()) {
 
