@@ -43,41 +43,41 @@ public class registerResources {
         Registry.register(Registries.SOUND_EVENT, registerResources.END, SoundEvent.of(END));
     }
 
-    public static final Identifier MY_SOUND_ID = new Identifier("timm:my_sound");
-    public static final Identifier MENU = new Identifier("timm:menu");
-    public static final Identifier BADLANDS = new Identifier("timm:badlands");
-    public static final Identifier BAMBOO_JUNGLE = new Identifier("timm:bamboo_jungle");
-    public static final Identifier BIRCH_FOREST = new Identifier("timm:birch_forest");
-    public static final Identifier CHERRY_GROVE = new Identifier("timm:cherry_grove");
-    public static final Identifier COLD_OCEAN = new Identifier("timm:cold_ocean");
-    public static final Identifier DARK_FOREST = new Identifier("timm:dark_forest");
-    public static final Identifier DEEP_DARK = new Identifier("timm:deep_dark");
-    public static final Identifier DESERT = new Identifier("timm:desert");
-    public static final Identifier DRIPSTONE_CAVES = new Identifier("timm:dripstone_caves");
-    public static final Identifier FLOWER_FOREST = new Identifier("timm:flower_forest");
-    public static final Identifier FOREST = new Identifier("timm:forest");
-    public static final Identifier MOUNTAINS = new Identifier("timm:mountains");
-    public static final Identifier JUNGLE = new Identifier("timm:jungle");
-    public static final Identifier LUSH_CAVES = new Identifier("timm:lush_caves");
-    public static final Identifier MEADOW = new Identifier("timm:meadow");
-    public static final Identifier MUSHROOM = new Identifier("timm:mushroom");
-    public static final Identifier OCEAN = new Identifier("timm:ocean");
-    public static final Identifier PLAINS = new Identifier("timm:plains");
-    public static final Identifier SNOW_PLAINS = new Identifier("timm:snow_plains");
-    public static final Identifier RIVER = new Identifier("timm:river");
-    public static final Identifier SWAMP = new Identifier("timm:swamp");
-    public static final Identifier TAIGA = new Identifier("timm:taiga");
-    public static final Identifier WARM_OCEAN = new Identifier("timm:warm_ocean");
-    public static final Identifier WINDY = new Identifier("timm:windy_hills");
+    public static final Identifier MY_SOUND_ID = Identifier.of("timm:my_sound");
+    public static final Identifier MENU = Identifier.of("timm:menu");
+    public static final Identifier BADLANDS = Identifier.of("timm:badlands");
+    public static final Identifier BAMBOO_JUNGLE = Identifier.of("timm:bamboo_jungle");
+    public static final Identifier BIRCH_FOREST = Identifier.of("timm:birch_forest");
+    public static final Identifier CHERRY_GROVE = Identifier.of("timm:cherry_grove");
+    public static final Identifier COLD_OCEAN = Identifier.of("timm:cold_ocean");
+    public static final Identifier DARK_FOREST = Identifier.of("timm:dark_forest");
+    public static final Identifier DEEP_DARK = Identifier.of("timm:deep_dark");
+    public static final Identifier DESERT = Identifier.of("timm:desert");
+    public static final Identifier DRIPSTONE_CAVES = Identifier.of("timm:dripstone_caves");
+    public static final Identifier FLOWER_FOREST = Identifier.of("timm:flower_forest");
+    public static final Identifier FOREST = Identifier.of("timm:forest");
+    public static final Identifier MOUNTAINS = Identifier.of("timm:mountains");
+    public static final Identifier JUNGLE = Identifier.of("timm:jungle");
+    public static final Identifier LUSH_CAVES = Identifier.of("timm:lush_caves");
+    public static final Identifier MEADOW = Identifier.of("timm:meadow");
+    public static final Identifier MUSHROOM = Identifier.of("timm:mushroom");
+    public static final Identifier OCEAN = Identifier.of("timm:ocean");
+    public static final Identifier PLAINS = Identifier.of("timm:plains");
+    public static final Identifier SNOW_PLAINS = Identifier.of("timm:snow_plains");
+    public static final Identifier RIVER = Identifier.of("timm:river");
+    public static final Identifier SWAMP = Identifier.of("timm:swamp");
+    public static final Identifier TAIGA = Identifier.of("timm:taiga");
+    public static final Identifier WARM_OCEAN = Identifier.of("timm:warm_ocean");
+    public static final Identifier WINDY = Identifier.of("timm:windy_hills");
 
 
-    public static final Identifier BASALT_DELTAS = new Identifier("timm:basalt_deltas");
-    public static final Identifier CRIMSON_FOREST = new Identifier("timm:crimson_forest");
-    public static final Identifier NETHER_WASTES = new Identifier("timm:nether_wastes");
-    public static final Identifier SOUL_SAND_VALLEY = new Identifier("timm:soul_sand_valley");
+    public static final Identifier BASALT_DELTAS = Identifier.of("timm:basalt_deltas");
+    public static final Identifier CRIMSON_FOREST = Identifier.of("timm:crimson_forest");
+    public static final Identifier NETHER_WASTES = Identifier.of("timm:nether_wastes");
+    public static final Identifier SOUL_SAND_VALLEY = Identifier.of("timm:soul_sand_valley");
 
 
 
-    public static final Identifier END = new Identifier("timm:end");
+    public static final Identifier END = Identifier.of("timm:end");
 
 }
