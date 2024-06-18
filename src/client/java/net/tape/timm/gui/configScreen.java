@@ -12,6 +12,7 @@ import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.gui.widget.resetButton;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
+import net.tape.timm.util.math;
 
 import static net.tape.timm.timmMain.mc;
 
@@ -50,8 +51,8 @@ public class configScreen extends Screen {
 
         addDrawableChild(debugLogs);
 
-        addDrawableChild(new closeButton(this)); // TODO: remove the class for this it isn't really necessary
-        addDrawableChild(new resetButton(this)); // TODO: remove the class for this it isn't really necessary
+        addDrawableChild(new closeButton(this)); // TODO: either remove the class for these or merge them
+        addDrawableChild(new resetButton(this));
 
         addDrawableChild(menuMinSlider);
         addDrawableChild(menuMaxSlider);
@@ -77,6 +78,17 @@ public class configScreen extends Screen {
 
     }
 
+    public void resetConfig() {
+        modConfig.configMap = modConfig.defaultConfig;
+        modConfig.copyVals();
+        configManager.update_cfg();
+
+        menuMinSlider.updateWidget(modConfig.minMenuDelay);
+        menuMaxSlider.updateWidget(modConfig.maxMenuDelay);
+        songMaxSlider.updateWidget(modConfig.maxGameDelay);
+        songMinSlider.updateWidget(modConfig.minGameDelay);
+    }
+
     @Override
     public void close() {
         mc.setScreen(parent);
@@ -89,16 +101,10 @@ public class configScreen extends Screen {
         configManager.update_cfg();
     }
 
-    public long lerp(long min, long max, double t) {
-        if ((t > 1.0) || (t < 0.0)) {
-            throw new ArithmeticException("lerp value out of bounds");
-        } else {
-            return Math.round(max*t + min*(1-t));
-        }
-    }
+
 
     private long updateMenuMin(double value) {
-        long realVal = lerp(1, modConfig.maxMenuDelay, value);
+        long realVal = math.lerp(1, modConfig.maxMenuDelay, value);
         String valString = String.valueOf(realVal);
         modConfig.minMenuDelay = realVal;
         modConfig.configMap.replace("menuMinDelay", new String[]{"long", valString});
@@ -108,7 +114,7 @@ public class configScreen extends Screen {
     }
 
     private long updateMenuMax(double value) {
-        long realVal = lerp(modConfig.minMenuDelay, 36000, value);
+        long realVal = math.lerp(modConfig.minMenuDelay, 36000, value);
         String valString = String.valueOf(realVal);
         modConfig.maxMenuDelay = realVal;
         modConfig.configMap.replace("menuMaxDelay", new String[]{"long", valString});
@@ -117,7 +123,7 @@ public class configScreen extends Screen {
     }
 
     private long updateGameMin(double value) {
-        long realVal = lerp(1, modConfig.maxGameDelay, value);
+        long realVal = math.lerp(1, modConfig.maxGameDelay, value);
         String valString = String.valueOf(realVal);
         modConfig.minGameDelay = realVal;
         modConfig.configMap.replace("gameMinDelay", new String[]{"long", valString});
@@ -126,7 +132,7 @@ public class configScreen extends Screen {
     }
 
     private long updateGameMax(double value) {
-        long realVal = lerp(modConfig.minGameDelay, 36000, value);
+        long realVal = math.lerp(modConfig.minGameDelay, 36000, value);
         String valString = String.valueOf(realVal);
         modConfig.maxGameDelay = realVal;
         modConfig.configMap.replace("gameMaxDelay", new String[]{"long", valString});

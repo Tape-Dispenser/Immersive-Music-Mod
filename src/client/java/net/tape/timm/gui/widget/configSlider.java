@@ -7,6 +7,7 @@ import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.text.Text;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
+import net.tape.timm.util.math;
 
 public class configSlider extends SliderWidget {
     public configSlider(int x, int y, int w, int h, String key, double val, long real, ReleaseAction callback) {
@@ -17,12 +18,19 @@ public class configSlider extends SliderWidget {
     }
 
     final protected ReleaseAction lambda;
-    private long realVal;
+    private long ticks;
     final private String translationKey;
+
+    public void updateWidget(long ticks) {
+        // this is called after a config reset to visually update sliders and other widgets
+        this.value = math.invLerp(1, 36000, ticks);
+        this.applyValue();
+        this.updateMessage();
+    }
 
     @Override
     protected void updateMessage() {
-        this.setMessage(Text.stringifiedTranslatable(translationKey, this.realVal));
+        this.setMessage(Text.stringifiedTranslatable(translationKey, this.ticks));
     }
 
     @Override
@@ -33,7 +41,7 @@ public class configSlider extends SliderWidget {
             String[] temp = this.translationKey.split("\\.");
             temp[temp.length - 1] = "text";
             String temp1 = String.join(".", temp);
-            String message = temp1.concat(" = ").concat(String.valueOf(this.realVal));
+            String message = temp1.concat(" = ").concat(String.valueOf(this.ticks));
             timmMain.LOGGER.info(message);
         }
     }
@@ -41,7 +49,7 @@ public class configSlider extends SliderWidget {
     @Override
     protected void applyValue() {
         // value translation is done in configScreen
-        this.realVal = this.lambda.onRelease(this.value);
+        this.ticks = this.lambda.onRelease(this.value);
     }
 
     @Environment(value= EnvType.CLIENT)
