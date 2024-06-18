@@ -9,6 +9,7 @@ import net.minecraft.text.Text;
 import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.closeButton;
 import net.tape.timm.gui.widget.configSlider;
+import net.tape.timm.gui.widget.resetButton;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
@@ -50,7 +51,7 @@ public class configScreen extends Screen {
         addDrawableChild(debugLogs);
 
         addDrawableChild(new closeButton(this)); // TODO: remove the class for this it isn't really necessary
-        // TODO: add a "load defaults" button
+        addDrawableChild(new resetButton(this)); // TODO: remove the class for this it isn't really necessary
 
         addDrawableChild(menuMinSlider);
         addDrawableChild(menuMaxSlider);

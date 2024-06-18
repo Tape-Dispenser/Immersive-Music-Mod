@@ -15,6 +15,9 @@
   "timm.config.close.text": "Close",
   "timm.config.close.tooltip": "Close this menu.",
 
+  "timm.config.reset.text": "Reset",
+  "timm.config.reset.tooltip": "Reset config to defaults",
+
   "timm.config.songMin.text": "Minimum Game Song Delay",
   "timm.config.songMin.slider": "Minimum: %d",
 
