@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 
 public class configManager {
 
-    static Path config_dir = FabricLoader.getInstance().getConfigDir();
+    public static String config_dir = FabricLoader.getInstance().getConfigDir().toString();
 
     public static void init() {
         // initialize variables
@@ -31,7 +31,7 @@ public class configManager {
         // read biome playlists
         String PLcontent;
         try {
-            String pl_file = config_dir.toString().concat("/timm/biome_playlists.json");
+            String pl_file = config_dir.concat("/timm/biome_playlists.json");
             PLcontent = new String(readAllBytes(Paths.get(pl_file)));
 
             if (modConfig.debugLogging) {timmMain.LOGGER.info(PLcontent);}
@@ -40,7 +40,7 @@ public class configManager {
             // biome playlists doesn't exist, create it now
             timmMain.LOGGER.info("Biome playlists file/directory not found, creating now...");
             first_launch();
-            String pl_file = config_dir.toString().concat("/timm/biome_playlists.json");
+            String pl_file = config_dir.concat("/timm/biome_playlists.json");
             try {
                 PLcontent = new String (readAllBytes(Paths.get(pl_file)));
 
@@ -56,7 +56,7 @@ public class configManager {
         // read config file
         String cfgContent;
         try {
-            String cfg_file = config_dir.toString().concat("/timm/TIMM.config");
+            String cfg_file = config_dir.concat("/timm/TIMM.config");
             cfgContent = new String(readAllBytes(Paths.get(cfg_file)));
 
             if (modConfig.debugLogging) {timmMain.LOGGER.info(cfgContent);}
@@ -67,7 +67,7 @@ public class configManager {
             if (modConfig.debugLogging) {timmMain.LOGGER.info("Main Config file not found, creating now...");}
 
             first_launch();
-            String cfg_file = config_dir.toString().concat("/timm/TIMM.config");
+            String cfg_file = config_dir.concat("/timm/TIMM.config");
             try {
                 cfgContent = new String (readAllBytes(Paths.get(cfg_file)));
 
@@ -114,7 +114,7 @@ public class configManager {
     }
 
     public static void update_cfg() {
-        File f = new File(config_dir.toString().concat("/timm/TIMM.config"));
+        File f = new File(config_dir.concat("/timm/TIMM.config"));
         Gson gson = new GsonBuilder().create();
 
         String configJSON = gson.toJson(modConfig.configMap);
@@ -134,11 +134,11 @@ public class configManager {
 
     private static void first_launch() {
         // create timm directory in .minecraft/config and add biome_playlists.json
-        if (!Files.isDirectory(Paths.get(config_dir.toString().concat("/timm/")))) {
+        if (!Files.isDirectory(Paths.get(config_dir.concat("/timm/")))) {
             try {
-                Files.createDirectories(Paths.get(config_dir.toString().concat("/timm")));
+                Files.createDirectories(Paths.get(config_dir.concat("/timm")));
 
-                if (modConfig.debugLogging) {timmMain.LOGGER.info("created directory ".concat(config_dir.toString().concat("/timm")) );}
+                if (modConfig.debugLogging) {timmMain.LOGGER.info("created directory ".concat(config_dir.concat("/timm")) );}
 
             } catch (IOException e) {
                 timmMain.LOGGER.error("Failed to create .minecraft/config/timm folder!");
@@ -147,9 +147,9 @@ public class configManager {
             }
         }
 
-        if (!Files.isDirectory(Paths.get(config_dir.toString().concat("/timm/biome_playlists.json")))) {
+        if (!Files.isDirectory(Paths.get(config_dir.concat("/timm/biome_playlists.json")))) {
             // create biome_playlists.json if it does not exist
-            File f = new File(config_dir.toString().concat("/timm/biome_playlists.json"));
+            File f = new File(config_dir.concat("/timm/biome_playlists.json"));
             Gson gson = new GsonBuilder()
                     .enableComplexMapKeySerialization()
                     .create();
@@ -169,7 +169,7 @@ public class configManager {
 
                 //debug
                 if (modConfig.debugLogging) {
-                    timmMain.LOGGER.info("created file ".concat(config_dir.toString().concat("/timm/biome_playlists.json")) );
+                    timmMain.LOGGER.info("created file ".concat(config_dir.concat("/timm/biome_playlists.json")) );
                 }
 
             } catch (IOException e) {
@@ -178,7 +178,7 @@ public class configManager {
             }
         }
 
-        if (!Files.isDirectory(Paths.get(config_dir.toString().concat("/timm/TIMM.config")))) {
+        if (!Files.isDirectory(Paths.get(config_dir.concat("/timm/TIMM.config")))) {
             File f = new File(config_dir.toString().concat("/timm/TIMM.config"));
             Gson gson = new GsonBuilder().create();
 

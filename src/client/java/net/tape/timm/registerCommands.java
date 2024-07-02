@@ -14,6 +14,7 @@ public class registerCommands {
         stop.register(dispatch);
         skip.register(dispatch);
         soundManagerInject.register(dispatch);
+        test.register(dispatch);//
     }
 
 

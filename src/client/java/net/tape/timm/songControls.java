@@ -2,10 +2,13 @@ package net.tape.timm;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundSystem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.tape.timm.access.SoundManagerAccess;
+import net.tape.timm.access.SoundSystemAccess;
 import net.tape.timm.util.Song;
 
 import java.util.*;
@@ -32,6 +35,12 @@ public class songControls {
         timer = 10;
         inTimer = true;
         song_rng = new Random();
+    }
+
+    public static void test() {
+        Song x = new Song(configManager.config_dir.concat("/music/TIMM/desert_005.ogg"), "test", "nate");
+        SoundSystem mcSoundSystem = ((SoundManagerAccess) timmMain.mc.getSoundManager()).getSoundSystem();
+        ((SoundSystemAccess)mcSoundSystem).play(x);
     }
 
     public static void play(Song song) {
@@ -115,6 +124,10 @@ public class songControls {
 
     public static Song pickSong() {
 
+
+        return new Song(configManager.config_dir.concat("/music/TIMM/desert_005.ogg"), "test", "nate");
+
+        /*
         // determine playlist and set delay
         String playlistName = "menu";
         if (mc.world != null) {
@@ -149,6 +162,8 @@ public class songControls {
             timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
             return null;
         }
+
+         */
 
     }
 

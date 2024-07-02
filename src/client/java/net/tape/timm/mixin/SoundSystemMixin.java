@@ -1,11 +1,13 @@
 package net.tape.timm.mixin;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.sound.*;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.Vec3d;
 import net.tape.timm.access.SoundSystemAccess;
 import net.tape.timm.songControls;
@@ -20,9 +22,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 @Mixin(SoundSystem.class)
 public abstract class SoundSystemMixin implements SoundSystemAccess {
@@ -61,41 +68,38 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 			slice = @Slice(
 					 from = @At(value = "CONSTANT", args = "stringValue=Sound engine started")
 			)
-	) // TODO: this will run every tick, a cleaner system is needed!!!!!
+	)
 	private void soundStarted(CallbackInfo info) {
-		songControls.soundEngineStarted = true;
+		songControls.soundEngineStarted = this.started;
 	}
+
+	private Map<Song, Integer> songEndTicks = Maps.newHashMap();
+	private Map<Song, Channel.SourceManager> songSources = Maps.newHashMap();
+	private Multimap<SoundCategory, Song> songs = HashMultimap.create();
 	
 	@Override
 	public String access() {
 		return "i jailbroke the system.\nthe sound system has started.\nthe previous statement is ".concat(String.valueOf(this.started)).concat(".");
 	}
 
-	/*@Override
+
+	@Override
 	public void play(Song song) {
 		if (!this.started) {
 			return;
 		}
-
 		if (!song.isFile()) {
 			play(PositionedSoundInstance.music(song.getSoundEvent()));
 			return;
 		}
 
-		PositionedSoundInstance sound2;
+		PositionedSoundInstance soundInstance;
+		Identifier identifier = song.getId();
 
-		Identifier identifier = sound2.getId();
-
-		Sound sound22 = sound2.getSound();
-
-		float f = 1.0f;
-		float g = 0.0f;
-		float h = this.getAdjustedVolume(f, SoundCategory.MUSIC);
-		float i = 1.0f;
-		SoundInstance.AttenuationType attenuationType = SoundInstance.AttenuationType.NONE;
+		float volSlider = this.getAdjustedVolume(1.0f, SoundCategory.MUSIC);
 		boolean bl = true;
-		if (h == 0.0f && !sound2.shouldAlwaysPlay()) {
-			timmMain.LOGGER.debug(MARKER, "Skipped playing sound {}, volume was zero.", (Object)sound22.getIdentifier());
+		if (volSlider == 0.0f) {
+			timmMain.LOGGER.debug(MARKER, "Skipped playing sound {}, volume was zero.", (Object) identifier);
 			return;
 		}
 		Vec3d vec3d = new Vec3d(0.0, 0.0, 0.0);
@@ -104,10 +108,6 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 			timmMain.LOGGER.debug(MARKER, "Skipped playing soundEvent: {}, master volume was zero", (Object)identifier);
 			return;
 		}
-
-		boolean bl2 = false;  // should audio repeat instantly? (no)
-
-		boolean bl3 = false; // is audio streamed? (idk what this means i just know it needs to be false)
 
 		CompletableFuture<Channel.SourceManager> completableFuture = this.channel.createSource(SoundEngine.RunMode.STATIC);
 		Channel.SourceManager sourceManager = completableFuture.join();
@@ -118,30 +118,44 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 			return;
 		}
 
-		// TODO: more sound2 & sound22 usages i need to figure out here
-		timmMain.LOGGER.debug(MARKER, "Playing sound {} for event {}", (Object)sound22.getIdentifier(), (Object)identifier);
-		this.soundEndTicks.put(sound2, this.ticks + 20);
+		timmMain.LOGGER.debug(MARKER, "Playing sound {} for event {}", (Object) song.getId(), (Object)identifier);
+		this.songEndTicks.put(song, this.ticks + 20);
 
-		this.sources.put(sound2, sourceManager); // TODO: need to either remove this or spoof a SoundInstance...
+		this.songSources.put(song, sourceManager);
 
-		this.sounds.put(SoundCategory.MUSIC, sound2); // // TODO: need to either remove this or spoof a SoundInstance...
+		this.songs.put(SoundCategory.MUSIC, song);
 
 		sourceManager.run(source -> {
-			source.setPitch(i);
-			source.setVolume(h);
+			source.setPitch(1.0f);
+			source.setVolume(volSlider);
             source.disableAttenuation();
             source.setLooping(false);
 			source.setPosition(vec3d);
 			source.setRelative(bl);
 		});
-		if (!bl3) {
-			this.soundLoader.loadStatic(sound22.getLocation()).thenAccept(sound -> sourceManager.run(source -> {
-				source.setBuffer((StaticSound)sound);
-				source.play();
-			}));
+		CompletableFuture<StaticSound> test = CompletableFuture.supplyAsync(() -> {
+			try (InputStream inputStream = new FileInputStream(song.getFilePath())){
+				StaticSound staticSound;
+				try (OggAudioStream oggAudioStream = new OggAudioStream(inputStream);){
+					ByteBuffer byteBuffer = oggAudioStream.getBuffer();
+					staticSound = new StaticSound(byteBuffer, oggAudioStream.getFormat());
+				}
+				return staticSound;
+			} catch (IOException e) {
+				throw new CompletionException(e);
+			}
+		}, Util.getMainWorkerExecutor());
+
+		test.thenAccept(sound -> sourceManager.run(source -> {
+			source.setBuffer((StaticSound)sound);
+			source.play();
+		}));
+
+		/*
+		if (soundInstance instanceof TickableSoundInstance) {
+			this.tickingSounds.add((TickableSoundInstance) soundInstance);
 		}
-		if (sound2 instanceof TickableSoundInstance) {
-			this.tickingSounds.add((TickableSoundInstance)sound2);
-		}
-	}*/
+
+		 */
+	}
 }
