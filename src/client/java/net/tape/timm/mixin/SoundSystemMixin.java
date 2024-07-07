@@ -151,6 +151,8 @@ public abstract class SoundSystemMixin implements SoundSystemAccess {
 			source.play();
 		}));
 
+
+		// TODO: implement my own version of ticking sounds
 		/*
 		if (soundInstance instanceof TickableSoundInstance) {
 			this.tickingSounds.add((TickableSoundInstance) soundInstance);

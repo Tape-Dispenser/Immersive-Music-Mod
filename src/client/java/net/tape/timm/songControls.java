@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.tape.timm.access.SoundManagerAccess;
 import net.tape.timm.access.SoundSystemAccess;
+import net.tape.timm.audio.Sound;
 import net.tape.timm.util.Song;
 
 import java.util.*;
@@ -38,9 +39,8 @@ public class songControls {
     }
 
     public static void test() {
-        Song x = new Song(configManager.config_dir.concat("/music/TIMM/desert_005.ogg"), "test", "nate");
-        SoundSystem mcSoundSystem = ((SoundManagerAccess) timmMain.mc.getSoundManager()).getSoundSystem();
-        ((SoundSystemAccess)mcSoundSystem).play(x);
+        Sound x = new Sound(configManager.config_dir.concat("/music/TIMM/desert_005.ogg"));
+        x.play();
     }
 
     public static void play(Song song) {
