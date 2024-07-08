@@ -8,7 +8,7 @@ import static net.tape.timm.timmMain.LOGGER;
 
 
 public class biomePlaylists {
-    public static Map<String, String[]> biomePlaylists = new HashMap<String, String[]>();
+    public static Map<String, String[]> playlists = new HashMap<String, String[]>();
 
     public static final Map<String, String[]> defaultPlaylists = new HashMap<String, String[]>();
 

@@ -86,9 +86,9 @@ public class configManager {
         Gson gson = new Gson();
         TypeToken<Map<String, String[]>> mapType = new TypeToken<Map<String, String[]>>(){}; // java my beloved (this line isn't even that bad)
 
-        biomePlaylists.biomePlaylists = gson.fromJson(PLcontent, mapType);
+        biomePlaylists.playlists = gson.fromJson(PLcontent, mapType);
 
-        String[] currentVersionPair = biomePlaylists.biomePlaylists.get("version");
+        String[] currentVersionPair = biomePlaylists.playlists.get("version");
         if (currentVersionPair == null) {
             timmMain.LOGGER.error("Current biome_playlists.json version is using an outdated format!");
             timmMain.LOGGER.warn("To update to most recent version of biome_playlists, simply delete your current one.");
@@ -179,7 +179,7 @@ public class configManager {
         }
 
         if (!Files.isDirectory(Paths.get(config_dir.concat("/timm/TIMM.config")))) {
-            File f = new File(config_dir.toString().concat("/timm/TIMM.config"));
+            File f = new File(config_dir.concat("/timm/TIMM.config"));
             Gson gson = new GsonBuilder().create();
 
             String configJSON = gson.toJson(modConfig.defaultConfig);

@@ -12,7 +12,6 @@ import static net.tape.timm.timmMain.LOGGER;
 public class songControls {
 
     public static MinecraftClient mc;
-    public static Map<String, String[]> bp = biomePlaylists.biomePlaylists;
     public static Sound lastSound;
 
     public static Song lastSong;
@@ -154,33 +153,7 @@ public class songControls {
         }
     }
 
-    public static ArrayList<Song> getPlaylists() {
-        ArrayList<Song> selectionPool = new ArrayList<>();
 
-        if (mc.world == null) {
-            // game has not started, therefore must be in main menu
-
-        }
-
-
-        return selectionPool;
-    }
-
-
-    public static ArrayList<Song> getPlaylist(String name) {
-        ArrayList<Song> playlist = new ArrayList<>();
-
-        ArrayList<String> strings = new ArrayList<String>(List.of(bp.get(name)));
-
-
-        return playlist;
-    }
-
-    public static Song songLookup(String name) {
-
-
-
-    }
 
 
 

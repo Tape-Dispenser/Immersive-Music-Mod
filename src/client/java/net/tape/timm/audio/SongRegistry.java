@@ -68,7 +68,19 @@ public class SongRegistry {
         }
     }
 
-    public static Song getSong(String id) {
+    public static Song songFromID(String id) {
         return songList.get(id);
+    }
+
+    public static Song songFromName(String name) {
+        Set<Map.Entry<String, Song>> songs = songList.entrySet();
+        for (Map.Entry<String, Song> entry : songs) {
+            if (entry.getValue().getSongName().equals(name)) {
+                return entry.getValue();
+            }
+        }
+
+        // song not found
+        return null;
     }
 }
