@@ -1,9 +1,6 @@
 package net.tape.timm.access;
 
-import com.google.common.collect.Maps;
-import net.tape.timm.util.Song;
-
-import java.util.Map;
+import net.tape.timm.audio.Song;
 
 public interface SoundSystemAccess {
 

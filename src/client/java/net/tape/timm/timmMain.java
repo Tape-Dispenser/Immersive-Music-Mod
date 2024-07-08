@@ -3,25 +3,13 @@ package net.tape.timm;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 
 
-import net.minecraft.client.sound.SoundSystem;
-import net.minecraft.client.sound.TickableSoundInstance;
-import net.minecraft.resource.ResourceFinder;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.tape.timm.access.SoundManagerAccess;
-import net.tape.timm.access.SoundSystemAccess;
 import net.tape.timm.audio.AudioManager;
-import net.tape.timm.audio.Sound;
-import net.tape.timm.mixin.SoundSystemMixin;
-import net.tape.timm.util.Song;
+import net.tape.timm.audio.SongRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.minecraft.registry.Registry;
 
 
 public class timmMain implements ClientModInitializer {
@@ -37,33 +25,42 @@ public class timmMain implements ClientModInitializer {
 		// Proceed with mild caution.
 
 
-		LOGGER.info("Registering Resources...");
-		registerResources.init();
-		LOGGER.info("Resources Registered");
-
-
-
-		LOGGER.info("Initializing Playlists...");
-		biomePlaylists.init();
-		LOGGER.info("Playlists Initialized.");
-
-
-
-		LOGGER.info("Loading Default Config Values...");
+		LOGGER.info("Loading default config values...");
 		modConfig.init();
-		LOGGER.info("Loaded Default Config Values.");
+		LOGGER.info("Loaded default config values.");
 
 
-
-		LOGGER.info("Loading Config Values...");
+		LOGGER.info("Loading config values from file...");
 		configManager.init();
-		LOGGER.info("Config Values Loaded");
-
+		LOGGER.info("Config values loaded");
 
 
 		LOGGER.info("Copying config values to memory...");
 		modConfig.copyVals();
 		LOGGER.info("Config values copied to memory.");
+
+
+		LOGGER.info("Checking for song updates...");
+		getSongs.update();
+		LOGGER.info("Successfully updated any outdated songs.");
+
+
+		LOGGER.info("Registering songs...");
+		SongRegistry.init();
+		LOGGER.info("Songs registered");
+
+
+		LOGGER.info("Loading playlists to memory...");
+		biomePlaylists.init();
+		LOGGER.info("Playlists loaded.");
+
+
+
+
+
+
+
+
 
 
 
@@ -79,9 +76,7 @@ public class timmMain implements ClientModInitializer {
 
 
 
-		LOGGER.info("Checking for song updates...");
-		//getSongs.update();
-		LOGGER.info("Successfully updated any applicable songs.");
+
 
 		LOGGER.info("Starting OpenAL...");
 		AudioManager.init();

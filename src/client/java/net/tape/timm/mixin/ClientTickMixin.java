@@ -2,18 +2,14 @@ package net.tape.timm.mixin;
 
 import net.tape.timm.modConfig;
 import net.tape.timm.songControls;
-import net.tape.timm.util.Song;
 
 import net.minecraft.client.MinecraftClient;
 
 import net.tape.timm.timmMain;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Objects;
 
 import static net.tape.timm.timmMain.LOGGER;
 

@@ -12,7 +12,7 @@ import net.minecraft.util.math.Vec3d;
 import net.tape.timm.access.SoundSystemAccess;
 import net.tape.timm.songControls;
 import net.tape.timm.timmMain;
-import net.tape.timm.util.Song;
+import net.tape.timm.audio.Song;
 import org.slf4j.Marker;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

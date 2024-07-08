@@ -1,16 +1,8 @@
 package net.tape.timm;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.SoundSystem;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
-import net.tape.timm.access.SoundManagerAccess;
-import net.tape.timm.access.SoundSystemAccess;
 import net.tape.timm.audio.Sound;
-import net.tape.timm.util.Song;
+import net.tape.timm.audio.Song;
 
 import java.util.*;
 
@@ -21,7 +13,7 @@ public class songControls {
 
     public static MinecraftClient mc;
     public static Map<String, String[]> bp = biomePlaylists.biomePlaylists;
-    public static PositionedSoundInstance lastSoundInstance;
+    public static Sound lastSound;
 
     public static Song lastSong;
     public static long timer;
@@ -39,39 +31,24 @@ public class songControls {
     }
 
     public static void test() {
-        Sound x = new Sound(configManager.config_dir.concat("/music/TIMM/desert_005.ogg"));
+        Sound x = new Sound("/home/tape/Documents/cs/mods/The-Immersive-Music-Mod/run/music/TIMM/Swamp_001-final-2.ogg");
         x.play();
     }
 
     public static void play(Song song) {
         if (song != null) {
-            if (nowPlaying() != null)
-                mc.getSoundManager().stop(lastSoundInstance);
-            if (!song.isFile()) {
-                lastSoundInstance = PositionedSoundInstance.music(song.getSoundEvent());
-                mc.getSoundManager().play(lastSoundInstance);
-                lastSong = song;
-            } else {
-
+            if (lastSound.isPlaying()) {
+                lastSound.stop();
             }
+            lastSound = new Sound(song.getFilePath());
+            lastSound.play();
+            lastSong = song;
         }
     }
-
-    public static void play(SoundEvent song) {
-        if (song != null) {
-            if (nowPlaying() != null)
-                mc.getSoundManager().stop(lastSoundInstance);
-            lastSoundInstance = PositionedSoundInstance.music(song);
-            mc.getSoundManager().play(lastSoundInstance);
-            lastSong = null;
-        }
-    }
-
-
 
     public static void stop() {
-        if (nowPlaying() != null) {
-            mc.getSoundManager().stop(lastSoundInstance);
+        if (lastSound.isPlaying()) {
+            lastSound.stop();
 
             // set timer and rng delay time
             inTimer = true;
@@ -92,8 +69,10 @@ public class songControls {
         }
     }
 
-    public static void skip(SoundEvent next) {
-        if (nowPlaying() != null) {stop();}
+    public static void skip(Song next) {
+        if (lastSound.isPlaying()) {
+            stop();
+        }
         if (inTimer) {
             inTimer = false;
             timer = 10;
@@ -168,8 +147,8 @@ public class songControls {
     }
 
     public static String nowPlaying() {
-        if (mc.getSoundManager().isPlaying(lastSoundInstance)) {
-            return lastSoundInstance.getSound().getIdentifier().toString();
+        if (lastSound.isPlaying()) {
+            return lastSound.getFilePath();
         } else {
             return null;
         }
@@ -187,7 +166,7 @@ public class songControls {
         return selectionPool;
     }
 
-    /*
+
     public static ArrayList<Song> getPlaylist(String name) {
         ArrayList<Song> playlist = new ArrayList<>();
 
@@ -202,7 +181,7 @@ public class songControls {
 
 
     }
-     */
+
 
 
 

@@ -1,10 +1,10 @@
 {
-  "version": 0,
+  "version": 2,
 
   "songs": {
 
     "soul_sand_valley-01": {
-      "file_name": "SoulSandValley_001-final-og.ogg",
+      "file/id": "SoulSandValley_001-final-og.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -12,7 +12,7 @@
     },
 
     "cherry_grove-01": {
-      "file_name": "CherryForest_001-og-final.ogg",
+      "file/id": "CherryForest_001-og-final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -20,7 +20,7 @@
     },
 
     "taiga-01": {
-      "file_name": "Taiga_001-og-final.ogg",
+      "file/id": "Taiga_001-og-final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -28,7 +28,7 @@
     },
 
     "end-01": {
-      "file_name": "End_001-firstring-og-final.ogg",
+      "file/id": "End_001-firstring-og-final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -36,7 +36,7 @@
     },
 
     "warm_ocean-01": {
-      "file_name": "WarmOcean_001-ogg.ogg",
+      "file/id": "WarmOcean_001-ogg.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -44,7 +44,7 @@
     },
 
     "mountain-02": {
-      "file_name": "Mountain_002-og.ogg",
+      "file/id": "Mountain_002-og.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -52,7 +52,7 @@
     },
 
     "lush_caves-02": {
-      "file_name": "LushCaves_002-2.ogg",
+      "file/id": "LushCaves_002-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -60,7 +60,7 @@
     },
 
     "nether_wastes-02": {
-      "file_name": "NetherWastes_002.ogg",
+      "file/id": "NetherWastes_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -68,7 +68,7 @@
     },
 
     "forest-02": {
-      "file_name": "Forest_002.ogg",
+      "file/id": "Forest_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -76,7 +76,7 @@
     },
 
     "menu-06": {
-      "file_name": "Menu_006-og.ogg",
+      "file/id": "Menu_006-og.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -84,7 +84,7 @@
     },
 
     "desert-02": {
-      "file_name": "Desert_002-ja.ogg",
+      "file/id": "Desert_002-ja.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -92,7 +92,7 @@
     },
 
     "jungle-01": {
-      "file_name": "Jungle_001-0gg-final.ogg",
+      "file/id": "Jungle_001-0gg-final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -100,7 +100,7 @@
     },
 
     "initial_spawn-01": {
-      "file_name": "InitialSpawn_001-og-5-25.ogg",
+      "file/id": "InitialSpawn_001-og-5-25.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -108,7 +108,7 @@
     },
 
     "deep_dark-01": {
-      "file_name": "DeepDark_001-og-5-25.ogg",
+      "file/id": "DeepDark_001-og-5-25.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -116,7 +116,7 @@
     },
 
     "basalt_deltas-01": {
-      "file_name": "BasaltDeltas_001-Final.ogg",
+      "file/id": "BasaltDeltas_001-Final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -124,7 +124,7 @@
     },
 
     "crimson_forest-01": {
-      "file_name": "CrimsonForest_001.ogg",
+      "file/id": "CrimsonForest_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -132,7 +132,7 @@
     },
 
     "plains-02": {
-      "file_name": "Plains_002-Final.ogg",
+      "file/id": "Plains_002-Final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -140,7 +140,7 @@
     },
 
     "bamboo_jungle-01": {
-      "file_name": "BambooJungle_001.ogg",
+      "file/id": "BambooJungle_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -148,7 +148,7 @@
     },
 
     "deep_ocean-02": {
-      "file_name": "DeepOcean_002-OGG-FINAL.ogg",
+      "file/id": "DeepOcean_002-OGG-FINAL.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -156,7 +156,7 @@
     },
 
     "plains-01": {
-      "file_name": "Plains_001-20230811.ogg",
+      "file/id": "Plains_001-20230811.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -164,7 +164,7 @@
     },
 
     "dark_oak_forest-01": {
-      "file_name": "DarkOakForest_001-OGG-FINAL.ogg",
+      "file/id": "DarkOakForest_001-OGG-FINAL.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -172,7 +172,7 @@
     },
 
     "birch_forest-02": {
-      "file_name": "BirchForest_002-final-final.ogg",
+      "file/id": "BirchForest_002-final-final.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -180,7 +180,7 @@
     },
 
     "snow_plains-02": {
-      "file_name": "SnowPlains_002-2.ogg",
+      "file/id": "SnowPlains_002-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -188,7 +188,7 @@
     },
 
     "mountain-01": {
-      "file_name": "Mountains_001.ogg",
+      "file/id": "Mountains_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -196,7 +196,7 @@
     },
 
     "cherry_grove-02": {
-      "file_name": "CherryBlossom_002.ogg",
+      "file/id": "CherryBlossom_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -204,7 +204,7 @@
     },
 
     "dripstone_caves-01": {
-      "file_name": "DripstoneCave_001-1.ogg",
+      "file/id": "DripstoneCave_001-1.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -212,7 +212,7 @@
     },
 
     "forest-04": {
-      "file_name": "Forest_004-1.ogg",
+      "file/id": "Forest_004-1.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -220,7 +220,7 @@
     },
 
     "deep_dark-02": {
-      "file_name": "DeepDark_002-2.ogg",
+      "file/id": "DeepDark_002-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -228,7 +228,7 @@
     },
 
     "taiga-03": {
-      "file_name": "Taiga_003.ogg",
+      "file/id": "Taiga_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -236,7 +236,7 @@
     },
 
     "taiga-02": {
-      "file_name": "Taiga_002-ogg.ogg",
+      "file/id": "Taiga_002-ogg.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -244,7 +244,7 @@
     },
 
     "dark_oak_forest-02": {
-      "file_name": "DarkForest_002.ogg",
+      "file/id": "DarkForest_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -252,7 +252,7 @@
     },
 
     "snow_plains-01": {
-      "file_name": "SnowPlains_001-ogg.ogg",
+      "file/id": "SnowPlains_001-ogg.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -260,7 +260,7 @@
     },
 
     "menu-02": {
-      "file_name": "Menu_002-2.ogg",
+      "file/id": "Menu_002-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -268,7 +268,7 @@
     },
 
     "end-02": {
-      "file_name": "End_002-final_og.ogg",
+      "file/id": "End_002-final_og.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -276,7 +276,7 @@
     },
 
     "desert-01": {
-      "file_name": "Desert_001.ogg",
+      "file/id": "Desert_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -284,7 +284,7 @@
     },
 
     "cold_ocean-01": {
-      "file_name": "ColdOcean_001-ogg.ogg",
+      "file/id": "ColdOcean_001-ogg.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -292,7 +292,7 @@
     },
 
     "swamp-01": {
-      "file_name": "Swamp_001-final-2.ogg",
+      "file/id": "Swamp_001-final-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -300,7 +300,7 @@
     },
 
     "birch_forest-01": {
-      "file_name": "Birch_Forest_001-OG.ogg",
+      "file/id": "Birch_Forest_001-OG.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -308,7 +308,7 @@
     },
 
     "menu-03": {
-      "file_name": "Menu_003-og.ogg",
+      "file/id": "Menu_003-og.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -316,7 +316,7 @@
     },
 
     "snow_plains-03": {
-      "file_name": "SnowPlains_003-OGG.ogg",
+      "file/id": "SnowPlains_003-OGG.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -324,7 +324,7 @@
     },
 
     "mushroom_island-01": {
-      "file_name": "MushroomIsland_001-OG.ogg",
+      "file/id": "MushroomIsland_001-OG.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -332,7 +332,7 @@
     },
 
     "savanna-02": {
-      "file_name": "Savanna_002.ogg",
+      "file/id": "Savanna_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -340,7 +340,7 @@
     },
 
     "deep_dark-03": {
-      "file_name": "DeepDark_003-1.ogg",
+      "file/id": "DeepDark_003-1.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -348,7 +348,7 @@
     },
 
     "swamp-02": {
-      "file_name": "Swamp_002-2.ogg",
+      "file/id": "Swamp_002-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -356,7 +356,7 @@
     },
 
     "mountain-03": {
-      "file_name": "Mountains_003.ogg",
+      "file/id": "Mountains_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -364,7 +364,7 @@
     },
 
     "nightfall-01": {
-      "file_name": "NightFall_001.ogg",
+      "file/id": "NightFall_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -372,7 +372,7 @@
     },
 
     "lush_caves-01": {
-      "file_name": "LushCaves_001.ogg",
+      "file/id": "LushCaves_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -380,7 +380,7 @@
     },
 
     "flower_forest-01": {
-      "file_name": "FlowerForest_001.ogg",
+      "file/id": "FlowerForest_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -388,7 +388,7 @@
     },
 
     "general-03": {
-      "file_name": "General_003.ogg",
+      "file/id": "General_003.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -396,7 +396,7 @@
     },
 
     "deep_cold_ocean-02": {
-      "file_name": "Deep_Cold_Ocean_002.ogg",
+      "file/id": "Deep_Cold_Ocean_002.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -404,7 +404,7 @@
     },
 
     "cold_ocean-02": {
-      "file_name": "Cold_Ocean_002.ogg",
+      "file/id": "Cold_Ocean_002.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -412,7 +412,7 @@
     },
 
     "forest-01": {
-      "file_name": "Forest_001.ogg",
+      "file/id": "Forest_001.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -420,7 +420,7 @@
     },
 
     "ocean-01": {
-      "file_name": "Ocean_001.ogg",
+      "file/id": "Ocean_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -428,7 +428,7 @@
     },
 
     "dark_oak_forest-03": {
-      "file_name": "DarkForest_003-2.ogg",
+      "file/id": "DarkForest_003-2.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -436,7 +436,7 @@
     },
 
     "windswept_hills-01": {
-      "file_name": "WindsweptHills_001.ogg",
+      "file/id": "WindsweptHills_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -444,7 +444,7 @@
     },
 
     "desert-03": {
-      "file_name": "Desert_003.ogg",
+      "file/id": "Desert_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -452,7 +452,7 @@
     },
 
     "plains-03": {
-      "file_name": "Plains_003.ogg",
+      "file/id": "Plains_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -460,7 +460,7 @@
     },
 
     "deep-dark-05": {
-      "file_name": "DeepDark_005.ogg",
+      "file/id": "DeepDark_005.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -468,7 +468,7 @@
     },
 
     "birch_forest-03": {
-      "file_name": "BirchForest_003.ogg",
+      "file/id": "BirchForest_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -476,7 +476,7 @@
     },
 
     "deep_dark-06": {
-      "file_name": "DeepDark_006.ogg",
+      "file/id": "DeepDark_006.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -484,7 +484,7 @@
     },
 
     "ocean_night-01": {
-      "file_name": "Ocean_Night_001.ogg",
+      "file/id": "Ocean_Night_001.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -492,7 +492,7 @@
     },
 
     "snow_plains-04": {
-      "file_name": "SnowPlains_004.ogg",
+      "file/id": "SnowPlains_004.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -500,7 +500,7 @@
     },
 
     "jungle-02": {
-      "file_name": "Jungle_002.ogg",
+      "file/id": "Jungle_002.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -508,7 +508,7 @@
     },
 
     "forest-03": {
-      "file_name": "Forest_003.ogg",
+      "file/id": "Forest_003.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -516,7 +516,7 @@
     },
 
     "menu-09": {
-      "file_name": "Menu_009.ogg",
+      "file/id": "Menu_009.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -524,7 +524,7 @@
     },
 
     "birch_forest_night-01": {
-      "file_name": "BirchForest_Night_001.ogg",
+      "file/id": "BirchForest_Night_001.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Frozen Stars",
@@ -532,7 +532,7 @@
     },
 
     "basalt_deltas-02": {
-      "file_name": "BasaltDeltas_002.ogg",
+      "file/id": "BasaltDeltas_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -540,7 +540,7 @@
     },
 
     "desert-04": {
-      "file_name": "Desert_004.ogg",
+      "file/id": "Desert_004.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -548,7 +548,7 @@
     },
 
     "dark_oak_forest-04": {
-      "file_name": "DarkForest_004.ogg",
+      "file/id": "DarkForest_004.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -556,7 +556,7 @@
     },
 
     "lush_caves-03": {
-      "file_name": "LushCaves_003.ogg",
+      "file/id": "LushCaves_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Subterrarium",
@@ -564,7 +564,7 @@
     },
 
     "dripstone_caves-02": {
-      "file_name": "DripstoneCaves_002.ogg",
+      "file/id": "DripstoneCaves_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -572,7 +572,7 @@
     },
 
     "cold_ocean-03": {
-      "file_name": "ColdOcean_003.ogg",
+      "file/id": "ColdOcean_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -580,7 +580,7 @@
     },
 
     "end-04": {
-      "file_name": "End_004.ogg",
+      "file/id": "End_004.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -588,7 +588,7 @@
     },
 
     "soul_sand_valley-03": {
-      "file_name": "SoulSandValley_003.ogg",
+      "file/id": "SoulSandValley_003.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "",
@@ -596,7 +596,7 @@
     },
 
     "enter_nether-01": {
-      "file_name": "EnterNether_001.ogg",
+      "file/id": "EnterNether_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
@@ -604,7 +604,7 @@
     },
 
     "river-01": {
-      "file_name": "River_001.ogg",
+      "file/id": "River_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Rowing Along",
@@ -612,7 +612,7 @@
     },
 
     "soul_sand_valley-02": {
-      "file_name": "SoulSandValley_002-1.ogg",
+      "file/id": "SoulSandValley_002-1.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Living Vessels",
@@ -620,7 +620,7 @@
     },
 
     "underground-01": {
-      "file_name": "Above_Yzero_1.ogg",
+      "file/id": "Above_Yzero_1.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Cobbled Stone",
@@ -628,7 +628,7 @@
     },
 
     "underground-02": {
-      "file_name": "Above_Yzero_2.ogg",
+      "file/id": "Above_Yzero_2.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Limestone Layers",
@@ -636,7 +636,7 @@
     },
 
     "flower_forest-02": {
-      "file_name": "FlowerForest_002.ogg",
+      "file/id": "FlowerForest_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Pins",
@@ -644,7 +644,7 @@
     },
 
     "taiga_night-01": {
-      "file_name": "Taiga_Night_001.ogg",
+      "file/id": "Taiga_Night_001.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Check F3",
@@ -652,7 +652,7 @@
     },
 
     "cherry_grove-03": {
-      "file_name": "CherryBlossom_003.ogg",
+      "file/id": "CherryBlossom_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Track 1",
@@ -660,7 +660,7 @@
     },
 
     "cherry_grove-04": {
-      "file_name": "CherryBlossom_004.ogg",
+      "file/id": "CherryBlossom_004.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Track 4",
@@ -668,7 +668,7 @@
     },
 
     "nether_wastes-01": {
-      "file_name": "NetherWastes_001-1.ogg",
+      "file/id": "NetherWastes_001-1.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Track 3",
@@ -676,7 +676,7 @@
     },
 
     "warm_ocean-02": {
-      "file_name": "WarmOcean_002-1.ogg",
+      "file/id": "WarmOcean_002-1.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Track 2",
@@ -684,7 +684,7 @@
     },
 
     "best_friends_forever-01": {
-      "file_name": "BestFriendsForever_001.ogg",
+      "file/id": "BestFriendsForever_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Koda",
@@ -692,7 +692,7 @@
     },
 
     "nether_wastes-03": {
-      "file_name": "NetherWastes_003.ogg",
+      "file/id": "NetherWastes_003.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Lava Pools",
@@ -700,7 +700,7 @@
     },
 
     "plains-04": {
-      "file_name": "Plains_004.ogg",
+      "file/id": "Plains_004.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Just calm down",
@@ -708,7 +708,7 @@
     },
 
     "plains-05": {
-      "file_name": "Plains_005.ogg",
+      "file/id": "Plains_005.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Four Way Glances",
@@ -716,7 +716,7 @@
     },
 
     "forest-05": {
-      "file_name": "Forest_005.ogg",
+      "file/id": "Forest_005.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Wander",
@@ -724,7 +724,7 @@
     },
 
     "forest-06": {
-      "file_name": "Forest_006.ogg",
+      "file/id": "Forest_006.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Wander II",
@@ -732,7 +732,7 @@
     },
 
     "dripstone_caves-03": {
-      "file_name": "DripstoneCaves_003.ogg",
+      "file/id": "DripstoneCaves_003.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Resonant Walls",
@@ -740,7 +740,7 @@
     },
 
     "dripstone_caves-04": {
-      "file_name": "DripstoneCaves_004.ogg",
+      "file/id": "DripstoneCaves_004.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Promise",
@@ -748,7 +748,7 @@
     },
 
     "warm_ocean_night-01": {
-      "file_name": "WarmOcean_Night_001.ogg",
+      "file/id": "WarmOcean_Night_001.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Shifting Currents",
@@ -756,7 +756,7 @@
     },
 
     "cherry_grove-05": {
-      "file_name": "CherryBlossom_005.ogg",
+      "file/id": "CherryBlossom_005.ogg",
       "is_file?": true,
       "author": "Caner Crebes",
       "song_name": "Tradition",
@@ -764,7 +764,7 @@
     },
 
     "forest-07": {
-      "file_name": "Forest_007.ogg",
+      "file/id": "Forest_007.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "There, In The Trees",
@@ -772,7 +772,7 @@
     },
 
     "badlands-01": {
-      "file_name": "Badlands_001.ogg",
+      "file/id": "Badlands_001.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Track 6",

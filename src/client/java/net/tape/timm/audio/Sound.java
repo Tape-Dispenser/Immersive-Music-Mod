@@ -1,14 +1,15 @@
 package net.tape.timm.audio;
 
+import net.minecraft.client.sound.OggAudioStream;
 import net.tape.timm.timmMain;
 
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import javax.sound.sampled.AudioFormat;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 import static org.lwjgl.openal.AL10.*;
-import static org.lwjgl.stb.STBVorbis.stb_vorbis_decode_filename;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.libc.LibCStdlib.free;
 
 public class Sound {
     private int bufferId;
@@ -21,28 +22,32 @@ public class Sound {
     public Sound(String filepath) {
         this.filePath = filepath;
 
-        // allocate space for return information from stb
-        stackPush();
-        IntBuffer channelsBuffer = stackMallocInt(1);
-        stackPush();
-        IntBuffer sampleRateBuffer = stackMallocInt(1);
 
-        // load file with stb
-        ShortBuffer rawAudioBuffer = stb_vorbis_decode_filename(filepath, channelsBuffer, sampleRateBuffer);
 
-        if (rawAudioBuffer == null) {
-            timmMain.LOGGER.warn(String.format("Could not load sound '%s'!", filepath));
-            stackPop();
-            stackPop();
+        // TODO: Make some way to load ogg data without stb vorbis (cringe)
+        // TODO: Maybe i can do it the same way minecraft does
+
+        ByteBuffer audioData = null;
+        AudioFormat metaData = null;
+        try (InputStream inputStream = new FileInputStream(filepath);){
+            try (OggAudioStream oggAudioStream = new OggAudioStream(inputStream);){
+                audioData = oggAudioStream.getBuffer();
+                metaData = oggAudioStream.getFormat();
+            }
+        } catch (IOException e) {
+            timmMain.LOGGER.warn(String.format("Error loading file '%s'", filepath), e);
+        }
+
+        if (audioData == null || metaData == null) {
             return;
         }
 
         // retrieve extra information stored in buffers by stb
-        int channels = channelsBuffer.get();
-        int sampleRate = sampleRateBuffer.get();
-        // free memory on stack
-        stackPop();
-        stackPop();
+        int channels = metaData.getChannels();
+        int sampleRate = (int) metaData.getSampleRate();
+
+        // debug
+        timmMain.LOGGER.info(String.format("file '%s' has %d channels and a sample rate of %d", filepath, channels, sampleRate));
 
         // find correct OpenAL format
         int format = -1;
@@ -53,7 +58,7 @@ public class Sound {
         }
 
         bufferId = alGenBuffers();
-        alBufferData(bufferId, format, rawAudioBuffer, sampleRate);
+        alBufferData(bufferId, format, audioData, sampleRate);
 
         // generate source
         sourceId = alGenSources();
@@ -62,8 +67,6 @@ public class Sound {
         alSourcei(sourceId, AL_LOOPING, 0); // disable looping
         alSourcei(sourceId, AL_POSITION, 0); // set cursor to start
         alSourcef(sourceId, AL_GAIN, 0.3f); // TODO: get minecraft audio slider data here
-
-        free(rawAudioBuffer);
     }
 
     public void delete() {
