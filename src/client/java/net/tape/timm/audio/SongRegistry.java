@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,7 +52,12 @@ public class SongRegistry {
             if (songObj.get("is_file?").getAsBoolean()) {
                 String fileName = songObj.get("file/id").getAsString();
                 String filePath = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
-                song = new Song(filePath, songName, author);
+                File temp = new File(filePath);
+                if (temp.exists()) {
+                    song = new Song(filePath, songName, author);
+                } else {
+                    timmMain.LOGGER.warn(String.format("Failed to find file with path '%s'", filePath));
+                }
             } else {
                 // parse file/id as an identifier and get the sound event associated with it
                 String id = songObj.get("file/id").getAsString();
