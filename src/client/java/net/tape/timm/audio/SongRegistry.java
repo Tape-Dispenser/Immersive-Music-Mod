@@ -12,12 +12,13 @@ import net.tape.timm.timmMain;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class SongRegistry {
 
-    protected static Map<String, Song> songList;
+    public static Map<String, Song> songList = new HashMap<String, Song>();
 
     public static void init() {
         // open songList.json
@@ -48,7 +49,8 @@ public class SongRegistry {
             String author = songObj.get("author").getAsString();
 
             if (songObj.get("is_file?").getAsBoolean()) {
-                String filePath = songObj.get("file/id").getAsString();
+                String fileName = songObj.get("file/id").getAsString();
+                String filePath = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
                 song = new Song(filePath, songName, author);
             } else {
                 // parse file/id as an identifier and get the sound event associated with it

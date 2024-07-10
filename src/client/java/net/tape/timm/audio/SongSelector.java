@@ -22,7 +22,6 @@ public class SongSelector {
     public static ArrayList<Song> getPlaylist(String name) {
         ArrayList<Song> playlist = new ArrayList<>();
 
-        ArrayList<String> strings = new ArrayList<String>(List.of(bp.get(name)));
 
 
         return playlist;

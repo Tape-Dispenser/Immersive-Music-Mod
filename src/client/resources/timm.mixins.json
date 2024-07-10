@@ -7,7 +7,6 @@
   "client": [
     "ClientTickMixin",
     "MusicSoundMixin",
-    "SoundManagerMixin",
     "SoundSystemMixin"
   ],
   "injectors": {

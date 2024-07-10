@@ -1,6 +1,7 @@
 package net.tape.timm;
 
 import net.minecraft.client.MinecraftClient;
+import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.audio.Sound;
 import net.tape.timm.audio.Song;
 
@@ -36,7 +37,7 @@ public class songControls {
 
     public static void play(Song song) {
         if (song != null) {
-            if (lastSound.isPlaying()) {
+            if (nowPlaying() != null) {
                 lastSound.stop();
             }
             lastSound = new Sound(song.getFilePath());
@@ -46,7 +47,7 @@ public class songControls {
     }
 
     public static void stop() {
-        if (lastSound.isPlaying()) {
+        if (nowPlaying() != null) {
             lastSound.stop();
 
             // set timer and rng delay time
@@ -69,7 +70,7 @@ public class songControls {
     }
 
     public static void skip(Song next) {
-        if (lastSound.isPlaying()) {
+        if (nowPlaying() != null) {
             stop();
         }
         if (inTimer) {
@@ -102,8 +103,12 @@ public class songControls {
 
     public static Song pickSong() {
 
+        // playlists aren't implemented properly yet, just return a random song
+        ArrayList<Map.Entry<String, Song>> x = new ArrayList<>(SongRegistry.songList.entrySet());
+        int len = x.size();
+        int songIndex = song_rng.nextInt(len);
+        return x.get(songIndex).getValue();
 
-        return new Song(configManager.config_dir.concat("/music/TIMM/desert_005.ogg"), "test", "nate");
 
         /*
         // determine playlist and set delay
@@ -146,11 +151,15 @@ public class songControls {
     }
 
     public static String nowPlaying() {
-        if (lastSound.isPlaying()) {
-            return lastSound.getFilePath();
-        } else {
+        if (lastSound == null) {
             return null;
         }
+
+        if (lastSound.isPlaying()) {
+            return lastSound.getFilePath();
+        }
+
+        return null;
     }
 
 

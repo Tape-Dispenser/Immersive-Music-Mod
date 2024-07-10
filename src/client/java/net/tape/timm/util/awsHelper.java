@@ -66,7 +66,7 @@ public class awsHelper {
             boolean isFile = song.get("is_file?").getAsBoolean();
             if (isFile) {
                 // check if file exists
-                String fileName = song.get("file_name").getAsString();
+                String fileName = song.get("file/id").getAsString();
                 String path = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
                 File f = new File(path);
                 if (!f.isFile()) {
@@ -147,7 +147,7 @@ public class awsHelper {
 
             if (localSong == null) {
                 if (serverSong.get("is_file?").getAsBoolean()) {
-                    filesToUpdate.add(serverSong.get("file_name").getAsString());
+                    filesToUpdate.add(serverSong.get("file/id").getAsString());
                 }
             } else {
                 serverVersion = serverSong.get("revision").getAsInt();
@@ -155,7 +155,7 @@ public class awsHelper {
 
                 if (serverVersion > localVersion) {
                     if (serverSong.get("is_file?").getAsBoolean()) {
-                        filesToUpdate.add(serverSong.get("file_name").getAsString());
+                        filesToUpdate.add(serverSong.get("file/id").getAsString());
                     }
                 }
             }

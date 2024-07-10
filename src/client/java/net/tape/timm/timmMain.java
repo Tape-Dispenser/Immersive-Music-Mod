@@ -24,6 +24,10 @@ public class timmMain implements ClientModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+		LOGGER.info("Loading playlists to memory...");
+		biomePlaylists.init();
+		LOGGER.info("Playlists loaded.");
+
 
 		LOGGER.info("Loading default config values...");
 		modConfig.init();
@@ -48,20 +52,6 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Registering songs...");
 		SongRegistry.init();
 		LOGGER.info("Songs registered");
-
-
-		LOGGER.info("Loading playlists to memory...");
-		biomePlaylists.init();
-		LOGGER.info("Playlists loaded.");
-
-
-
-
-
-
-
-
-
 
 
 		LOGGER.info("Initializing Song Controls...");

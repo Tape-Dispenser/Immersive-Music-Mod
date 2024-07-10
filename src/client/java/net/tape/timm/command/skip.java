@@ -1,10 +1,8 @@
 package net.tape.timm.command;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.context.CommandContext;
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.client.sound.Sound;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.tape.timm.audio.Song;
+import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.songControls;
 
 import com.mojang.brigadier.Command;
@@ -12,7 +10,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 import net.minecraft.text.Text;
-import net.tape.timm.timmMain;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
 
@@ -43,22 +40,24 @@ public class skip {
 
     private static int skipNoSong(FabricClientCommandSource source) {
         songControls.skip();
-        source.sendFeedback(Text.translatable("timm.commands.skip.success", songControls.lastSoundInstance.getSound().getIdentifier().toString()));
+        source.sendFeedback(Text.translatable("timm.commands.skip.success", songControls.lastSong.getSongName()));
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int skipWithSong(FabricClientCommandSource source, String song) {
+    private static int skipWithSong(FabricClientCommandSource source, String songName) {
 
-        Identifier id = Identifier.tryParse(song);
-        if (id != null && id.getClass().getTypeName().equals("SoundEvent")) {
-            SoundEvent sound = SoundEvent.of(id);
-            songControls.skip(sound);
-            source.sendFeedback(Text.translatable("timm.commands.skip.success", song));
+        Song song = null;
+        song = SongRegistry.songFromID(songName);
+        if (song == null) {
+            song = SongRegistry.songFromName(songName);
+        }
+        if (song != null) {
+            songControls.skip(song);
+            source.sendFeedback(Text.translatable("timm.commands.skip.success", song.getSongName()));
             return Command.SINGLE_SUCCESS;
         } else {
-            source.sendFeedback(Text.translatable("timm.commands.skip.badId", song));
+            source.sendFeedback(Text.translatable("timm.commands.skip.badId", songName));
             return -1; // apparently there isn't a constant defined for command failure???
         }
     }
-
 }

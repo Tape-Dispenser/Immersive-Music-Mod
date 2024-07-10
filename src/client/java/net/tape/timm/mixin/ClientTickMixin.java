@@ -45,7 +45,7 @@ public class ClientTickMixin {
 					songControls.timer -= 1;
 				}
 
-			} else if (!timmMain.mc.getSoundManager().isPlaying(songControls.lastSoundInstance)) { // not in timer, and current song has run out
+			} else if (!songControls.lastSound.isPlaying()) { // not in timer, and current song has run out
 				// set timer and rng delay time
 				songControls.inTimer = true;
 				long x; // delay time

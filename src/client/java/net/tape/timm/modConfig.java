@@ -21,7 +21,6 @@ public class modConfig {
     public static void init() {
         defaultConfig.put("debug", new String[]{"bool", "false"}); // i store the type of the rest of the values so i can have multiple types in config
 
-
         // menu delays
         defaultConfig.put("menuMinDelay", new String[]{"long", "20" /* delay times are in ticks (20ths of a second) */ });
         defaultConfig.put("menuMaxDelay", new String[]{"long", "600" });

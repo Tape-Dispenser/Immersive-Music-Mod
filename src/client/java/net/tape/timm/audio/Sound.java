@@ -22,11 +22,6 @@ public class Sound {
     public Sound(String filepath) {
         this.filePath = filepath;
 
-
-
-        // TODO: Make some way to load ogg data without stb vorbis (cringe)
-        // TODO: Maybe i can do it the same way minecraft does
-
         ByteBuffer audioData = null;
         AudioFormat metaData = null;
         try (InputStream inputStream = new FileInputStream(filepath);){
