@@ -1,6 +1,8 @@
 package net.tape.timm;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.audio.Sound;
 import net.tape.timm.audio.Song;
@@ -103,12 +105,16 @@ public class songControls {
 
     public static Song pickSong() {
 
+        SoundEvent se = SoundEvent.of(Identifier.tryParse("minecraft:music.game"));
+        return new Song(se, "minecraft default", "probably c418");
+
+        /*
         // playlists aren't implemented properly yet, just return a random song
         ArrayList<Map.Entry<String, Song>> x = new ArrayList<>(SongRegistry.songList.entrySet());
         int len = x.size();
         int songIndex = song_rng.nextInt(len);
         return x.get(songIndex).getValue();
-
+        */
 
         /*
         // determine playlist and set delay
