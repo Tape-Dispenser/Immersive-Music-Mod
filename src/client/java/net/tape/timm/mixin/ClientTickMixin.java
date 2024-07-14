@@ -1,5 +1,6 @@
 package net.tape.timm.mixin;
 
+import net.tape.timm.audio.Song;
 import net.tape.timm.modConfig;
 import net.tape.timm.songControls;
 
@@ -32,9 +33,9 @@ public class ClientTickMixin {
 
 					// debug logging
 					if (modConfig.debugLogging) {
-						String x = songControls.nowPlaying();
+						Song x = songControls.nowPlaying();
 						if (x != null) {
-							LOGGER.info("now playing : ".concat(x));
+							LOGGER.info("now playing : ".concat(x.getSongName()));
 						} else {
 							LOGGER.warn("failed to pick song!");
 						}
@@ -45,7 +46,7 @@ public class ClientTickMixin {
 					songControls.timer -= 1;
 				}
 
-			} else if (!songControls.lastSound.isPlaying()) { // not in timer, and current song has run out
+			} else if (songControls.nowPlaying() == null) { // not in timer, and current song has run out
 				// set timer and rng delay time
 				songControls.inTimer = true;
 				long x; // delay time

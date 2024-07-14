@@ -1,30 +1,26 @@
 package net.tape.timm.audio;
 
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.sound.SoundEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
-public class Song {
+public abstract class Song {
 
 
-    private final String filePath;
+    final String pathOrId;
     private final String songName;
     private final String author;
 
-    public Song(String path, String name, String author) {
-        this.filePath = path;
-        this.songName = name;
+    protected Song(String pathOrId, String songName, String author) {
+        this.pathOrId = pathOrId;
+        this.songName = songName;
         this.author = author;
     }
 
-    public Song(SoundEvent sound, String name, String author) {
-        this.songName = name;
-        this.filePath = PositionedSoundInstance.music(sound).getSound().getLocation().getPath();
-        this.author = author;
-    }
+    public abstract ByteArrayOutputStream loadByteStream();
 
     public String getAuthor() {return this.author;}
 
-    public String getFilePath() {return this.filePath;}
+    public String getPathOrId() {return this.pathOrId;}
 
     public String getSongName() {return this.songName;}
 

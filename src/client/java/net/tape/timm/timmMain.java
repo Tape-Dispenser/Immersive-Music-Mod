@@ -3,13 +3,22 @@ package net.tape.timm;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.impl.resource.loader.ModNioResourcePack;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.MinecraftClient;
 
 
+import net.minecraft.resource.ResourceType;
 import net.tape.timm.audio.AudioManager;
 import net.tape.timm.audio.SongRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class timmMain implements ClientModInitializer {
@@ -73,6 +82,16 @@ public class timmMain implements ClientModInitializer {
 
 
 		LOGGER.info("TIMM successfully initialized.");
+
+		LOGGER.info("Testing resource loading path...");
+		/*for (ModContainer mod : FabricLoader.getInstance().getAllMods()) {
+			if (!mod.getMetadata().getId().equals("minecraft")) continue;
+			for (Path path : mod.get()) {
+				LOGGER.info(path.toAbsolutePath().toString());
+				LOGGER.info(ResourceType.CLIENT_RESOURCES.getDirectory());
+			}
+		}*/
+		LOGGER.info("Testing done");
 
 	}
 

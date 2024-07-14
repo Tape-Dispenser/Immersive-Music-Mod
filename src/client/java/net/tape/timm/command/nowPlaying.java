@@ -1,4 +1,5 @@
 package net.tape.timm.command;
+import net.tape.timm.audio.Song;
 import net.tape.timm.songControls;
 
 import com.mojang.brigadier.Command;
@@ -25,9 +26,9 @@ public class nowPlaying {
     }
 
     private static int printNowPlaying(FabricClientCommandSource source) {
-        if (songControls.nowPlaying() != null) {
-            String song = songControls.nowPlaying();
-            source.sendFeedback(Text.translatable("timm.commands.nowPlaying.song", song));
+        Song song = songControls.nowPlaying();
+        if (song != null) {
+            source.sendFeedback(Text.translatable("timm.commands.nowPlaying.song", song.getSongName()));
         } else {
             source.sendFeedback(Text.translatable("timm.commands.nowPlaying.null"));
         }

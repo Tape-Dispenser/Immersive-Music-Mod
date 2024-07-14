@@ -3,10 +3,15 @@ package net.tape.timm;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.tape.timm.audio.SongRegistry;
+import net.tape.timm.audio.FileSong;
+import net.tape.timm.audio.ResourceSong;
 import net.tape.timm.audio.Sound;
 import net.tape.timm.audio.Song;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 import static net.tape.timm.timmMain.LOGGER;
@@ -32,20 +37,19 @@ public class songControls {
         song_rng = new Random();
     }
 
-    public static void test() {
-        Sound x = new Sound("/home/tape/Documents/cs/mods/The-Immersive-Music-Mod/run/music/TIMM/Swamp_001-final-2.ogg");
-        x.play();
-    }
-
     public static void play(Song song) {
-        if (song != null) {
-            if (nowPlaying() != null) {
-                lastSound.stop();
-            }
-            lastSound = new Sound(song.getFilePath());
-            lastSound.play();
-            lastSong = song;
+        if (song == null) {
+            return;
         }
+
+        if (nowPlaying() != null) {
+            lastSound.stop();
+        }
+
+        lastSound = new Sound(song);
+        lastSound.play();
+        lastSong = song;
+
     }
 
     public static void stop() {
@@ -104,17 +108,15 @@ public class songControls {
 
 
     public static Song pickSong() {
+        return new ResourceSong("minecraft:music.game", "minecraft default", "probably c418");
 
-        SoundEvent se = SoundEvent.of(Identifier.tryParse("minecraft:music.game"));
-        return new Song(se, "minecraft default", "probably c418");
-
-        /*
+/*
         // playlists aren't implemented properly yet, just return a random song
         ArrayList<Map.Entry<String, Song>> x = new ArrayList<>(SongRegistry.songList.entrySet());
         int len = x.size();
         int songIndex = song_rng.nextInt(len);
         return x.get(songIndex).getValue();
-        */
+*/
 
         /*
         // determine playlist and set delay
@@ -156,13 +158,13 @@ public class songControls {
 
     }
 
-    public static String nowPlaying() {
+    public static Song nowPlaying() {
         if (lastSound == null) {
             return null;
         }
 
         if (lastSound.isPlaying()) {
-            return lastSound.getFilePath();
+            return lastSong;
         }
 
         return null;

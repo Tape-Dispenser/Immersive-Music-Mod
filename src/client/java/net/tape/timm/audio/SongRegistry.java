@@ -54,7 +54,7 @@ public class SongRegistry {
                 String filePath = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
                 File temp = new File(filePath);
                 if (temp.exists()) {
-                    song = new Song(filePath, songName, author);
+                    song = new FileSong(filePath, songName, author);
                 } else {
                     timmMain.LOGGER.warn(String.format("Failed to find file with path '%s'", filePath));
                 }
@@ -63,8 +63,7 @@ public class SongRegistry {
                 String id = songObj.get("file/id").getAsString();
                 Identifier identifier = Identifier.tryParse(id);
                 if (identifier != null) {
-                    SoundEvent se = SoundEvent.of(identifier);
-                    song = new Song(se, songName, author);
+                    song = new ResourceSong(id, songName, author);
                 } else if (modConfig.debugLogging) {
                     timmMain.LOGGER.warn(String.format("Failed to find sound event with identifier '%s'", id));
                 }
@@ -87,7 +86,6 @@ public class SongRegistry {
                 return entry.getValue();
             }
         }
-
         // song not found
         return null;
     }

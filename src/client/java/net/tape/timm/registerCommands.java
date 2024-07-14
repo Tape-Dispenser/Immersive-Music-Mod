@@ -13,7 +13,6 @@ public class registerCommands {
         nowPlaying.register(dispatch);
         stop.register(dispatch);
         skip.register(dispatch);
-        test.register(dispatch);//
     }
 
 

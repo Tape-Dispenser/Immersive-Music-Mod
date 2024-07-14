@@ -4,7 +4,7 @@ import net.minecraft.client.sound.OggAudioStream;
 import net.tape.timm.timmMain;
 
 import javax.sound.sampled.AudioFormat;
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -15,34 +15,31 @@ public class Sound {
     private int bufferId;
     private int sourceId;
 
-    private final String filePath;
 
     private boolean isPlaying = false;
 
-    public Sound(String filepath) {
-        this.filePath = filepath;
+    public Sound(Song song) {
 
         ByteBuffer audioData = null;
         AudioFormat metaData = null;
-        try (InputStream inputStream = new FileInputStream(filepath);){
+        try(InputStream inputStream = new ByteArrayInputStream(song.loadByteStream().toByteArray());) {
             try (OggAudioStream oggAudioStream = new OggAudioStream(inputStream);){
                 audioData = oggAudioStream.getBuffer();
                 metaData = oggAudioStream.getFormat();
             }
         } catch (IOException e) {
-            timmMain.LOGGER.warn(String.format("Error loading file '%s'", filepath), e);
+            timmMain.LOGGER.warn("Error creating new sound", e);
         }
 
         if (audioData == null || metaData == null) {
             return;
         }
 
-        // retrieve extra information stored in buffers by stb
+        timmMain.LOGGER.info(String.format("Now playing: '%s' by '%s'", song.getSongName(), song.getAuthor()));
+
+        // retrieve extra information
         int channels = metaData.getChannels();
         int sampleRate = (int) metaData.getSampleRate();
-
-        // debug
-        timmMain.LOGGER.info(String.format("file '%s' has %d channels and a sample rate of %d", filepath, channels, sampleRate));
 
         // find correct OpenAL format
         int format = -1;
@@ -87,10 +84,6 @@ public class Sound {
             alSourceStop(sourceId);
             isPlaying = false;
         }
-    }
-
-    public String getFilePath() {
-        return this.filePath;
     }
 
     public boolean isPlaying() {
