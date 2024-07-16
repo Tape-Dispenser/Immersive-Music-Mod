@@ -1,6 +1,7 @@
 package net.tape.timm.audio;
 
 import net.minecraft.client.sound.OggAudioStream;
+import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
 import javax.sound.sampled.AudioFormat;
@@ -27,15 +28,18 @@ public class Sound {
                 audioData = oggAudioStream.getBuffer();
                 metaData = oggAudioStream.getFormat();
             }
-        } catch (IOException e) {
-            timmMain.LOGGER.warn("Error creating new sound", e);
+        } catch (Exception e) {
+            timmMain.LOGGER.warn("Error loading sound data from buffer", e);
         }
 
         if (audioData == null || metaData == null) {
+            timmMain.LOGGER.warn("Invalid file type passed (maybe)");
             return;
         }
 
-        timmMain.LOGGER.info(String.format("Now playing: '%s' by '%s'", song.getSongName(), song.getAuthor()));
+        if (modConfig.debugLogging) {
+            timmMain.LOGGER.info(String.format("Now playing: '%s' by '%s'", song.getSongName(), song.getAuthor()));
+        }
 
         // retrieve extra information
         int channels = metaData.getChannels();

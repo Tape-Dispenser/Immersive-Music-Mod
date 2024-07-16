@@ -108,8 +108,6 @@ public class songControls {
 
 
     public static Song pickSong() {
-        return new ResourceSong("minecraft:music.game", "minecraft default", "probably c418");
-
 /*
         // playlists aren't implemented properly yet, just return a random song
         ArrayList<Map.Entry<String, Song>> x = new ArrayList<>(SongRegistry.songList.entrySet());

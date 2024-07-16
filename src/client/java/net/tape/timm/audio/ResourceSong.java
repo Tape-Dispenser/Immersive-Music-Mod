@@ -31,26 +31,23 @@ public class ResourceSong extends Song{
 
     @Override
     public ByteArrayOutputStream loadByteStream() {
-        Identifier id = Identifier.tryParse(this.pathOrId);
+        Identifier id = Identifier.tryParse(this.getPathOrId());
         if (id == null) {
-            timmMain.LOGGER.warn(String.format("Error loading song from resource: bad identifier '%s' passed", this.pathOrId));
+            timmMain.LOGGER.warn(String.format("Error loading song from resource: bad identifier '%s' passed", this.getPathOrId()));
             return null;
         }
 
         RegistryEntry<SoundEvent> registryEntry = RegistryEntry.of(SoundEvent.of(id));
         timmMain.LOGGER.info(registryEntry.value().getId().toString());
 
-        Random rng = Random.create();
-
-        PositionedSoundInstance soundInstance = new PositionedSoundInstance(id, SoundCategory.MUSIC, 1.0f, 1.0f, rng, false, 0, SoundInstance.AttenuationType.NONE, 0.0, 0.0, 0.0, true);
         WeightedSoundSet soundSet = timmMain.mc.getSoundManager().get(id);
-
         Identifier locationId;
 
         if (soundSet == null) {
             // if game fails to find a sound set it may still be a location identifier
             locationId = id;
         } else {
+            Random rng = Random.create();
             Sound sound = soundSet.getSound(rng);
             locationId = sound.getLocation();
         }
@@ -67,7 +64,7 @@ public class ResourceSong extends Song{
             outputStream.flush();
             return outputStream;
         } catch (IOException e) {
-            timmMain.LOGGER.warn(String.format("Error while loading '%s' from file", this.pathOrId), e);
+            timmMain.LOGGER.warn(String.format("Error while loading '%s' from file", this.getPathOrId()), e);
             return null;
         }
     }

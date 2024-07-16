@@ -14,7 +14,7 @@ public class FileSong extends Song {
 
     @Override
     public ByteArrayOutputStream loadByteStream() {
-        try(InputStream inputStream = new FileInputStream(this.pathOrId);) {
+        try(InputStream inputStream = new FileInputStream(this.getPathOrId());) {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             int len;
@@ -24,7 +24,7 @@ public class FileSong extends Song {
             outputStream.flush();
             return outputStream;
         } catch (IOException e) {
-            timmMain.LOGGER.warn(String.format("failed to load song '%s'", this.pathOrId), e);
+            timmMain.LOGGER.warn(String.format("failed to load song '%s'", this.getPathOrId()), e);
             return null;
         }
     }

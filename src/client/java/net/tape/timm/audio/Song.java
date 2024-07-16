@@ -6,7 +6,7 @@ import java.io.InputStream;
 public abstract class Song {
 
 
-    final String pathOrId;
+    private final String pathOrId;
     private final String songName;
     private final String author;
 
