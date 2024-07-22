@@ -3,10 +3,7 @@ package net.tape.timm;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.tape.timm.audio.FileSong;
-import net.tape.timm.audio.ResourceSong;
-import net.tape.timm.audio.Sound;
-import net.tape.timm.audio.Song;
+import net.tape.timm.audio.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -87,7 +84,7 @@ public class songControls {
     }
 
     public static void skip() {
-        Song song = pickSong();
+        Song song = SongSelector.pickSong();
         if (song != null) {
             if (inTimer) {
                 inTimer = false;
@@ -106,56 +103,6 @@ public class songControls {
         }
     }
 
-
-    public static Song pickSong() {
-/*
-        // playlists aren't implemented properly yet, just return a random song
-        ArrayList<Map.Entry<String, Song>> x = new ArrayList<>(SongRegistry.songList.entrySet());
-        int len = x.size();
-        int songIndex = song_rng.nextInt(len);
-        return x.get(songIndex).getValue();
-*/
-
-        /*
-        // determine playlist and set delay
-        String playlistName = "menu";
-        if (mc.world != null) {
-            assert mc.player != null;
-            Optional<RegistryKey<Biome>> temp = mc.world.getBiome(mc.player.getBlockPos()).getKey();
-            if (temp.isPresent()) {
-                playlistName = temp.get().getValue().toString();
-
-                if (modConfig.debugLogging) {
-                    timmMain.LOGGER.info(playlistName);
-                }
-            }
-        }
-
-        // get playlist
-        List<String> playlist;
-        try {
-            playlist = Arrays.asList(bp.get(playlistName));
-        } catch (NullPointerException e) {
-            playlist = Arrays.asList(bp.get("fallback"));
-        }
-        if (playlist.isEmpty()) {
-            playlist = Arrays.asList(bp.get("fallback"));
-        }
-
-        // pick song in playlist
-        int index = Math.abs(song_rng.nextInt() % playlist.size());
-        String songName = playlist.get(index);
-        try {
-            return new Song(SoundEvent.of(Identifier.tryParse(songName)), "", "Unknown");
-        } catch (NullPointerException e) {
-            timmMain.LOGGER.warn(String.format("song \"%s\" does not exist!", songName));
-            return null;
-        }
-
-         */
-
-    }
-
     public static Song nowPlaying() {
         if (lastSound == null) {
             return null;
@@ -167,17 +114,4 @@ public class songControls {
 
         return null;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

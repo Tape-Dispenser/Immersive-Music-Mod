@@ -21,8 +21,8 @@ public class Sound {
 
     public Sound(Song song) {
 
-        ByteBuffer audioData = null;
-        AudioFormat metaData = null;
+        ByteBuffer audioData;
+        AudioFormat metaData;
         try(InputStream inputStream = new ByteArrayInputStream(song.loadByteStream().toByteArray());) {
             try (OggAudioStream oggAudioStream = new OggAudioStream(inputStream);){
                 audioData = oggAudioStream.getBuffer();
@@ -30,6 +30,7 @@ public class Sound {
             }
         } catch (Exception e) {
             timmMain.LOGGER.warn("Error loading sound data from buffer", e);
+            return;
         }
 
         if (audioData == null || metaData == null) {

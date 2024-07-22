@@ -13,9 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SongRegistry {
 
@@ -88,5 +86,17 @@ public class SongRegistry {
         }
         // song not found
         return null;
+    }
+
+    public static Set<String> songsInGroup(String groupName) {
+        // get set of all registered songs under a specific song group
+        Set<String> matches = new HashSet<>();
+        for (String songId : SongRegistry.songList.keySet()) {
+            ArrayList <String> parts = new ArrayList<>(List.of(songId.split("-")));
+            if (Objects.equals(parts.get(0), groupName)) {
+                matches.add(songId);
+            }
+        }
+        return matches;
     }
 }

@@ -36,10 +36,16 @@ public class getSongs {
 
         for (String file : filesToUpdate) {
             timmMain.LOGGER.info(String.format("Updating file %s...", file));
-            awsHelper.downloadFile(file, String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), file), bucketName, client);
+            // TODO: make this use file objects to declare the subdirectories from game dir
+            File localFile = new File(String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), file));
+            awsHelper.downloadFile(file, localFile , bucketName, client);
         }
 
         File serverSL = new File(String.format("%s/music/TIMM/serverSongList.json", FabricLoader.getInstance().getGameDir()));
         serverSL.delete();
+
+
+        String playlistsFile = String.format("%s/timm/biomePlaylists.json", FabricLoader.getInstance().getConfigDir());
+        awsHelper.updateVersionedJsonFile(playlistsFile, bucketName, client);
     }
 }

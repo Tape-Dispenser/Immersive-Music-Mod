@@ -11,36 +11,84 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class awsHelper {
 
     /*
         Collection of functions to make interfacing with AWS easier and shorter
-
-
      */
 
 
-    public static void downloadFile(String file, String dest, String bucketName, AmazonS3Client client) {
-        // create new file object at .minecraft/music/TIMM/<song>
-        File localFile = new File(dest);
-
+    public static void downloadFile(String serverFile, File dest, String bucketName, AmazonS3Client client) {
         if (modConfig.debugLogging) {
-            timmMain.LOGGER.info(String.format("Attempting to download aws file %s to local file %s", file, dest));
+            timmMain.LOGGER.info(String.format("Attempting to download aws serverFile %s to local serverFile %s", serverFile, dest.getPath()));
         }
 
         try {
-            // download file and return metadata
-            client.getObject(new GetObjectRequest(bucketName, file), localFile);
+            // download serverFile and return metadata
+            client.getObject(new GetObjectRequest(bucketName, serverFile), dest);
         } catch (AmazonS3Exception e) {
-            timmMain.LOGGER.warn(String.format("Failed to download file %s from aws server!", file));
+            timmMain.LOGGER.warn(String.format("Failed to download serverFile %s from aws server!", serverFile));
             timmMain.LOGGER.warn(e.getMessage());
         }
-        return;
+    }
+
+    public static void updateVersionedJsonFile(String file, String bucketName, AmazonS3Client client) {
+        String json;
+
+        try {
+            json = Files.readString(Path.of(file));
+        } catch (IOException e) {
+            timmMain.LOGGER.warn(String.format("Failed to find '%s'", file));
+            timmMain.LOGGER.info("Downloading now...");
+            File localFile = new File(file);
+            downloadFile(localFile.getName(), localFile, bucketName, client);
+            return;
+        }
+
+        JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
+
+        JsonElement custom = obj.get("custom");
+        if (custom != null && custom.getAsBoolean()) {
+            if (modConfig.debugLogging) {
+                timmMain.LOGGER.info(String.format("config file %s is customized, ignoring updates", file));
+            }
+            return;
+        }
+
+        int localVersion = obj.get("version").getAsInt();
+
+        File localFile = new File(file);
+        String fileDirectory = localFile.getParent();
+        String fileName = localFile.getName();
+        File serverFile = new File(fileDirectory, "server_" + fileName);
+        downloadFile(fileName, serverFile, bucketName, client);
+        try {
+            json = Files.readString(Path.of(serverFile.getPath()));
+        } catch (IOException e) {
+            timmMain.LOGGER.error(String.format("Failed to find and download %s on AWS server!", fileName));
+            throw new RuntimeException(e);
+        }
+
+        obj = JsonParser.parseString(json).getAsJsonObject();
+        int serverVersion = obj.get("version").getAsInt();
+        if (localVersion >= serverVersion) {
+            serverFile.delete();
+            return;
+        }
+
+        if (!localFile.delete()) {
+            timmMain.LOGGER.error(String.format("Failed to delete %s while updating!", file));
+            timmMain.LOGGER.warn("This may be due to some file permission error");
+            throw new RuntimeException();
+        }
+
+        if (!serverFile.renameTo(new File(file))) {
+            timmMain.LOGGER.error(String.format("Failed to rename server file to %s while updating!", file));
+            timmMain.LOGGER.warn("This may be due to some file permission error");
+            throw new RuntimeException();
+        }
     }
 
     public static void validateLocal(String bucket, AmazonS3Client client) {
@@ -53,7 +101,7 @@ public class awsHelper {
             timmMain.LOGGER.error("Failed to find songList.json!");
             throw new RuntimeException(e);
         }
-        // load json file into JsonObject
+        // load json serverFile into JsonObject
         JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
         // get songs as a set of key pairs
         JsonObject songList = obj.get("songs").getAsJsonObject();
@@ -62,22 +110,24 @@ public class awsHelper {
         for (Map.Entry<String, JsonElement> entry : localEntries) {
             // each key will be a song id string and the value associated will be a song JSON object
             JsonObject song = entry.getValue().getAsJsonObject();
-            // check if song is a file
+            // check if song is a serverFile
             boolean isFile = song.get("is_file?").getAsBoolean();
-            if (isFile) {
-                // check if file exists
-                String fileName = song.get("file/id").getAsString();
-                String path = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
-                File f = new File(path);
-                if (!f.isFile()) {
-
-                    if (modConfig.debugLogging) {
-                        timmMain.LOGGER.info(String.format("%s not found, downloading now...", fileName));
-                    }
-
-                    downloadFile(fileName, path, bucket, client);
-                }
+            if (!isFile) {
+                continue;
             }
+
+            // check if serverFile exists
+            String fileName = song.get("file/id").getAsString();
+            String path = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
+            File f = new File(path);
+            if (f.isFile()) {
+                continue;
+            }
+
+            if (modConfig.debugLogging) {
+                timmMain.LOGGER.info(String.format("%s not found, downloading now...", fileName));
+            }
+            downloadFile(fileName, f, bucket, client);
         }
     }
 
@@ -93,7 +143,8 @@ public class awsHelper {
         } catch (IOException e) {
             timmMain.LOGGER.warn(String.format("Error while accessing file %s", filePath), e);
             timmMain.LOGGER.info("Attempting to download now...");
-            downloadFile("songList.json", String.format("%s/music/TIMM/songList.json", FabricLoader.getInstance().getGameDir()), bucketName, client);
+            File songListFile = new File(String.format("%s/music/TIMM/songList.json", FabricLoader.getInstance().getGameDir()));
+            downloadFile("songList.json", songListFile, bucketName, client);
             validateLocal(bucketName, client);
             try {
                 json = Files.readString(Path.of(filePath));
@@ -102,12 +153,13 @@ public class awsHelper {
                 throw new RuntimeException(f);
             }
         }
-        // load json file into JsonObject
+        // load json serverFile into JsonObject
         JsonObject localObj = JsonParser.parseString(json).getAsJsonObject();
 
 
         // get server-side song list
-        downloadFile("songList.json", String.format("%s/music/TIMM/serverSongList.json", FabricLoader.getInstance().getGameDir()), bucketName, client);
+        File serverSongListFile = new File(String.format("%s/music/TIMM/serverSongList.json", FabricLoader.getInstance().getGameDir()));
+        downloadFile("songList.json", serverSongListFile, bucketName, client);
         // load json
         filePath = String.format("%s/music/TIMM/serverSongList.json", FabricLoader.getInstance().getGameDir());
         try {
@@ -116,7 +168,7 @@ public class awsHelper {
             timmMain.LOGGER.error("Error while accessing server side song list", e);
             throw new RuntimeException(e);
         }
-        // load json file into JsonObject
+        // load json serverFile into JsonObject
         JsonObject serverObj = JsonParser.parseString(json).getAsJsonObject();
 
 

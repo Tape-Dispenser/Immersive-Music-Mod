@@ -1,6 +1,7 @@
 package net.tape.timm.mixin;
 
 import net.tape.timm.audio.Song;
+import net.tape.timm.audio.SongSelector;
 import net.tape.timm.modConfig;
 import net.tape.timm.songControls;
 
@@ -29,7 +30,7 @@ public class ClientTickMixin {
 
 					// timer has run out, play new song
 					songControls.inTimer = false;
-					songControls.play(songControls.pickSong());
+					songControls.play(SongSelector.pickSong());
 
 					// debug logging
 					if (modConfig.debugLogging) {

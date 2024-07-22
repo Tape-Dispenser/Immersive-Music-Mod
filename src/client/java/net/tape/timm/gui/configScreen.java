@@ -81,7 +81,7 @@ public class configScreen extends Screen {
     public void resetConfig() {
         modConfig.configMap = modConfig.defaultConfig;
         modConfig.copyVals();
-        configManager.update_cfg();
+        configManager.update_cfg(modConfig.configMap);
 
         menuMinSlider.updateWidget(modConfig.minMenuDelay);
         menuMaxSlider.updateWidget(modConfig.maxMenuDelay);
@@ -97,8 +97,8 @@ public class configScreen extends Screen {
     private void updateDebug(boolean check) {
         modConfig.debugLogging = check;
         String checkString = String.valueOf(check);
-        modConfig.configMap.replace("debug", new String[]{"bool", checkString});
-        configManager.update_cfg();
+        modConfig.configMap.replace("debug", checkString);
+        configManager.update_cfg(modConfig.configMap);
     }
 
 
@@ -107,8 +107,8 @@ public class configScreen extends Screen {
         long realVal = math.lerp(1, modConfig.maxMenuDelay, value);
         String valString = String.valueOf(realVal);
         modConfig.minMenuDelay = realVal;
-        modConfig.configMap.replace("menuMinDelay", new String[]{"long", valString});
-        configManager.update_cfg();
+        modConfig.configMap.replace("menuMinDelay", valString);
+        configManager.update_cfg(modConfig.configMap);
 
         return realVal;
     }
@@ -117,8 +117,8 @@ public class configScreen extends Screen {
         long realVal = math.lerp(modConfig.minMenuDelay, 36000, value);
         String valString = String.valueOf(realVal);
         modConfig.maxMenuDelay = realVal;
-        modConfig.configMap.replace("menuMaxDelay", new String[]{"long", valString});
-        configManager.update_cfg();
+        modConfig.configMap.replace("menuMaxDelay", valString);
+        configManager.update_cfg(modConfig.configMap);
         return realVal;
     }
 
@@ -126,8 +126,8 @@ public class configScreen extends Screen {
         long realVal = math.lerp(1, modConfig.maxGameDelay, value);
         String valString = String.valueOf(realVal);
         modConfig.minGameDelay = realVal;
-        modConfig.configMap.replace("gameMinDelay", new String[]{"long", valString});
-        configManager.update_cfg();
+        modConfig.configMap.replace("gameMinDelay", valString);
+        configManager.update_cfg(modConfig.configMap);
         return realVal;
     }
 
@@ -135,8 +135,8 @@ public class configScreen extends Screen {
         long realVal = math.lerp(modConfig.minGameDelay, 36000, value);
         String valString = String.valueOf(realVal);
         modConfig.maxGameDelay = realVal;
-        modConfig.configMap.replace("gameMaxDelay", new String[]{"long", valString});
-        configManager.update_cfg();
+        modConfig.configMap.replace("gameMaxDelay", valString);
+        configManager.update_cfg(modConfig.configMap);
         return realVal;
     }
 
