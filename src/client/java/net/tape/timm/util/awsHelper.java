@@ -34,15 +34,14 @@ public class awsHelper {
         }
     }
 
-    public static void updateVersionedJsonFile(String file, String bucketName, AmazonS3Client client) {
+    public static void updateVersionedJsonFile(File localFile, String bucketName, AmazonS3Client client) {
         String json;
 
         try {
-            json = Files.readString(Path.of(file));
+            json = Files.readString(localFile.toPath());
         } catch (IOException e) {
-            timmMain.LOGGER.warn(String.format("Failed to find '%s'", file));
+            timmMain.LOGGER.warn(String.format("Failed to find '%s'", localFile.getPath()));
             timmMain.LOGGER.info("Downloading now...");
-            File localFile = new File(file);
             downloadFile(localFile.getName(), localFile, bucketName, client);
             return;
         }
@@ -52,14 +51,13 @@ public class awsHelper {
         JsonElement custom = obj.get("custom");
         if (custom != null && custom.getAsBoolean()) {
             if (modConfig.debugLogging) {
-                timmMain.LOGGER.info(String.format("config file %s is customized, ignoring updates", file));
+                timmMain.LOGGER.info(String.format("config file %s is customized, ignoring updates", localFile.getPath()));
             }
             return;
         }
 
         int localVersion = obj.get("version").getAsInt();
 
-        File localFile = new File(file);
         String fileDirectory = localFile.getParent();
         String fileName = localFile.getName();
         File serverFile = new File(fileDirectory, "server_" + fileName);
@@ -79,13 +77,13 @@ public class awsHelper {
         }
 
         if (!localFile.delete()) {
-            timmMain.LOGGER.error(String.format("Failed to delete %s while updating!", file));
+            timmMain.LOGGER.error(String.format("Failed to delete %s while updating!", localFile.getPath()));
             timmMain.LOGGER.warn("This may be due to some file permission error");
             throw new RuntimeException();
         }
 
-        if (!serverFile.renameTo(new File(file))) {
-            timmMain.LOGGER.error(String.format("Failed to rename server file to %s while updating!", file));
+        if (!serverFile.renameTo(localFile)) {
+            timmMain.LOGGER.error(String.format("Failed to rename server file to %s while updating!", localFile.getPath()));
             timmMain.LOGGER.warn("This may be due to some file permission error");
             throw new RuntimeException();
         }
