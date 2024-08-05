@@ -18,10 +18,10 @@ public class modConfig {
     public static long maxMenuDelay;
     public static boolean debugLogging;
     public static boolean singlePlaylist;
+    public static boolean mixBaseDefault;
+    public static boolean superflatMode;
 
     public static void init() {
-        defaultConfig.put("debug", "false");
-
         // menu delays
         defaultConfig.put("menuMinDelay", "20");
         defaultConfig.put("menuMaxDelay", "600");
@@ -30,18 +30,22 @@ public class modConfig {
         defaultConfig.put("gameMinDelay", "1200");
         defaultConfig.put("gameMaxDelay", "12000");
 
+        defaultConfig.put("debug", "false");
         defaultConfig.put("singlePlaylist", "false");
+        defaultConfig.put("mixBaseDefault", "true");
+        defaultConfig.put("superflatMode", "false");
     }
 
     public static void copyVals() {
-        minGameDelay = Integer.parseInt(configMap.get("gameMinDelay")); // get the second index of the list and parse as integer.
+        minGameDelay = Integer.parseInt(configMap.get("gameMinDelay"));
         maxGameDelay = Integer.parseInt(configMap.get("gameMaxDelay"));
 
-        minMenuDelay = Integer.parseInt(configMap.get("menuMinDelay")); // get the second index of the list and parse as integer.
+        minMenuDelay = Integer.parseInt(configMap.get("menuMinDelay"));
         maxMenuDelay = Integer.parseInt(configMap.get("menuMaxDelay"));
 
         debugLogging = parseBoolean(configMap.get("debug"));
-
         singlePlaylist = parseBoolean(configMap.get("singlePlaylist"));
+        mixBaseDefault = parseBoolean(configMap.get("mixBaseDefault"));
+        superflatMode = parseBoolean(configMap.get("superflatMode"));
     }
 }

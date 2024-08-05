@@ -11,6 +11,61 @@
     "timm:menu"
   ],
 
+  "underground_overworld": [
+
+  ],
+
+  "underground_nether": [
+
+  ],
+
+  "minecraft:overworld": [
+    "timm:badlands",
+    "timm:bamboo_jungle",
+    "timm:birch_forest",
+    "timm:beach",
+    "timm:cherry_grove",
+    "timm:cold_ocean",
+    "timm:dark_forest",
+    "timm:deep_dark",
+    "timm:desert",
+    "timm:dripstone_caves",
+    "timm:flower_forest",
+    "timm:mountains",
+    "timm:jungle",
+    "timm:lush_caves",
+    "timm:meadow",
+    "timm:mushroom",
+    "timm:ocean"
+  ],
+
+  "minecraft:the_nether": [
+    "timm:basalt_deltas",
+    "timm:crimson_forest",
+    "timm:nether_wastes",
+    "timm:soul_sand_valley"
+  ],
+
+  "end_ring0": [
+    "timm:main_island"
+  ],
+
+  "end_ring1": [
+    "timm:void_ring"
+  ],
+
+  "end_ring2": [
+    "timm:first_ring"
+  ],
+
+  "end_ring3": [
+    "timm:second_ring"
+  ],
+
+  "end_ring4": [
+    "timm:the_beyond"
+  ],
+
   "minecraft:snowy_slopes": [
     "timm:mountains",
     "minecraft:music.game"
@@ -46,10 +101,6 @@
   ],
   "minecraft:cherry_grove": [
     "timm:cherry_grove",
-    "minecraft:music.game"
-  ],
-  "minecraft:end_highlands": [
-    "timm:end",
     "minecraft:music.game"
   ],
   "minecraft:birch_forest": [
@@ -209,10 +260,6 @@
     "timm:ocean",
     "minecraft:music.game"
   ],
-  "minecraft:end_barrens": [
-    "timm:end",
-    "minecraft:music.game"
-  ],
   "minecraft:deep_lukewarm_ocean": [
     "timm:warm_ocean",
     "timm:ocean",
@@ -234,16 +281,8 @@
     "timm:mountains",
     "minecraft:music.game"
   ],
-  "minecraft:the_end": [
-    "timm:end",
-    "minecraft:music.game"
-  ],
   "minecraft:old_growth_birch_forest": [
     "timm:birch_forest",
-    "minecraft:music.game"
-  ],
-  "minecraft:small_end_islands": [
-    "timm:end",
     "minecraft:music.game"
   ],
   "minecraft:crimson_forest": [

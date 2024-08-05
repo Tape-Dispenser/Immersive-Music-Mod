@@ -46,29 +46,26 @@ public class songControls {
         lastSound = new Sound(song);
         lastSound.play();
         lastSong = song;
-
     }
 
     public static void stop() {
-        if (nowPlaying() != null) {
-            lastSound.stop();
-
-            // set timer and rng delay time
-            inTimer = true;
-            long x; // delay time
-            if (lastSong == null) {
-                x = 10;
-            } else {
-                // TODO: FIX THIS
-                        x = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
-            }
-            timer = x;
-
-            // debug logging
-            if (modConfig.debugLogging) {
-                LOGGER.info("ticks until next song: ".concat(String.valueOf(x)));
-            }
-
+        if (nowPlaying() == null) {
+            return;
+        }
+        lastSound.stop();
+        // set timer and rng delay time
+        inTimer = true;
+        long x; // delay time
+        if (lastSong == null) {
+            x = 10;
+        } else {
+            // TODO: FIX THIS
+            x = pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, song_rng);
+        }
+        timer = x;
+        // debug logging
+        if (modConfig.debugLogging) {
+            LOGGER.info("ticks until next song: ".concat(String.valueOf(x)));
         }
     }
 
@@ -84,13 +81,14 @@ public class songControls {
     }
 
     public static void skip() {
-        Song song = SongSelector.pickSong();
-        if (song != null) {
-            if (inTimer) {
-                inTimer = false;
-            }
-            play(song);
+        Song song = SongSelector.pickSong(songControls.song_rng);
+        if (song == null) {
+            return;
         }
+        if (inTimer) {
+            inTimer = false;
+        }
+        play(song);
     }
 
     public static long pickDelay(long min, long max, Random rng) {

@@ -1,5 +1,8 @@
 package net.tape.timm.mixin;
 
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.tape.timm.audio.Song;
 import net.tape.timm.audio.SongSelector;
 import net.tape.timm.modConfig;
@@ -22,54 +25,52 @@ public class ClientTickMixin {
 
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	private void init(CallbackInfo info) {
-		if (songControls.soundEngineStarted) {
 
-			if (songControls.inTimer) {
 
-				if (songControls.timer == 0) {
+		if (!songControls.soundEngineStarted) {
+			return;
+		}
 
-					// timer has run out, play new song
-					songControls.inTimer = false;
-					songControls.play(SongSelector.pickSong());
+		if (songControls.inTimer) {
 
-					// debug logging
-					if (modConfig.debugLogging) {
-						Song x = songControls.nowPlaying();
-						if (x != null) {
-							LOGGER.info("now playing : ".concat(x.getSongName()));
-						} else {
-							LOGGER.warn("failed to pick song!");
-						}
-					}
+			if (songControls.timer > 0) {
+				songControls.timer -= 1;
+				return;
+			}
 
+			// timer has run out, play new song
+			songControls.inTimer = false;
+			songControls.play(SongSelector.pickSong(songControls.song_rng));
+
+			// debug logging
+			if (modConfig.debugLogging) {
+				Song x = songControls.nowPlaying();
+				if (x != null) {
+					LOGGER.info("now playing : ".concat(x.getSongName()));
 				} else {
-					// decrement timer
-					songControls.timer -= 1;
+					LOGGER.warn("failed to pick song!");
 				}
+			}
+		} else if (songControls.nowPlaying() == null) { // not in timer, and current song has run out
+			// set timer and rng delay time
+			songControls.inTimer = true;
+			long x; // delay time
+			if (songControls.lastSong == null) {
+				x = 10;
+			} else {
+				//TODO: FIX THIS!!!
+				x = songControls.pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, songControls.song_rng);
+			}
+			songControls.timer = x;
 
-			} else if (songControls.nowPlaying() == null) { // not in timer, and current song has run out
-				// set timer and rng delay time
-				songControls.inTimer = true;
-				long x; // delay time
-				if (songControls.lastSong == null) {
-					x = 10;
-				} else {
-
-					//TODO: FIX THIS!!!
-							x = songControls.pickDelay(modConfig.minMenuDelay, modConfig.maxMenuDelay, songControls.song_rng);
-
-
-				}
-				songControls.timer = x;
-
-				// debug logging
-				if (modConfig.debugLogging) {
-					LOGGER.info("ticks until next song: ".concat(String.valueOf(x)));
-				}
+			// debug logging
+			if (modConfig.debugLogging) {
+				LOGGER.info("ticks until next song: ".concat(String.valueOf(x)));
 			}
 		}
 	}
 }
+
 
 
 

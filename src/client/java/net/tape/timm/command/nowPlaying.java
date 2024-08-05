@@ -17,12 +17,9 @@ public class nowPlaying {
     // earthcomputer a real one for that
     // https://github.com/Earthcomputer/clientcommands
 
-
-
-
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(literal("nowplaying").executes(ctx -> printNowPlaying(ctx.getSource())));
-        dispatcher.register(literal("np").executes(ctx -> printNowPlaying(ctx.getSource())));
+        dispatcher.register(literal("timm:nowplaying").executes(ctx -> printNowPlaying(ctx.getSource())));
+        dispatcher.register(literal("timm:np").executes(ctx -> printNowPlaying(ctx.getSource())));
     }
 
     private static int printNowPlaying(FabricClientCommandSource source) {
@@ -37,5 +34,4 @@ public class nowPlaying {
 
 
     }
-
 }

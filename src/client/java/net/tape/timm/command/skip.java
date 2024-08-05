@@ -22,7 +22,7 @@ public class skip {
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
 
-        dispatcher.register(literal("skip")
+        dispatcher.register(literal("timm:skip")
                     // literal skip with no arguments executes skipNoSong
             .executes(ctx -> {
                 final FabricClientCommandSource src = ctx.getSource();

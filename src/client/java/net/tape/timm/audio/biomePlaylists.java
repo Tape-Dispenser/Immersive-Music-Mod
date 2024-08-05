@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import net.fabricmc.loader.api.FabricLoader;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,12 +60,18 @@ public class biomePlaylists {
 
         if (!modConfig.debugLogging) {return;}
 
-        for (Map.Entry<String, Set<String>> entry : playlists.entrySet()) {
-            String message = String.format("%s:\n", entry.getKey());
-            for (String song : entry.getValue()) {
-                message = String.format("%s\t%s\n", message, song);
-            }
-            LOGGER.info(message);
+        LOGGER.info(String.format("Successfully registered %d playlists", playlists.size()));
+    }
+
+    public static @NotNull ArrayList<Song> getPlaylist(String name) {
+        ArrayList<Song> songs = new ArrayList<>();
+        ArrayList<String> ids = new ArrayList<>(playlists.get(name));
+        if (ids.isEmpty()) {
+            return songs;
         }
+        for (String songId : ids) {
+            songs.add(SongRegistry.songFromID(songId));
+        }
+        return songs;
     }
 }

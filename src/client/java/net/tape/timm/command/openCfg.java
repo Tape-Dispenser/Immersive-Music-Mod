@@ -24,19 +24,16 @@ public class openCfg {
     // https://github.com/Earthcomputer/clientcommands
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(literal("cfg")
-                .executes(ctx -> fooCommand(ctx.getSource()))
-
-        );
+        dispatcher.register(literal("timm:cfg").executes(ctx -> openConfigMenu(ctx.getSource())));
+        dispatcher.register(literal("timm:config").executes(ctx -> openConfigMenu(ctx.getSource())));
     }
 
-    private static int fooCommand(FabricClientCommandSource source) throws CommandSyntaxException {
+    private static int openConfigMenu(FabricClientCommandSource source) throws CommandSyntaxException {
         configScreen cfg = new configScreen(mc.currentScreen);
         timmMain.LOGGER.info(Thread.currentThread().getName());
         mc.send(() -> mc.setScreen(cfg));
         return Command.SINGLE_SUCCESS;
     }
-
 }
 
 

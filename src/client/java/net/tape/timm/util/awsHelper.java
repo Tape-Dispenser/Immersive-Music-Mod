@@ -22,14 +22,14 @@ public class awsHelper {
 
     public static void downloadFile(String serverFile, File dest, String bucketName, AmazonS3Client client) {
         if (modConfig.debugLogging) {
-            timmMain.LOGGER.info(String.format("Attempting to download aws serverFile %s to local serverFile %s", serverFile, dest.getPath()));
+            timmMain.LOGGER.info(String.format("Attempting to download aws file %s to local file %s", serverFile, dest.getPath()));
         }
 
         try {
             // download serverFile and return metadata
             client.getObject(new GetObjectRequest(bucketName, serverFile), dest);
         } catch (AmazonS3Exception e) {
-            timmMain.LOGGER.warn(String.format("Failed to download serverFile %s from aws server!", serverFile));
+            timmMain.LOGGER.warn(String.format("Failed to download file %s from aws server!", serverFile));
             timmMain.LOGGER.warn(e.getMessage());
         }
     }
@@ -40,7 +40,7 @@ public class awsHelper {
         try {
             json = Files.readString(localFile.toPath());
         } catch (IOException e) {
-            timmMain.LOGGER.warn(String.format("Failed to find '%s'", localFile.getPath()));
+            timmMain.LOGGER.warn(String.format("Failed to find file '%s' while trying to update", localFile.getPath()));
             timmMain.LOGGER.info("Downloading now...");
             downloadFile(localFile.getName(), localFile, bucketName, client);
             return;
