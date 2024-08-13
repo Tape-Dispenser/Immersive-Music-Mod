@@ -21,15 +21,41 @@ import net.tape.timm.audio.biomePlaylists;
 public class configManager {
 
     public static String config_dir = FabricLoader.getInstance().getConfigDir().toString();
+    public static final File timmCfgDir = new File(FabricLoader.getInstance().getConfigDir().toFile(), "timm");
+    public static final File musicDir = new File(FabricLoader.getInstance().getGameDir().toFile(), "music");
+    public static final File timmMusicDir = new File(musicDir, "TIMM");
+    public static final File timmCfgFile = new File(timmCfgDir, "TIMM.config");
 
     public static void init() {
         // read config file
         String cfgContent;
-        File cfgDir = new File(config_dir, "timm");
-        File cfgFile = new File(cfgDir, "TIMM.config");
+
+        if (!musicDir.isDirectory()) {
+            try {
+                Files.createDirectories(musicDir.toPath());
+                if (modConfig.debugLogging) {
+                    timmMain.LOGGER.info(String.format("successfully created config directory at %s", musicDir.getPath()));}
+            } catch (IOException e) {
+                timmMain.LOGGER.error("Failed to create .minecraft/music folder!");
+                timmMain.LOGGER.warn("This may be because .minecraft does not exist, or because of some permissions issue.");
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (!timmMusicDir.isDirectory()) {
+            try {
+                Files.createDirectories(musicDir.toPath());
+                if (modConfig.debugLogging) {timmMain.LOGGER.info(String.format("successfully created config directory at %s", musicDir.getPath()));}
+            } catch (IOException e) {
+                timmMain.LOGGER.error("Failed to create .minecraft/music/TIMM folder!");
+                timmMain.LOGGER.warn("This may be because .minecraft/music does not exist, or because of some permissions issue.");
+                throw new RuntimeException(e);
+            }
+        }
+
         try {
 
-            cfgContent = Files.readString(cfgFile.toPath());
+            cfgContent = Files.readString(timmCfgFile.toPath());
 
             if (modConfig.debugLogging) {timmMain.LOGGER.info(cfgContent);}
 
@@ -38,7 +64,7 @@ public class configManager {
             if (modConfig.debugLogging) {timmMain.LOGGER.info("Main Config file not found, creating now...");}
             first_launch();
             try {
-                cfgContent = Files.readString(cfgFile.toPath());
+                cfgContent = Files.readString(timmCfgFile.toPath());
                 if (modConfig.debugLogging) {timmMain.LOGGER.info(cfgContent);}
             } catch (IOException f) {
                 // something went really wrong, likely some permissions issue, or maybe config directory doesn't exist
@@ -85,16 +111,13 @@ public class configManager {
             timmMain.LOGGER.error("Error");
             throw new RuntimeException(e);
         }
-
     }
 
 
     private static void first_launch() {
         // create timm directory in .minecraft/config and add biome_playlists.json
-        File timmCfgDir = new File(config_dir, "timm");
-        File mainCfgFile = new File(timmCfgDir, "TIMM.config");
 
-        if (mainCfgFile.isFile()) {
+        if (timmCfgFile.isFile()) {
             return;
         }
 

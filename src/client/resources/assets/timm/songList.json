@@ -1,6 +1,8 @@
 {
   "version": 5,
 
+  "custom": false,
+
   "songs": {
 
     "soul_sand_valley-01": {
@@ -459,7 +461,7 @@
       "revision": 0
     },
 
-    "deep-dark-05": {
+    "deep_dark-05": {
       "file/id": "DeepDark_005.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",

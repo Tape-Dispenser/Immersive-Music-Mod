@@ -29,6 +29,8 @@ loom {
 		}
 	}
 
+	accessWidenerPath = file("src/client/resources/timm.accesswidener")
+
 }
 
 dependencies {

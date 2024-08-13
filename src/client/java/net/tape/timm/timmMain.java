@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient;
 import net.tape.timm.audio.AudioManager;
 import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.audio.biomePlaylists;
+import net.tape.timm.aws.getSongs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,11 +42,6 @@ public class timmMain implements ClientModInitializer {
 		LOGGER.info("Copying config values to memory...");
 		modConfig.copyVals();
 		LOGGER.info("Config values copied to memory.");
-
-
-		LOGGER.info("Checking for song updates...");
-		getSongs.update();
-		LOGGER.info("Successfully updated any outdated songs.");
 
 
 		LOGGER.info("Registering songs...");

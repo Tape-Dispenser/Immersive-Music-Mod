@@ -1,19 +1,14 @@
 package net.tape.timm.audio;
 
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.GameMode;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionType;
 import net.tape.timm.BaseManager;
 import net.tape.timm.modConfig;
 import net.tape.timm.songControls;
 import net.tape.timm.timmMain;
-import org.spongepowered.asm.mixin.injection.struct.InjectorGroupInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -92,9 +87,8 @@ public class SongSelector {
         switch (dimension) {
         case "minecraft:the_end":
             // do end ring selection
-            int playerX = abs(timmMain.mc.player.getBlockX());
-            int playerZ = abs(timmMain.mc.player.getBlockZ());
-            selectionPool.addAll(getEndRing(playerX, playerZ));
+
+            selectionPool.addAll(endSongSelection());
             return selectionPool;
         case "minecraft:overworld":
             boolean night = false;
@@ -133,16 +127,19 @@ public class SongSelector {
         return selectionPool;
     }
 
-    public static ArrayList<Song> getEndRing(int x, int z) {
+    public static ArrayList<Song> endSongSelection() {
+        assert timmMain.mc.player != null;
+        int xPos = timmMain.mc.player.getBlockX();
+        int zPos = timmMain.mc.player.getBlockZ();
         ArrayList<Song> ringList = new ArrayList<>();
-        double distance = sqrt(x*x + z*z);
+        double distance = sqrt(xPos*xPos + zPos*zPos);
         if (distance < 300) {
             ringList.addAll(biomePlaylists.getPlaylist("end_ring0"));
         } else if (distance < 1000) {
             ringList.addAll(biomePlaylists.getPlaylist("end_ring1"));
-        } else if (distance < 1750) {
+        } else if (distance < 1700) {
             ringList.addAll(biomePlaylists.getPlaylist("end_ring2"));
-        } else if (distance < 2500) {
+        } else if (distance < 2400) {
             ringList.addAll(biomePlaylists.getPlaylist("end_ring3"));
         } else {
             ringList.addAll(biomePlaylists.getPlaylist("end_ring4"));

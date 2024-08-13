@@ -30,6 +30,8 @@
     "timm.mixins.json"
   ],
 
+  "accessWidener" : "timm.accesswidener",
+
   "depends": {
     "fabricloader": ">=0.14.21",
     "fabric-api": "*",

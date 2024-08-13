@@ -1,9 +1,10 @@
-package net.tape.timm.util;
+package net.tape.timm.aws;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
 import com.google.gson.*;
 import net.fabricmc.loader.api.FabricLoader;
+import net.tape.timm.configManager;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
@@ -19,6 +20,15 @@ public class awsHelper {
         Collection of functions to make interfacing with AWS easier and shorter
      */
 
+    public static final int UP_TO_DATE = 2;
+    public static final int NO_UPDATE = 3;
+    public static final int NO_LOCAL = 1;
+    public static final int ERROR = -1;
+    public static final int UPDATE = 0;
+
+    public static final int SUCCESS = 0;
+    public static final int MISSING_CLIENT_ERROR = -1;
+    public static final int MISSING_SERVER_ERROR = -2;
 
     public static void downloadFile(String serverFile, File dest, String bucketName, AmazonS3Client client) {
         if (modConfig.debugLogging) {
@@ -34,7 +44,7 @@ public class awsHelper {
         }
     }
 
-    public static void updateVersionedJsonFile(File localFile, String bucketName, AmazonS3Client client) {
+    public static UpdateJsonFileReturn updateVersionedJsonFile(File localFile, String bucketName, AmazonS3Client client) {
         String json;
 
         try {
@@ -43,7 +53,10 @@ public class awsHelper {
             timmMain.LOGGER.warn(String.format("Failed to find file '%s' while trying to update", localFile.getPath()));
             timmMain.LOGGER.info("Downloading now...");
             downloadFile(localFile.getName(), localFile, bucketName, client);
-            return;
+            if (localFile.isFile()) {
+                return new UpdateJsonFileReturn(NO_LOCAL, null, localFile);
+            }
+            return new UpdateJsonFileReturn(ERROR, null, null);
         }
 
         JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
@@ -53,7 +66,7 @@ public class awsHelper {
             if (modConfig.debugLogging) {
                 timmMain.LOGGER.info(String.format("config file %s is customized, ignoring updates", localFile.getPath()));
             }
-            return;
+            return new UpdateJsonFileReturn(NO_UPDATE, localFile, null);
         }
 
         int localVersion = obj.get("version").getAsInt();
@@ -66,152 +79,127 @@ public class awsHelper {
             json = Files.readString(Path.of(serverFile.getPath()));
         } catch (IOException e) {
             timmMain.LOGGER.error(String.format("Failed to find and download %s on AWS server!", fileName));
-            throw new RuntimeException(e);
+            return new UpdateJsonFileReturn(ERROR, localFile, null);
         }
 
         obj = JsonParser.parseString(json).getAsJsonObject();
         int serverVersion = obj.get("version").getAsInt();
         if (localVersion >= serverVersion) {
-            serverFile.delete();
-            return;
+            return new UpdateJsonFileReturn(UP_TO_DATE, localFile, serverFile);
         }
 
-        if (!localFile.delete()) {
-            timmMain.LOGGER.error(String.format("Failed to delete %s while updating!", localFile.getPath()));
-            timmMain.LOGGER.warn("This may be due to some file permission error");
-            throw new RuntimeException();
-        }
-
-        if (!serverFile.renameTo(localFile)) {
-            timmMain.LOGGER.error(String.format("Failed to rename server file to %s while updating!", localFile.getPath()));
-            timmMain.LOGGER.warn("This may be due to some file permission error");
-            throw new RuntimeException();
-        }
+        return new UpdateJsonFileReturn(UPDATE, localFile, serverFile);
     }
 
-    public static void validateLocal(String bucket, AmazonS3Client client) {
+    public static GetUpdatesReturn validateLocal(File songListFile, String bucket, AmazonS3Client client) {
+        HashSet<File> filesToUpdate = new HashSet<>();
         // check local songList.json and ensure all referenced files exist locally
-        String json;
-        String filePath = String.format("%s/music/TIMM/songList.json", FabricLoader.getInstance().getGameDir());
-        try {
-            json = Files.readString(Path.of(filePath));
-        } catch (IOException e) {
-            timmMain.LOGGER.error("Failed to find songList.json!");
-            throw new RuntimeException(e);
-        }
-        // load json serverFile into JsonObject
-        JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
-        // get songs as a set of key pairs
-        JsonObject songList = obj.get("songs").getAsJsonObject();
-        Set<Map.Entry<String, JsonElement>> localEntries = songList.entrySet();
 
-        for (Map.Entry<String, JsonElement> entry : localEntries) {
+        // load json file into JsonObject
+        String json;
+        try {
+            json = Files.readString(songListFile.toPath());
+        } catch (IOException e) {
+            timmMain.LOGGER.error(String.format("Failed to find Song List file \"%s\"", songListFile.getPath()));
+            return new GetUpdatesReturn(ERROR, filesToUpdate);
+        }
+        JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
+
+        // iterate through all songs
+        JsonObject songList = obj.get("songs").getAsJsonObject();
+        for (Map.Entry<String, JsonElement> entry : songList.entrySet()) {
             // each key will be a song id string and the value associated will be a song JSON object
             JsonObject song = entry.getValue().getAsJsonObject();
-            // check if song is a serverFile
+            // check if song is a file
             boolean isFile = song.get("is_file?").getAsBoolean();
             if (!isFile) {
                 continue;
             }
 
-            // check if serverFile exists
+            // check if file exists
             String fileName = song.get("file/id").getAsString();
-            String path = String.format("%s/music/TIMM/%s", FabricLoader.getInstance().getGameDir(), fileName);
-            File f = new File(path);
-            if (f.isFile()) {
+            File fileToCheck = new File(configManager.timmMusicDir, fileName);
+            if (fileToCheck.isFile()) {
                 continue;
             }
-
-            if (modConfig.debugLogging) {
-                timmMain.LOGGER.info(String.format("%s not found, downloading now...", fileName));
-            }
-            downloadFile(fileName, f, bucket, client);
+            filesToUpdate.add(fileToCheck);
         }
+
+        return new GetUpdatesReturn(SUCCESS, filesToUpdate);
     }
 
 
-    public static ArrayList<String> getDiffs(String bucketName, AmazonS3Client client) {
+    public static GetUpdatesReturn getDiffs(File localSongsFile, File serverSongsFile, String bucketName, AmazonS3Client client) {
+        HashSet<File> filesToUpdate = new HashSet<>();
         // get list of all songs that need to update
 
-        // get client-side song list
+        // read local song list
         String json;
-        String filePath = String.format("%s/music/TIMM/songList.json", FabricLoader.getInstance().getGameDir());
         try {
-            json = Files.readString(Path.of(filePath));
+            json = Files.readString(localSongsFile.toPath());
         } catch (IOException e) {
-            timmMain.LOGGER.warn(String.format("Error while accessing file %s", filePath), e);
-            timmMain.LOGGER.info("Attempting to download now...");
-            File songListFile = new File(String.format("%s/music/TIMM/songList.json", FabricLoader.getInstance().getGameDir()));
-            downloadFile("songList.json", songListFile, bucketName, client);
-            validateLocal(bucketName, client);
-            try {
-                json = Files.readString(Path.of(filePath));
-            } catch (IOException f) {
-                timmMain.LOGGER.error("something really bad happened", f);
-                throw new RuntimeException(f);
-            }
+            timmMain.LOGGER.warn(String.format("Failed to find local song list file \"%s\"", localSongsFile.getPath()));
+            return new GetUpdatesReturn(MISSING_CLIENT_ERROR, filesToUpdate);
         }
-        // load json serverFile into JsonObject
+        // load local song list into JsonObject
         JsonObject localObj = JsonParser.parseString(json).getAsJsonObject();
 
-
         // get server-side song list
-        File serverSongListFile = new File(String.format("%s/music/TIMM/serverSongList.json", FabricLoader.getInstance().getGameDir()));
-        downloadFile("songList.json", serverSongListFile, bucketName, client);
-        // load json
-        filePath = String.format("%s/music/TIMM/serverSongList.json", FabricLoader.getInstance().getGameDir());
         try {
-            json = Files.readString(Path.of(filePath));
+            json = Files.readString(serverSongsFile.toPath());
         } catch (IOException e) {
             timmMain.LOGGER.error("Error while accessing server side song list", e);
-            throw new RuntimeException(e);
+            return new GetUpdatesReturn(MISSING_SERVER_ERROR, filesToUpdate);
         }
         // load json serverFile into JsonObject
         JsonObject serverObj = JsonParser.parseString(json).getAsJsonObject();
 
 
-        ArrayList<String> filesToUpdate = new ArrayList<>();
+        int serverVersion;
+        int localVersion;
 
-        int serverVersion = serverObj.get("version").getAsInt();
-        int localVersion = localObj.get("version").getAsInt();
+        JsonObject serverSongsObj = serverObj.get("songs").getAsJsonObject();
+        JsonObject localSongsObj = localObj.get("songs").getAsJsonObject();
 
-        if (serverVersion > localVersion) {
-            filesToUpdate.add("songList.json");
-        }
-
-        serverObj = serverObj.get("songs").getAsJsonObject();
-        Set<Map.Entry<String, JsonElement>> serverSongs = serverObj.entrySet();
-        localObj = localObj.get("songs").getAsJsonObject();
-        Set<Map.Entry<String, JsonElement>> temp = localObj.entrySet();
+        Set<Map.Entry<String, JsonElement>> serverSongs = serverSongsObj.entrySet();
+        Set<Map.Entry<String, JsonElement>> temp = localSongsObj.entrySet();
         // convert set of map entries to hashmap
         HashMap<String, JsonElement> localSongs = new HashMap<>();
         for (Map.Entry<String, JsonElement> entry : temp) {
             localSongs.put(entry.getKey(), entry.getValue());
         }
 
-        // iterate through all key pairs
+        // iterate through all server key pairs
         for (Map.Entry<String, JsonElement> serverEntry : serverSongs) {
             String key = serverEntry.getKey();
             JsonObject serverSong = serverEntry.getValue().getAsJsonObject();
             JsonObject localSong = localSongs.get(key).getAsJsonObject();
 
             if (localSong == null) {
-                if (serverSong.get("is_file?").getAsBoolean()) {
-                    filesToUpdate.add(serverSong.get("file/id").getAsString());
+                if (!serverSong.get("is_file?").getAsBoolean()) {
+                    continue;
                 }
+                filesToUpdate.add(new File(serverSong.get("file/id").getAsString()));
             } else {
                 serverVersion = serverSong.get("revision").getAsInt();
                 localVersion = localSong.get("revision").getAsInt();
 
-                if (serverVersion > localVersion) {
-                    if (serverSong.get("is_file?").getAsBoolean()) {
-                        filesToUpdate.add(serverSong.get("file/id").getAsString());
-                    }
+                if (serverVersion <= localVersion && !serverSong.get("is_file?").getAsBoolean()) {
+                    continue;
                 }
+                filesToUpdate.add(new File(serverSong.get("file/id").getAsString()));
+
             }
         }
 
-        return filesToUpdate;
+        serverVersion = serverObj.get("version").getAsInt();
+        localVersion = localObj.get("version").getAsInt();
+
+        if (serverVersion > localVersion) {
+            filesToUpdate.add(localSongsFile);
+        }
+
+        return new GetUpdatesReturn(SUCCESS, filesToUpdate);
     }
 
 

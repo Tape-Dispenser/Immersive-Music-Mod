@@ -14,8 +14,6 @@ public class resetButton extends ButtonWidget {
 
         super(0, 0, 0, 0, Text.translatable("timm.config.reset.text"), button -> screen.resetConfig(), ButtonWidget.DEFAULT_NARRATION_SUPPLIER);
 
-
-
         this.height = ButtonWidget.DEFAULT_HEIGHT;
         this.width = ButtonWidget.DEFAULT_WIDTH_SMALL;
 

@@ -46,7 +46,7 @@ public class ClientTickMixin {
 			if (modConfig.debugLogging) {
 				Song x = songControls.nowPlaying();
 				if (x != null) {
-					LOGGER.info("now playing : ".concat(x.getSongName()));
+					LOGGER.info(String.format("now playing : %s (%s)", x.getSongName(), x.getPathOrId()));
 				} else {
 					LOGGER.warn("failed to pick song!");
 				}

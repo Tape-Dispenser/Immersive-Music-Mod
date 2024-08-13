@@ -65,8 +65,9 @@ public class biomePlaylists {
 
     public static @NotNull ArrayList<Song> getPlaylist(String name) {
         ArrayList<Song> songs = new ArrayList<>();
-        ArrayList<String> ids = new ArrayList<>(playlists.get(name));
-        if (ids.isEmpty()) {
+        Set<String> ids = playlists.get(name);
+
+        if (ids == null || ids.isEmpty()) {
             return songs;
         }
         for (String songId : ids) {
