@@ -29,6 +29,7 @@ public class awsHelper {
     public static final int SUCCESS = 0;
     public static final int MISSING_CLIENT_ERROR = -1;
     public static final int MISSING_SERVER_ERROR = -2;
+    public static final int UNKNOWN_ERROR = -255; // what the fuck how did you do this pls god no
 
     public static void downloadFile(String serverFile, File dest, String bucketName, AmazonS3Client client) {
         if (modConfig.debugLogging) {

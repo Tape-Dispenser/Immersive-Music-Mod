@@ -87,7 +87,8 @@ public class getSongs {
                 filesToUpdate.addAll(updatesReturnObj.filesToUpdate());
                 break;
             default:
-                return new GetUpdatesReturn(-255, null);
+                // THIS SHOULD NOT HAPPEN!!!! IF THIS HAPPENS, IT'S ENTIRELY YOUR FAULT!!!! FIX YOUR FUCKING CODE!!!!!!
+                return new GetUpdatesReturn(awsHelper.UNKNOWN_ERROR, null);
         }
 
         return new GetUpdatesReturn(awsHelper.SUCCESS, filesToUpdate);
@@ -96,7 +97,6 @@ public class getSongs {
     public static void update() {
 
         /*
-        // TODO: Rewrite getDiffs() and validateLocal()
 
         List<String> filesToUpdate = awsHelper.getDiffs(bucketName, client);
         awsHelper.validateLocal(bucketName, client);
