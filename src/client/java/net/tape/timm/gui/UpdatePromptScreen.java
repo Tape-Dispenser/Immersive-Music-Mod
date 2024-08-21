@@ -83,6 +83,9 @@ public class UpdatePromptScreen extends Screen {
         for (File file : updates.filesToUpdate()) {
             timmMain.LOGGER.info(String.format("Song \"%s\" needs to update", file.getPath()));
         }
+
+        // somehow push this data to the next screen, or redraw the screen with new content (pls dont do that)
+
         this.close();
     }
 }
