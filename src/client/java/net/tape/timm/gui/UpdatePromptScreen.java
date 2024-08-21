@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.tape.timm.aws.GetUpdatesReturn;
 import net.tape.timm.aws.getSongs;
-import net.tape.timm.gui.widget.AcceptButton;
+import net.tape.timm.gui.widget.SimpleButton;
 import net.tape.timm.timmMain;
 
 import java.io.File;
@@ -36,14 +36,30 @@ public class UpdatePromptScreen extends Screen {
 
     @Override
     public void init() {
-        addDrawableChild(new AcceptButton(this));
+        addDrawableChild(new SimpleButton(
+                this,
+                button -> acceptButtonClick(),
+                "timm.update.accept.text",
+                "timm.update.accept.tooltip",
+                10,
+                -10
+        ));
+
+        addDrawableChild(new SimpleButton(
+                this,
+                button -> this.close(),
+                "timm.update.decline.text",
+                "timm.update.decline.tooltip",
+                -10,
+                -10
+        ));
     }
 
     @Override
     public void render(DrawContext ctx, int mouseX, int mouseY, float delta) {
+        this.renderBackgroundTexture(ctx);
         super.render(ctx, mouseX, mouseY, delta);
 
-        this.renderBackgroundTexture(ctx);
         ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.message"), 10, 30, this.width - 10, txtcol);
     }
 
@@ -55,6 +71,11 @@ public class UpdatePromptScreen extends Screen {
     public void acceptButtonClick() {
         getSongs.initS3Client();
         GetUpdatesReturn updates = getSongs.checkForUpdates();
+        if (updates == null) {
+            timmMain.LOGGER.warn("Unknown error occurred while attempting to check for song updates!");
+            this.close();
+            return;
+        }
         if (updates.filesToUpdate() == null) {
             this.close();
             return;

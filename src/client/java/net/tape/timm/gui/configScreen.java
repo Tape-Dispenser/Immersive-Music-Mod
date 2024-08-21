@@ -7,9 +7,8 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.text.Text;
 import net.tape.timm.configManager;
-import net.tape.timm.gui.widget.closeButton;
+import net.tape.timm.gui.widget.SimpleButton;
 import net.tape.timm.gui.widget.configSlider;
-import net.tape.timm.gui.widget.resetButton;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 import net.tape.timm.util.math;
@@ -34,13 +33,10 @@ public class configScreen extends Screen {
     @Override
     public void init() {
 
-
         menuMinSlider = new configSlider(width/2,30,150,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
         menuMaxSlider = new configSlider(width/2,50,150,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
         songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minGameDelay / modConfig.maxGameDelay, modConfig.minGameDelay, this::updateGameMin);
         songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxGameDelay / (36000-modConfig.minGameDelay), modConfig.maxGameDelay, this::updateGameMax);
-
-
 
         debugLogs = CheckboxWidget.builder(Text.literal(""), mc.textRenderer)
                 .checked(modConfig.debugLogging)
@@ -50,8 +46,23 @@ public class configScreen extends Screen {
 
         addDrawableChild(debugLogs);
 
-        addDrawableChild(new closeButton(this)); // TODO: either remove the class for these or merge them
-        addDrawableChild(new resetButton(this));
+        addDrawableChild(new SimpleButton(
+                this,
+                button -> this.close(),
+                "timm.config.close.text",
+                "timm.config.close.tooltip",
+                -10,
+                -10
+        ));
+
+        addDrawableChild(new SimpleButton(
+                this,
+                button -> resetConfig(),
+                "timm.config.reset.text",
+                "timm.config.reset.tooltip",
+                10,
+                -10
+        ));
 
         addDrawableChild(menuMinSlider);
         addDrawableChild(menuMaxSlider);
@@ -62,18 +73,14 @@ public class configScreen extends Screen {
 
     @Override
     public void render(DrawContext ctx, int mouseX, int mouseY, float delta) {
+        this.renderBackgroundTexture(ctx);
         super.render(ctx, mouseX, mouseY, delta);
-
-
 
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.menuMin.text"), 10, 30, txtcol, false);
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.menuMax.text"), 10, 50, txtcol, false);
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol, false);
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol, false);
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol, false);
-
-
-
 
     }
 
@@ -99,8 +106,6 @@ public class configScreen extends Screen {
         modConfig.configMap.replace("debug", checkString);
         configManager.update_cfg(modConfig.configMap);
     }
-
-
 
     private long updateMenuMin(double value) {
         long realVal = math.lerp(1, modConfig.maxMenuDelay, value);

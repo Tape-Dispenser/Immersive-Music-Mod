@@ -6,10 +6,8 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.minecraft.client.MinecraftClient;
 
 
-import net.tape.timm.audio.AudioManager;
 import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.audio.biomePlaylists;
-import net.tape.timm.aws.getSongs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,9 +65,6 @@ public class timmMain implements ClientModInitializer {
 
 
 
-
-		LOGGER.info("Starting OpenAL...");
-		AudioManager.init();
 
 
 		LOGGER.info("TIMM successfully initialized.");

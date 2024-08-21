@@ -35,8 +35,10 @@
 
   "timm.update.text": "Update Menu",
   "timm.update.message": "NOTE: In order to get The Immersive Music Mod's songs and check for updates, the mod must connect to an external AWS server. If you click accept, the mod will check for updates, then you will be prompted on whether or not you wish to install any files. If you decline, the mod may not work as intended.",
-  "timm.update.accept": "Accept",
-  "timm.update.decline": "Decline",
+  "timm.update.accept.text": "Accept",
+  "timm.update.accept.tooltip": "Check AWS Server for TIMM Song updates.",
+  "timm.update.decline.text": "Decline",
+  "timm.update.decline.tooltip": "Proceed to Main Menu without checking for updates.",
 
   "timm.": ""
 }
