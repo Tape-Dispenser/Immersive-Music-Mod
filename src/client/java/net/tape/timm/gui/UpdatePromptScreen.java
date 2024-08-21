@@ -85,7 +85,7 @@ public class UpdatePromptScreen extends Screen{
         if (!accepted) {
             ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.message"), 10, 30, this.width - 10, txtcol);
         } else {
-            ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.waiting"), 10, 30, this.width - 10, txtcol);
+            ctx.drawCenteredTextWithShadow(mc.textRenderer, Text.translatable("timm.update.waiting"), this.width/2, 30, txtcol);
             if (!updateChecker.isAlive()) {
                 timmMain.LOGGER.info("Check for updates Successful");
                 // set screen to update confirm screen
