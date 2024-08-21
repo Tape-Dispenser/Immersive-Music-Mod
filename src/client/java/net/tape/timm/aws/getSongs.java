@@ -23,6 +23,8 @@ public class getSongs {
     static final Region region = Region.getRegion(Regions.US_EAST_2);
     static AmazonS3Client client;
 
+    public static GetUpdatesReturn updates = null;
+
     public static void initS3Client() {
         client = (AmazonS3Client) AmazonS3ClientBuilder
                 .standard()

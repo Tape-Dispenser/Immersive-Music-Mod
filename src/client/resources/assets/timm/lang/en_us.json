@@ -39,6 +39,9 @@
   "timm.update.accept.tooltip": "Check AWS Server for TIMM Song updates.",
   "timm.update.decline.text": "Decline",
   "timm.update.decline.tooltip": "Proceed to Main Menu without checking for updates.",
+  "timm.update.cancel.text": "Cancel",
+  "timm.update.cancel.tooltip": "Cancel check for updates",
+  "timm.update.waiting": "Checking for updates...",
 
   "timm.": ""
 }

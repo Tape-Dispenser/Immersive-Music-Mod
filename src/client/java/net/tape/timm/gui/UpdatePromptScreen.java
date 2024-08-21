@@ -5,7 +5,9 @@ import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
+import net.tape.timm.aws.CheckUpdates;
 import net.tape.timm.aws.GetUpdatesReturn;
 import net.tape.timm.aws.getSongs;
 import net.tape.timm.gui.widget.SimpleButton;
@@ -15,7 +17,7 @@ import java.io.File;
 
 import static net.tape.timm.timmMain.mc;
 
-public class UpdatePromptScreen extends Screen {
+public class UpdatePromptScreen extends Screen{
     public UpdatePromptScreen(Screen parent) {
         super(Text.translatable("timm.update.text"));
         this.parent = parent;
@@ -23,6 +25,14 @@ public class UpdatePromptScreen extends Screen {
 
     int txtcol = 0xffffff;
     private final Screen parent;
+
+    private boolean accepted = false;
+
+    private SimpleButton acceptButton;
+    private SimpleButton declineButton;
+    private SimpleButton cancelButton;
+
+    private CheckUpdates updateChecker = new CheckUpdates();
 
     @Override
     public boolean shouldPause() {
@@ -36,23 +46,35 @@ public class UpdatePromptScreen extends Screen {
 
     @Override
     public void init() {
-        addDrawableChild(new SimpleButton(
+
+        acceptButton = new SimpleButton(
                 this,
                 button -> acceptButtonClick(),
                 "timm.update.accept.text",
                 "timm.update.accept.tooltip",
                 10,
                 -10
-        ));
+        );
+        addDrawableChild(acceptButton);
 
-        addDrawableChild(new SimpleButton(
+        declineButton = new SimpleButton(
                 this,
                 button -> this.close(),
                 "timm.update.decline.text",
                 "timm.update.decline.tooltip",
                 -10,
                 -10
-        ));
+        );
+        addDrawableChild(declineButton);
+
+        cancelButton = new SimpleButton(
+                this,
+                button -> cancelButtonClick(),
+                "timm.update.cancel.text",
+                "timm.update.cancel.tooltip",
+                this.width / 2 - (ButtonWidget.DEFAULT_WIDTH_SMALL / 2),
+                -10
+        );
     }
 
     @Override
@@ -60,7 +82,18 @@ public class UpdatePromptScreen extends Screen {
         this.renderBackgroundTexture(ctx);
         super.render(ctx, mouseX, mouseY, delta);
 
-        ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.message"), 10, 30, this.width - 10, txtcol);
+        if (!accepted) {
+            ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.message"), 10, 30, this.width - 10, txtcol);
+        } else {
+            ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.waiting"), 10, 30, this.width - 10, txtcol);
+            if (!updateChecker.isAlive()) {
+                timmMain.LOGGER.info("Check for updates Successful");
+                // set screen to update confirm screen
+                this.close();
+            }
+        }
+
+
     }
 
     @Override
@@ -69,23 +102,18 @@ public class UpdatePromptScreen extends Screen {
     }
 
     public void acceptButtonClick() {
-        getSongs.initS3Client();
-        GetUpdatesReturn updates = getSongs.checkForUpdates();
-        if (updates == null) {
-            timmMain.LOGGER.warn("Unknown error occurred while attempting to check for song updates!");
-            this.close();
-            return;
-        }
-        if (updates.filesToUpdate() == null) {
-            this.close();
-            return;
-        }
-        for (File file : updates.filesToUpdate()) {
-            timmMain.LOGGER.info(String.format("Song \"%s\" needs to update", file.getPath()));
-        }
+        updateChecker.start();
+        accepted = true;
+        remove(acceptButton);
+        remove(declineButton);
+        addDrawableChild(cancelButton);
+    }
 
-        // somehow push this data to the next screen, or redraw the screen with new content (pls dont do that)
-
-        this.close();
+    public void cancelButtonClick() {
+        if (updateChecker.isAlive()) {
+            updateChecker.interrupt();
+            updateChecker.getUncaughtExceptionHandler();
+            this.close();
+        }
     }
 }
