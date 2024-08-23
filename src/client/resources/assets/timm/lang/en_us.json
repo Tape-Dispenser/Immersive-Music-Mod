@@ -42,6 +42,8 @@
   "timm.update.cancel.text": "Cancel",
   "timm.update.cancel.tooltip": "Cancel check for updates",
   "timm.update.waiting": "Checking for updates...",
+  "timm.update.alwaysUpdate.text": " Always check for updates?",
+  "timm.update.alwaysUpdate.tooltip": "Automatically check for updates when the mod starts.",
 
   "timm.": ""
 }

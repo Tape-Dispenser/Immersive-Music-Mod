@@ -20,6 +20,8 @@ public class modConfig {
     public static boolean singlePlaylist;
     public static boolean mixBaseDefault;
     public static boolean superflatMode;
+    public static boolean alwaysCheckUpdates;
+    public static boolean alwaysGetUpdates;
 
     public static void init() {
         // menu delays
@@ -31,12 +33,35 @@ public class modConfig {
         defaultConfig.put("gameMaxDelay", "12000");
 
         defaultConfig.put("debug", "false");
+
+        // song selection
         defaultConfig.put("singlePlaylist", "false");
         defaultConfig.put("mixBaseDefault", "true");
         defaultConfig.put("superflatMode", "false");
+
+        // updating
+        defaultConfig.put("alwaysCheckUpdates", "false");
+        defaultConfig.put("alwaysGetUpdates", "false");
     }
 
     public static void copyVals() {
+
+        // verify all config values are in the config map
+        boolean allExist = true;
+        for (Map.Entry<String, String> defaultEntry : defaultConfig.entrySet()) {
+            String key = defaultEntry.getKey();
+            String val = configMap.get(key);
+            if (val != null) {
+                continue;
+            }
+            allExist = false;
+            configMap.put(key, defaultEntry.getValue());
+        }
+        if (!allExist) {
+            configManager.update_cfg(configMap);
+        }
+
+        // copy values from config map to mod config
         minGameDelay = Integer.parseInt(configMap.get("gameMinDelay"));
         maxGameDelay = Integer.parseInt(configMap.get("gameMaxDelay"));
 
@@ -47,5 +72,8 @@ public class modConfig {
         singlePlaylist = parseBoolean(configMap.get("singlePlaylist"));
         mixBaseDefault = parseBoolean(configMap.get("mixBaseDefault"));
         superflatMode = parseBoolean(configMap.get("superflatMode"));
+
+        alwaysCheckUpdates = parseBoolean(configMap.get("alwaysCheckUpdates"));
+        alwaysGetUpdates = parseBoolean(configMap.get("alwaysGetUpdates"));
     }
 }

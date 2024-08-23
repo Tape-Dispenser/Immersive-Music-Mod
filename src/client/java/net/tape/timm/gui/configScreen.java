@@ -25,7 +25,7 @@ public class configScreen extends Screen {
     int txtcol = 0xffffff;
     private final Screen parent;
 
-    public CheckboxWidget debugLogs;
+    CheckboxWidget debugLogs, alwaysCheckUpdates, alwaysGetUpdates;
     configSlider menuMinSlider, menuMaxSlider, songMinSlider, songMaxSlider;
 
 

@@ -1,19 +1,16 @@
 package net.tape.timm.gui;
 
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.text.Text;
 import net.tape.timm.aws.CheckUpdates;
-import net.tape.timm.aws.GetUpdatesReturn;
-import net.tape.timm.aws.getSongs;
+import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.SimpleButton;
+import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
-
-import java.io.File;
 
 import static net.tape.timm.timmMain.mc;
 
@@ -32,7 +29,9 @@ public class UpdatePromptScreen extends Screen{
     private SimpleButton declineButton;
     private SimpleButton cancelButton;
 
-    private CheckUpdates updateChecker = new CheckUpdates();
+    private CheckboxWidget alwaysUpdate;
+
+    private final CheckUpdates updateChecker = new CheckUpdates();
 
     @Override
     public boolean shouldPause() {
@@ -46,6 +45,17 @@ public class UpdatePromptScreen extends Screen{
 
     @Override
     public void init() {
+
+        alwaysUpdate = CheckboxWidget.builder(Text.translatable("timm.update.alwaysUpdate.text"), mc.textRenderer)
+                .checked(modConfig.alwaysCheckUpdates)
+                .callback((checkbox, checked) -> setAlwaysCheckUpdates(checked))
+                .tooltip(Tooltip.of(Text.translatable("timm.update.alwaysUpdate.tooltip")))
+                .build();
+        alwaysUpdate.setPosition(10, this.height - 60);
+        alwaysUpdate.visible = true;
+        alwaysUpdate.setAlpha(1.0f);
+
+        addDrawableChild(alwaysUpdate);
 
         acceptButton = new SimpleButton(
                 this,
@@ -106,6 +116,7 @@ public class UpdatePromptScreen extends Screen{
         accepted = true;
         remove(acceptButton);
         remove(declineButton);
+        remove(alwaysUpdate);
         addDrawableChild(cancelButton);
     }
 
@@ -115,5 +126,12 @@ public class UpdatePromptScreen extends Screen{
             updateChecker.getUncaughtExceptionHandler();
             this.close();
         }
+    }
+
+    private void setAlwaysCheckUpdates(boolean check) {
+        modConfig.alwaysCheckUpdates = check;
+        String checkString = String.valueOf(check);
+        modConfig.configMap.replace("alwaysCheckUpdates", checkString);
+        configManager.update_cfg(modConfig.configMap);
     }
 }
