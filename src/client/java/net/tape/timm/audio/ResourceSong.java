@@ -26,7 +26,7 @@ public class ResourceSong extends Song{
      * @param author can be any string and is only used in printing info
      */
     public ResourceSong(String id, String songName, String author) {
-        super(id, songName, author);
+        super(id, songName, author, false);
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.io.*;
 public class FileSong extends Song {
 
     public FileSong(String filePath, String songName, String author) {
-        super(filePath, songName, author);
+        super(filePath, songName, author, true);
     }
 
     @Override
