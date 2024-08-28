@@ -19,16 +19,16 @@
   "timm.config.reset.tooltip": "Reset config to defaults",
 
   "timm.config.songMin.text": "Minimum Game Song Delay",
-  "timm.config.songMin.slider": "Minimum: %d",
+  "timm.config.songMin.slider": "Min: %s",
 
   "timm.config.songMax.text": "Maximum Game Song Delay",
-  "timm.config.songMax.slider": "Maximum: %d",
+  "timm.config.songMax.slider": "Max: %s",
 
   "timm.config.menuMin.text": "Minimum Menu Song Delay",
-  "timm.config.menuMin.slider": "Minimum: %d",
+  "timm.config.menuMin.slider": "Min: %s",
 
   "timm.config.menuMax.text": "Maximum Menu Song Delay",
-  "timm.config.menuMax.slider": "Maximum: %d",
+  "timm.config.menuMax.slider": "Max: %s",
 
   "timm.config.debug.text": "Enable Debug Logs",
 

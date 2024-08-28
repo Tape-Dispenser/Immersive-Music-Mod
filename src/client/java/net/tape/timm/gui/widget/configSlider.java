@@ -10,14 +10,16 @@ import net.tape.timm.timmMain;
 import net.tape.timm.util.math;
 
 public class configSlider extends SliderWidget {
-    public configSlider(int x, int y, int w, int h, String key, double val, long real, ReleaseAction callback) {
+    public configSlider(int x, int y, int w, int h, String key, double val, String real, ReleaseAction callback, MakeReadable callback1) {
         super(x, y, w, h, Text.stringifiedTranslatable(key, real), val);
-        this.lambda = callback;
+        this.releaseLambda = callback;
+        this.readableLamda = callback1;
         this.translationKey = key;
 
     }
 
-    final protected ReleaseAction lambda;
+    final protected ReleaseAction releaseLambda;
+    final protected MakeReadable readableLamda;
     private long ticks;
     final private String translationKey;
 
@@ -30,7 +32,8 @@ public class configSlider extends SliderWidget {
 
     @Override
     protected void updateMessage() {
-        this.setMessage(Text.stringifiedTranslatable(translationKey, this.ticks));
+        String readableValue = this.readableLamda.makeReadable(this.ticks);
+        this.setMessage(Text.stringifiedTranslatable(translationKey, readableValue));
     }
 
     @Override
@@ -49,11 +52,16 @@ public class configSlider extends SliderWidget {
     @Override
     protected void applyValue() {
         // value translation is done in configScreen
-        this.ticks = this.lambda.onRelease(this.value);
+        this.ticks = this.releaseLambda.onRelease(this.value);
     }
 
     @Environment(value= EnvType.CLIENT)
-    public static interface ReleaseAction {
-        public long onRelease(double value);
+    public interface ReleaseAction {
+        long onRelease(double value);
+    }
+
+    @Environment(value = EnvType.CLIENT)
+    public interface MakeReadable {
+        String makeReadable(long value);
     }
 }

@@ -10,8 +10,8 @@ import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.SimpleButton;
 import net.tape.timm.gui.widget.configSlider;
 import net.tape.timm.modConfig;
-import net.tape.timm.timmMain;
 import net.tape.timm.util.math;
+import java.math.RoundingMode;
 
 import static net.tape.timm.timmMain.mc;
 
@@ -33,10 +33,50 @@ public class configScreen extends Screen {
     @Override
     public void init() {
 
-        menuMinSlider = new configSlider(width/2,30,150,20, "timm.config.menuMin.slider", (double) modConfig.minMenuDelay / modConfig.maxMenuDelay, modConfig.minMenuDelay, this::updateMenuMin);
-        menuMaxSlider = new configSlider(width/2,50,150,20, "timm.config.menuMax.slider",(double) modConfig.maxMenuDelay / (36000-modConfig.minMenuDelay), modConfig.maxMenuDelay, this::updateMenuMax);
-        songMinSlider = new configSlider(width/2,80,150,20, "timm.config.songMin.slider",(double) modConfig.minGameDelay / modConfig.maxGameDelay, modConfig.minGameDelay, this::updateGameMin);
-        songMaxSlider = new configSlider(width/2,100,150,20, "timm.config.songMax.slider",(double) modConfig.maxGameDelay / (36000-modConfig.minGameDelay), modConfig.maxGameDelay, this::updateGameMax);
+        menuMinSlider = new configSlider(
+                width/2,
+                30,
+                150,
+                20,
+                "timm.config.menuMin.slider",
+                math.invLerp(1, 36000, modConfig.minMenuDelay),
+                makeTicksReadable(modConfig.minMenuDelay),
+                this::updateMenuMin,
+                this::makeTicksReadable
+        );
+        menuMaxSlider = new configSlider(
+                width/2,
+                50,
+                150,
+                20,
+                "timm.config.menuMax.slider",
+                math.invLerp(1, 36000, modConfig.maxMenuDelay),
+                makeTicksReadable(modConfig.maxMenuDelay),
+                this::updateMenuMax,
+                this::makeTicksReadable
+        );
+        songMinSlider = new configSlider(
+                width/2,
+                80,
+                150,
+                20,
+                "timm.config.songMin.slider",
+                math.invLerp(1, 36000, modConfig.minGameDelay),
+                makeTicksReadable(modConfig.minGameDelay),
+                this::updateGameMin,
+                this::makeTicksReadable
+        );
+        songMaxSlider = new configSlider(
+                width/2,
+                100,
+                150,
+                20,
+                "timm.config.songMax.slider",
+                math.invLerp(1, 36000, modConfig.maxGameDelay),
+                makeTicksReadable(modConfig.maxGameDelay),
+                this::updateGameMax,
+                this::makeTicksReadable
+        );
 
         debugLogs = CheckboxWidget.builder(Text.literal(""), mc.textRenderer)
                 .checked(modConfig.debugLogging)
@@ -108,40 +148,49 @@ public class configScreen extends Screen {
     }
 
     private long updateMenuMin(double value) {
-        long realVal = math.lerp(1, modConfig.maxMenuDelay, value);
-        String valString = String.valueOf(realVal);
-        modConfig.minMenuDelay = realVal;
+        long tickVal = math.lerp(1, 36000, value);
+        String valString = String.valueOf(tickVal);
+        modConfig.minMenuDelay = tickVal;
         modConfig.configMap.replace("menuMinDelay", valString);
         configManager.update_cfg(modConfig.configMap);
 
-        return realVal;
+        return tickVal;
     }
 
     private long updateMenuMax(double value) {
-        long realVal = math.lerp(modConfig.minMenuDelay, 36000, value);
-        String valString = String.valueOf(realVal);
-        modConfig.maxMenuDelay = realVal;
+        long tickVal = math.lerp(1, 36000, value);
+        String valString = String.valueOf(tickVal);
+        modConfig.maxMenuDelay = tickVal;
         modConfig.configMap.replace("menuMaxDelay", valString);
         configManager.update_cfg(modConfig.configMap);
-        return realVal;
+        return tickVal;
     }
 
     private long updateGameMin(double value) {
-        long realVal = math.lerp(1, modConfig.maxGameDelay, value);
-        String valString = String.valueOf(realVal);
-        modConfig.minGameDelay = realVal;
+        long tickVal = math.lerp(1, 36000, value);
+        String valString = String.valueOf(tickVal);
+        modConfig.minGameDelay = tickVal;
         modConfig.configMap.replace("gameMinDelay", valString);
         configManager.update_cfg(modConfig.configMap);
-        return realVal;
+        return tickVal;
     }
 
     private long updateGameMax(double value) {
-        long realVal = math.lerp(modConfig.minGameDelay, 36000, value);
-        String valString = String.valueOf(realVal);
-        modConfig.maxGameDelay = realVal;
+        long tickVal = math.lerp(1, 36000, value);
+        String valString = String.valueOf(tickVal);
+        modConfig.maxGameDelay = tickVal;
         modConfig.configMap.replace("gameMaxDelay", valString);
         configManager.update_cfg(modConfig.configMap);
-        return realVal;
+        return tickVal;
+    }
+
+    private String makeTicksReadable(long ticks) {
+        int seconds = Math.round((float) ticks / 20);
+        if (seconds < 60) {
+            return String.format("%d Seconds", seconds);
+        }
+        int minutes = seconds / 60;
+        return String.format("%d Mins, %d Secs", minutes, seconds - minutes * 60);
     }
 
 }

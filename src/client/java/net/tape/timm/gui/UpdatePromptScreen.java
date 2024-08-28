@@ -31,7 +31,7 @@ public class UpdatePromptScreen extends Screen{
 
     private CheckboxWidget alwaysUpdate;
 
-    private final CheckUpdates updateChecker = new CheckUpdates();
+    private CheckUpdates updateChecker;
 
     @Override
     public boolean shouldPause() {
@@ -45,6 +45,7 @@ public class UpdatePromptScreen extends Screen{
 
     @Override
     public void init() {
+        updateChecker = new CheckUpdates();
 
         alwaysUpdate = CheckboxWidget.builder(Text.translatable("timm.update.alwaysUpdate.text"), mc.textRenderer)
                 .checked(modConfig.alwaysCheckUpdates)
@@ -85,6 +86,10 @@ public class UpdatePromptScreen extends Screen{
                 this.width / 2 - (ButtonWidget.DEFAULT_WIDTH_SMALL / 2),
                 -10
         );
+
+        if (modConfig.alwaysCheckUpdates) {
+            acceptButtonClick();
+        }
     }
 
     @Override
@@ -95,15 +100,13 @@ public class UpdatePromptScreen extends Screen{
         if (!accepted) {
             ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.message"), 10, 30, this.width - 10, txtcol);
         } else {
-            ctx.drawCenteredTextWithShadow(mc.textRenderer, Text.translatable("timm.update.waiting"), this.width/2, 30, txtcol);
+            ctx.drawCenteredTextWithShadow(mc.textRenderer, Text.translatable("timm.update.waiting"), this.width/2, 50, txtcol);
             if (!updateChecker.isAlive()) {
                 timmMain.LOGGER.info("Check for updates Successful");
                 // set screen to update confirm screen
                 this.close();
             }
         }
-
-
     }
 
     @Override
