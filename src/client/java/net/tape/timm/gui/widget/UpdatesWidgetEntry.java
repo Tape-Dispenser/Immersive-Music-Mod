@@ -1,4 +1,4 @@
-/*
+
 package net.tape.timm.gui.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -79,4 +79,3 @@ public class UpdatesWidgetEntry extends AlwaysSelectedEntryListWidget.Entry<Upda
         return this.updateEntry;
     }
 }
-*/
