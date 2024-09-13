@@ -23,6 +23,28 @@ public class SongRegistry {
 
     public static Map<String, Song> songList = new HashMap<>();
 
+    public static JsonObject getSongList() {
+        String json;
+        File songListPath = new File(configManager.timmMusicDir, "songList.json");
+
+        try {
+            json = Files.readString(songListPath.toPath());
+        } catch (IOException e) {
+            timmMain.LOGGER.warn(String.format("Error while parsing JSON file: Failed to find file %s!", songListPath.getPath()));
+            return null;
+        }
+
+        // load json file into JsonObject
+        JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
+
+        JsonElement tmp = obj.get("songs");
+        if (tmp == null) {
+            timmMain.LOGGER.error("Error: songList.json is missing songs object!");
+            return null;
+        }
+        return tmp.getAsJsonObject();
+    }
+
     public static void init() {
         // open songList.json
         String json;

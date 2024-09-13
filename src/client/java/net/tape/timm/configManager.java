@@ -134,4 +134,5 @@ public class configManager {
 
         update_cfg(modConfig.defaultConfig);
     }
+
 }
