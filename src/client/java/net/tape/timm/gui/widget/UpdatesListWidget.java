@@ -30,7 +30,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
     private boolean scrolling;
 
 
-    UpdatesListWidget(int width, int height, int yPos, int itemHeight, UpdatesListWidget list, UpdateConfirmScreen parent) {
+    public UpdatesListWidget(int width, int height, int yPos, int itemHeight, UpdatesListWidget list, UpdateConfirmScreen parent) {
         super(timmMain.mc, width, height, yPos, itemHeight);
         this.parent = parent;
         if (list != null) {
@@ -43,9 +43,9 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
         super.setScrollAmount(amount);
         int denominator = Math.max(0, this.getMaxPosition() - (this.getBottom() - this.getY() - 4));
         if (denominator <= 0) {
-            parent.updateScrollPercent(0);
+            //parent.updateScrollPercent(0);
         } else {
-            parent.updateScrollPercent(getScrollAmount() / Math.max(0, this.getMaxPosition() - (this.getBottom() - this.getY() - 4)));
+            //parent.updateScrollPercent(getScrollAmount() / Math.max(0, this.getMaxPosition() - (this.getBottom() - this.getY() - 4)));
         }
     }
 
@@ -66,7 +66,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
     public void setSelected(UpdatesWidgetEntry entry) {
         super.setSelected(entry);
         selectedEntry = entry.getUpdateEntry();
-        parent.updateSelectedEntry(getSelectedOrNull());
+        //parent.updateSelectedEntry(getSelectedOrNull());
     }
 
     @Override

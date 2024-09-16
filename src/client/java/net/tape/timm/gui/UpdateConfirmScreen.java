@@ -28,7 +28,10 @@ public class UpdateConfirmScreen extends Screen {
 
     int txtcol = 0xffffff;
     private final Screen parent;
+
+    // update list width
     private UpdatesListWidget updateList;
+
 
 
     @Override
@@ -111,12 +114,23 @@ public class UpdateConfirmScreen extends Screen {
     public void init() {
         if ( getSongs.updates.code() < 0 ) {
             // we had an error, bring up an error screen and cancel update process
+            this.close();
         }
 
-        for (File fileToUpdate : getSongs.updates.filesToUpdate()) {
-            // get song associated with file to make an UpdateEntry
-            Song songToUpdate = searchForSongInJSON(fileToUpdate);
-        }
+        // initialize updateList
+        this.updateList = new UpdatesListWidget(
+                this.width - 20, // update list width
+                this.height - 60, // update list height
+                50, // update list ypos (ask mojang why it doesn't take an xpos as a constructor parameter)
+                36, // update entry height
+                this.updateList,
+                this
+        );
+        this.updateList.setX(10);
+
+
+
+
 
     }
 
