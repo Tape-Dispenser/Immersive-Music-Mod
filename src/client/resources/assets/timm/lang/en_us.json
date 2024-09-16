@@ -1,49 +1,41 @@
 {
   "timm.commands.foo": "foo command returned %s",
-
   "timm.commands.nowPlaying.song": "Now Playing: %s",
   "timm.commands.nowPlaying.null": "Not playing any song!",
-
   "timm.commands.stop": "Stopped playback.",
-
   "timm.commands.skip.success": "Skipped to %s",
   "timm.commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
 
 
   "timm.config.text": "Config Menu",
-
   "timm.config.close.text": "Close",
   "timm.config.close.tooltip": "Close this menu.",
-
   "timm.config.reset.text": "Reset",
   "timm.config.reset.tooltip": "Reset config to defaults",
-
   "timm.config.songMin.text": "Minimum Game Song Delay",
   "timm.config.songMin.slider": "Min: %s",
-
   "timm.config.songMax.text": "Maximum Game Song Delay",
   "timm.config.songMax.slider": "Max: %s",
-
   "timm.config.menuMin.text": "Minimum Menu Song Delay",
   "timm.config.menuMin.slider": "Min: %s",
-
   "timm.config.menuMax.text": "Maximum Menu Song Delay",
   "timm.config.menuMax.slider": "Max: %s",
-
   "timm.config.debug.text": "Enable Debug Logs",
+  "timm.config.alwaysCheckUpdates.text": "Automatically Check for Updates",
+  "timm.config.alwaysGetUpdates.text": "Automatically Download Updates",
 
 
-  "timm.update.text": "Update Menu",
-  "timm.update.message": "NOTE: In order to get The Immersive Music Mod's songs and check for updates, the mod must connect to an external AWS server. If you click accept, the mod will check for updates, then you will be prompted on whether or not you wish to install any files. If you decline, the mod may not work as intended.",
-  "timm.update.accept.text": "Accept",
-  "timm.update.accept.tooltip": "Check AWS Server for TIMM Song updates.",
-  "timm.update.decline.text": "Decline",
-  "timm.update.decline.tooltip": "Proceed to Main Menu without checking for updates.",
-  "timm.update.cancel.text": "Cancel",
-  "timm.update.cancel.tooltip": "Cancel check for updates",
-  "timm.update.waiting": "Checking for updates...",
-  "timm.update.alwaysUpdate.text": " Always check for updates?",
-  "timm.update.alwaysUpdate.tooltip": "Automatically check for updates when the mod starts.",
+  "timm.update.prompt.text": "Update Menu",
+  "timm.update.prompt.message": "NOTE: In order to get The Immersive Music Mod's songs and check for updates, the mod must connect to an external AWS server. If you click accept, the mod will check for updates, then you will be prompted on whether or not you wish to install any files. If you decline, the mod may not work as intended.",
+  "timm.update.prompt.accept.text": "Accept",
+  "timm.update.prompt.accept.tooltip": "Check AWS Server for TIMM Song updates.",
+  "timm.update.prompt.decline.text": "Decline",
+  "timm.update.prompt.decline.tooltip": "Proceed to Main Menu without checking for updates.",
+  "timm.update.prompt.cancel.text": "Cancel",
+  "timm.update.prompt.cancel.tooltip": "Cancel check for updates",
+  "timm.update.prompt.waiting": "Checking for updates...",
+  "timm.update.prompt.alwaysUpdate.text": " Always check for updates?",
+  "timm.update.prompt.alwaysUpdate.tooltip": "Automatically check for updates when the mod starts.",
 
   "timm.": ""
 }

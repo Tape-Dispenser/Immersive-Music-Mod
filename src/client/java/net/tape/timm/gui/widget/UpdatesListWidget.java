@@ -3,7 +3,6 @@ package net.tape.timm.gui.widget;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.terraformersmc.modmenu.util.mod.fabric.FabricIconHandler;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
 import net.minecraft.client.render.*;
@@ -20,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidgetEntry> implements AutoCloseable {
+public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesListEntry> implements AutoCloseable {
 
     private final UpdateConfirmScreen parent;
     private List<UpdateEntry> entries = null;
@@ -43,9 +42,9 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
         super.setScrollAmount(amount);
         int denominator = Math.max(0, this.getMaxPosition() - (this.getBottom() - this.getY() - 4));
         if (denominator <= 0) {
-            //parent.updateScrollPercent(0);
+            parent.updateScrollPercent(0);
         } else {
-            //parent.updateScrollPercent(getScrollAmount() / Math.max(0, this.getMaxPosition() - (this.getBottom() - this.getY() - 4)));
+            parent.updateScrollPercent(getScrollAmount() / Math.max(0, this.getMaxPosition() - (this.getBottom() - this.getY() - 4)));
         }
     }
 
@@ -54,7 +53,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
         return parent.getFocused() == this;
     }
 
-    public void select(UpdatesWidgetEntry entry) {
+    public void select(UpdatesListEntry entry) {
         this.setSelected(entry);
         if (entry != null) {
             Song song = entry.getUpdateEntry().song();
@@ -63,20 +62,20 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
     }
 
     @Override
-    public void setSelected(UpdatesWidgetEntry entry) {
+    public void setSelected(UpdatesListEntry entry) {
         super.setSelected(entry);
         selectedEntry = entry.getUpdateEntry();
-        //parent.updateSelectedEntry(getSelectedOrNull());
+        parent.updateSelectedEntry(getSelectedOrNull());
     }
 
     @Override
     protected boolean isSelectedEntry(int index) {
-        UpdatesWidgetEntry selected = getSelectedOrNull();
+        UpdatesListEntry selected = getSelectedOrNull();
         return selected != null && selected.getUpdateEntry().equals(getEntry(index).getUpdateEntry());
     }
 
     @Override
-    public int addEntry(UpdatesWidgetEntry entry) {
+    public int addEntry(UpdatesListEntry entry) {
         if (addedEntries.contains(entry.updateEntry)) {
             return 0;
         }
@@ -89,13 +88,13 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
     }
 
     @Override
-    protected boolean removeEntry(UpdatesWidgetEntry entry) {
+    protected boolean removeEntry(UpdatesListEntry entry) {
         addedEntries.remove(entry.updateEntry);
         return super.removeEntry(entry);
     }
 
     @Override
-    protected UpdatesWidgetEntry remove(int index) {
+    protected UpdatesListEntry remove(int index) {
         addedEntries.remove(getEntry(index).updateEntry);
         return super.remove(index);
     }
@@ -116,7 +115,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
             int entryBottom = this.getRowTop(index) + this.itemHeight;
             if (entryBottom >= this.getY() && entryTop <= this.getBottom()) {
                 int entryHeight = this.itemHeight - 4;
-                UpdatesWidgetEntry entry = this.getEntry(index);
+                UpdatesListEntry entry = this.getEntry(index);
                 int rowWidth = this.getRowWidth();
                 int entryLeft;
                 if (this.isSelectedEntry(index)) {
@@ -148,7 +147,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
         }
     }
 
-    public void ensureVisible(UpdatesWidgetEntry entry) {
+    public void ensureVisible(UpdatesListEntry entry) {
         super.ensureVisible(entry);
     }
 
@@ -164,7 +163,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
         if (!this.isMouseOver(double_1, double_2)) {
             return false;
         } else {
-            UpdatesWidgetEntry entry = this.getEntryAtPos(double_1, double_2);
+            UpdatesListEntry entry = this.getEntryAtPos(double_1, double_2);
             if (entry != null) {
                 if (entry.mouseClicked(double_1, double_2, int_1)) {
                     this.setFocused(entry);
@@ -189,7 +188,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesWidg
         return false;
     }
 
-    public final UpdatesWidgetEntry getEntryAtPos(double x, double y) {
+    public final UpdatesListEntry getEntryAtPos(double x, double y) {
         int int_5 = MathHelper.floor(y - (double) this.getY()) - this.headerHeight + (int) this.getScrollAmount() - 4;
         int index = int_5 / this.itemHeight;
         return x < (double) this.getScrollbarPositionX() && x >= (double) getRowLeft() && x <= (double) (getRowLeft() + getRowWidth()) && index >= 0 && int_5 >= 0 && index < this.getEntryCount() ? this.children().get(index) : null;

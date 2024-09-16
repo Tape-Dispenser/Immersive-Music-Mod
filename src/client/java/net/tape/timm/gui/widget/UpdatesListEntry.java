@@ -11,18 +11,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Language;
 import net.minecraft.util.Util;
-import net.tape.timm.audio.Song;
 import net.tape.timm.aws.UpdateEntry;
 
-import java.io.File;
-
-public class UpdatesWidgetEntry extends AlwaysSelectedEntryListWidget.Entry<UpdatesWidgetEntry> {
+public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<UpdatesListEntry> {
     protected final MinecraftClient client;
     protected final UpdateEntry updateEntry;
     protected final UpdatesListWidget parentList;
     protected long lastClickAt;
 
-    UpdatesWidgetEntry(UpdateEntry entry, UpdatesListWidget parentList) {
+    UpdatesListEntry(UpdateEntry entry, UpdatesListWidget parentList) {
         this.updateEntry = entry;
         this.parentList = parentList;
         this.client = MinecraftClient.getInstance();

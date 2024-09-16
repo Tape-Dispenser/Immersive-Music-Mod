@@ -84,7 +84,14 @@ public class configScreen extends Screen {
                 .build();
         debugLogs.setPosition(width/2, 130);
 
+        alwaysCheckUpdates = CheckboxWidget.builder(Text.literal(""), mc.textRenderer)
+                .checked(modConfig.alwaysCheckUpdates)
+                .callback((checkbox, checked) -> setAlwaysCheckUpdates(checked))
+                .build();
+        alwaysCheckUpdates.setPosition(width/2, 160);
+
         addDrawableChild(debugLogs);
+        addDrawableChild(alwaysCheckUpdates);
 
         addDrawableChild(new SimpleButton(
                 this,
@@ -121,6 +128,7 @@ public class configScreen extends Screen {
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.songMin.text"), 10, 80, txtcol, false);
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.songMax.text"), 10, 100, txtcol, false);
         ctx.drawText(mc.textRenderer, Text.translatable("timm.config.debug.text"), 10, 130, txtcol, false);
+        ctx.drawText(mc.textRenderer, Text.translatable("timm.config.alwaysCheckUpdates.text"), 10, 160, txtcol, false);
 
     }
 
@@ -144,6 +152,20 @@ public class configScreen extends Screen {
         modConfig.debugLogging = check;
         String checkString = String.valueOf(check);
         modConfig.configMap.replace("debug", checkString);
+        configManager.update_cfg(modConfig.configMap);
+    }
+
+    private void setAlwaysCheckUpdates(boolean check) {
+        modConfig.alwaysCheckUpdates = check;
+        String checkString = String.valueOf(check);
+        modConfig.configMap.replace("alwaysCheckUpdates", checkString);
+        configManager.update_cfg(modConfig.configMap);
+    }
+
+    private void setAlwaysGetUpdates(boolean check) {
+        modConfig.alwaysGetUpdates = check;
+        String checkString = String.valueOf(check);
+        modConfig.configMap.replace("alwaysGetUpdates", checkString);
         configManager.update_cfg(modConfig.configMap);
     }
 

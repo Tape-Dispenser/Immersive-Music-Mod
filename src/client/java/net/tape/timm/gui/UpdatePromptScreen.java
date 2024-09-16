@@ -16,7 +16,7 @@ import static net.tape.timm.timmMain.mc;
 
 public class UpdatePromptScreen extends Screen{
     public UpdatePromptScreen(Screen parent) {
-        super(Text.translatable("timm.update.text"));
+        super(Text.translatable("timm.update.prompt.text"));
         this.parent = parent;
     }
 
@@ -47,10 +47,10 @@ public class UpdatePromptScreen extends Screen{
     public void init() {
         updateChecker = new CheckUpdates();
 
-        alwaysUpdate = CheckboxWidget.builder(Text.translatable("timm.update.alwaysUpdate.text"), mc.textRenderer)
+        alwaysUpdate = CheckboxWidget.builder(Text.translatable("timm.update.prompt.alwaysUpdate.text"), mc.textRenderer)
                 .checked(modConfig.alwaysCheckUpdates)
                 .callback((checkbox, checked) -> setAlwaysCheckUpdates(checked))
-                .tooltip(Tooltip.of(Text.translatable("timm.update.alwaysUpdate.tooltip")))
+                .tooltip(Tooltip.of(Text.translatable("timm.update.prompt.alwaysUpdate.tooltip")))
                 .build();
         alwaysUpdate.setPosition(10, this.height - 60);
         alwaysUpdate.visible = true;
@@ -61,8 +61,8 @@ public class UpdatePromptScreen extends Screen{
         acceptButton = new SimpleButton(
                 this,
                 button -> acceptButtonClick(),
-                "timm.update.accept.text",
-                "timm.update.accept.tooltip",
+                "timm.update.prompt.accept.text",
+                "timm.update.prompt.accept.tooltip",
                 10,
                 -10
         );
@@ -71,8 +71,8 @@ public class UpdatePromptScreen extends Screen{
         declineButton = new SimpleButton(
                 this,
                 button -> this.close(),
-                "timm.update.decline.text",
-                "timm.update.decline.tooltip",
+                "timm.update.prompt.decline.text",
+                "timm.update.prompt.decline.tooltip",
                 -10,
                 -10
         );
@@ -81,8 +81,8 @@ public class UpdatePromptScreen extends Screen{
         cancelButton = new SimpleButton(
                 this,
                 button -> cancelButtonClick(),
-                "timm.update.cancel.text",
-                "timm.update.cancel.tooltip",
+                "timm.update.prompt.cancel.text",
+                "timm.update.prompt.cancel.tooltip",
                 this.width / 2 - (ButtonWidget.DEFAULT_WIDTH_SMALL / 2),
                 -10
         );
@@ -98,9 +98,9 @@ public class UpdatePromptScreen extends Screen{
         super.render(ctx, mouseX, mouseY, delta);
 
         if (!accepted) {
-            ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.message"), 10, 30, this.width - 10, txtcol);
+            ctx.drawTextWrapped(mc.textRenderer, Text.translatable("timm.update.prompt.message"), 10, 30, this.width - 10, txtcol);
         } else {
-            ctx.drawCenteredTextWithShadow(mc.textRenderer, Text.translatable("timm.update.waiting"), this.width/2, 50, txtcol);
+            ctx.drawCenteredTextWithShadow(mc.textRenderer, Text.translatable("timm.update.prompt.waiting"), this.width/2, 50, txtcol);
             if (!updateChecker.isAlive()) {
                 timmMain.LOGGER.info("Check for updates Successful");
                 // set screen to update confirm screen

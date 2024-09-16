@@ -10,7 +10,9 @@ import net.tape.timm.audio.Song;
 import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.aws.getSongs;
 import net.tape.timm.configManager;
+import net.tape.timm.gui.widget.SimpleButton;
 import net.tape.timm.gui.widget.UpdatesListWidget;
+import net.tape.timm.gui.widget.UpdatesListEntry;
 import net.tape.timm.timmMain;
 
 import java.io.File;
@@ -29,9 +31,13 @@ public class UpdateConfirmScreen extends Screen {
     int txtcol = 0xffffff;
     private final Screen parent;
 
-    // update list width
     private UpdatesListWidget updateList;
+    private SimpleButton acceptButton;
+    private SimpleButton declineButton;
 
+    private UpdatesListEntry selected;
+
+    private double scrollPercent = 0;
 
 
     @Override
@@ -128,6 +134,22 @@ public class UpdateConfirmScreen extends Screen {
         );
         this.updateList.setX(10);
 
+        // initialize accept button
+        /*
+
+        this.acceptButton = new SimpleButton(
+                this,
+                button -> {
+
+                },
+
+        );
+
+         */
+
+        // initialize decline button
+
+        // initialize toggle updates button
 
 
 
@@ -136,6 +158,13 @@ public class UpdateConfirmScreen extends Screen {
 
     @Override
     public void render(DrawContext ctx, int mouseX, int mouseY, float delta) {
+        super.render(ctx, mouseX, mouseY, delta);
+        UpdatesListEntry selectedEntry = selected;
+        if (selectedEntry != null) {
+            // insert description list widget render call here
+        }
+        this.updateList.render(ctx, mouseX, mouseY, delta);
+
 
     }
 
@@ -143,4 +172,19 @@ public class UpdateConfirmScreen extends Screen {
     public void close() {
         mc.setScreen(parent);
     }
+
+    public double getScrollPercent() {
+        return scrollPercent;
+    }
+
+    public void updateScrollPercent(double scrollPercent) {
+        this.scrollPercent = scrollPercent;
+    }
+
+    public UpdatesListEntry getSelectedEntry() { return this.selected; }
+
+    public void updateSelectedEntry(UpdatesListEntry entry) {
+
+    }
+
 }
