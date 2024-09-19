@@ -1,0 +1,41 @@
+{
+  "timm.commands.foo": "פקודת ניסיון החזירה %s",
+  "timm.commands.nowPlaying.song": "כרגע מנגן: %s",
+  "timm.commands.nowPlaying.null": "אף שמע לא מתנגן!",
+  "timm.commands.stop": "שמע הופסק.",
+  "timm.commands.skip.success": "דולג ל-%s",
+  "timm.commands.skip.badId": "שגיאה בזמן שבוצע דילוג: שמע לא ידוע \"%s\"",
+
+
+  "timm.config.text": "תפריט הגדרות",
+  "timm.config.close.text": "סגור",
+  "timm.config.close.tooltip": "סגור את התפריט.",
+  "timm.config.reset.text": "איפוס",
+  "timm.config.reset.tooltip": "אפס הגדרות לברירת מחדל",
+  "timm.config.songMin.text": "זמן שהייה מינימלי למנגינות משחק",
+  "timm.config.songMin.slider": "מינ.: %s",
+  "timm.config.songMax.text": "זמן שהייה מקסימלי למנגינות משחק",
+  "timm.config.songMax.slider": "מקס.: %s",
+  "timm.config.menuMin.text": "זמן שהייה מינימלי למנגינות תפריט",
+  "timm.config.menuMin.slider": "מינ.: %s",
+  "timm.config.menuMax.text": "זמן שהייה מקסימלי למנגינות תפריט",
+  "timm.config.menuMax.slider": "מקס.: %s",
+  "timm.config.debug.text": "הפעל יומן באגים",
+  "timm.config.alwaysCheckUpdates.text": "בדיקת עדכונים אוטומטית",
+  "timm.config.alwaysGetUpdates.text": "הורדת עידכונים אוטומטית",
+
+
+  "timm.update.prompt.text": "תפריט עדכונים",
+  "timm.update.prompt.message": "הערה: על מנת להוריד את מנגינות The Immersive Music Mod ולאפשר חיפוש עבור עדכונים, המוד חייב להיות מחובר לשרת AWS חיצוני. אם יאופשר, המוד יוכל לחפש עדכונים. לאחר מכן, תועברו לאפשרות לבחור אם תרצו להוריד קבצים כלשהם. אם יסורב, המוד לא יוכל לעבוד כראוי.",
+  "timm.update.prompt.accept.text": "אשר",
+  "timm.update.prompt.accept.tooltip": "בדוק שרת AWS לעדכוני מגינות TIMM.",
+  "timm.update.prompt.decline.text": "סרב",
+  "timm.update.prompt.decline.tooltip": "המשך לתפריט ראשי ללא חיפוש עדכונים.",
+  "timm.update.prompt.cancel.text": "בטל",
+  "timm.update.prompt.cancel.tooltip": "בטל חיפוש עדכונים",
+  "timm.update.prompt.waiting": "מחפש עדכונים...",
+  "timm.update.prompt.alwaysUpdate.text": "תמיד לחפש עדכונים?",
+  "timm.update.prompt.alwaysUpdate.tooltip": "חפש עדכונים אוטומטית ברגע איתחול המוד.",
+
+  "timm.": ""
+}

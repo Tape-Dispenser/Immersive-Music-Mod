@@ -4,7 +4,7 @@
   "timm.commands.nowPlaying.null": "Not playing any song!",
   "timm.commands.stop": "Stopped playback.",
   "timm.commands.skip.success": "Skipped to %s",
-  "timm.commands.skip.badId": "Error while executing skip: Unknown SoundEvent \"%s\"",
+  "timm.commands.skip.badId": "Error while executing skip: Unknown song \"%s\"",
 
 
   "timm.config.text": "Config Menu",

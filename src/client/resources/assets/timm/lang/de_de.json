@@ -1,0 +1,41 @@
+{
+  "timm.commands.foo": "foo Befehl Rückgabewert: %s",
+  "timm.commands.nowPlaying.song": "Aktueller Song: %s",
+  "timm.commands.nowPlaying.null": "Gerade spielt nichts!",
+  "timm.commands.stop": "Wiedergabe angehalten.",
+  "timm.commands.skip.success": "Skip zu %s",
+  "timm.commands.skip.badId": "Fehler beim Skippen: Kein Song mit diesem Namen \"%s\"",
+
+
+  "timm.config.text": "Einstellungen",
+  "timm.config.close.text": "Schließen",
+  "timm.config.close.tooltip": "Zurückkehren zum Hauptmenü.",
+  "timm.config.reset.text": "Zurücksetzen",
+  "timm.config.reset.tooltip": "Setzt auf Standardwerte zurück",
+  "timm.config.songMin.text": "Minimaler Abstand zwischen Songs im Spiel",
+  "timm.config.songMin.slider": "Min: %s",
+  "timm.config.songMax.text": "Maximaler Abstand zwischen Songs im Spiel",
+  "timm.config.songMax.slider": "Max: %s",
+  "timm.config.menuMin.text": "Minimaler Abstand zwischen Songs im Menu",
+  "timm.config.menuMin.slider": "Min: %s",
+  "timm.config.menuMax.text": "Maximaler Abstand zwischen Songs im Menu",
+  "timm.config.menuMax.slider": "Max: %s",
+  "timm.config.debug.text": "Debug Logs anschalten",
+  "timm.config.alwaysCheckUpdates.text": "Automatisch nach Updates suchen",
+  "timm.config.alwaysGetUpdates.text": "Stellt ein, ob automatisch nach Updates gesucht werden soll",
+
+
+  "timm.update.prompt.text": "Update Menü",
+  "timm.update.prompt.message": "Achtung: Um die Lieder und Updates von The Immersive Music Mod zu runterzuladen, verbindet der Mod sich mit einem externen AWS Server. Wenn du auf "Akzeptieren" klickst, wird der Mod nach Updates suchen, und danach fragen, ob Dateien installiert werden dürfen. Bei "Ablehnen" wird der Mod keine Dateien runterladen und kann eventuell nicht richtig funktionieren.",
+  "timm.update.prompt.accept.text": "Akzeptieren",
+  "timm.update.prompt.accept.tooltip": "Suche nach neuen TIMM Songs auf dem AWS Server.",
+  "timm.update.prompt.decline.text": "Ablehnen",
+  "timm.update.prompt.decline.tooltip": "Weitermachen zum Hauptmenü ohne nach Updates zu suchen.",
+  "timm.update.prompt.cancel.text": "Abbrechen",
+  "timm.update.prompt.cancel.tooltip": "Updatesuche Abbrechen",
+  "timm.update.prompt.waiting": "Suche nach Updates...",
+  "timm.update.prompt.alwaysUpdate.text": " Automatisch nach Updates suchen?",
+  "timm.update.prompt.alwaysUpdate.tooltip": "Sucht beim Start des Mods automatisch nach neuen Songs und Updates.",
+
+  "timm.": ""
+}
