@@ -26,7 +26,7 @@
 
 
   "timm.update.prompt.text": "Update Menü",
-  "timm.update.prompt.message": "Achtung: Um die Lieder und Updates von The Immersive Music Mod zu runterzuladen, verbindet der Mod sich mit einem externen AWS Server. Wenn du auf "Akzeptieren" klickst, wird der Mod nach Updates suchen, und danach fragen, ob Dateien installiert werden dürfen. Bei "Ablehnen" wird der Mod keine Dateien runterladen und kann eventuell nicht richtig funktionieren.",
+  "timm.update.prompt.message": "Achtung: Um die Lieder und Updates von The Immersive Music Mod zu runterzuladen, verbindet der Mod sich mit einem externen AWS Server. Wenn du auf \"Akzeptieren\" klickst, wird der Mod nach Updates suchen, und danach fragen, ob Dateien installiert werden dürfen. Bei \"Ablehnen\" wird der Mod keine Dateien runterladen und kann eventuell nicht richtig funktionieren.",
   "timm.update.prompt.accept.text": "Akzeptieren",
   "timm.update.prompt.accept.tooltip": "Suche nach neuen TIMM Songs auf dem AWS Server.",
   "timm.update.prompt.decline.text": "Ablehnen",
