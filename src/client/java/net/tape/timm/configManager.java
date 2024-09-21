@@ -44,8 +44,9 @@ public class configManager {
 
         if (!timmMusicDir.isDirectory()) {
             try {
-                Files.createDirectories(musicDir.toPath());
-                if (modConfig.debugLogging) {timmMain.LOGGER.info(String.format("successfully created config directory at %s", musicDir.getPath()));}
+                Files.createDirectories(timmMusicDir.toPath());
+                if (modConfig.debugLogging) {
+                    timmMain.LOGGER.info("successfully created config directory at {}", timmMusicDir.getPath());}
             } catch (IOException e) {
                 timmMain.LOGGER.error("Failed to create .minecraft/music/TIMM folder!");
                 timmMain.LOGGER.warn("This may be because .minecraft/music does not exist, or because of some permissions issue.");

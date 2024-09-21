@@ -4,6 +4,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.tape.timm.audio.Song;
+import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.audio.SongSelector;
 import net.tape.timm.modConfig;
 import net.tape.timm.songControls;
@@ -28,6 +29,14 @@ public class ClientTickMixin {
 
 
 		if (!songControls.soundEngineStarted) {
+			return;
+		}
+
+		if (!SongRegistry.isStarted()) {
+			return;
+		}
+
+		if (SongRegistry.songList.isEmpty()) {
 			return;
 		}
 

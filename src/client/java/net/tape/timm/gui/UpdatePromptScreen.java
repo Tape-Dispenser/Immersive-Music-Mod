@@ -104,7 +104,7 @@ public class UpdatePromptScreen extends Screen{
             if (!updateChecker.isAlive()) {
                 timmMain.LOGGER.info("Check for updates Successful");
                 // set screen to update confirm screen
-                this.close();
+                mc.setScreen(new UpdateConfirmScreen(this.parent));
             }
         }
     }

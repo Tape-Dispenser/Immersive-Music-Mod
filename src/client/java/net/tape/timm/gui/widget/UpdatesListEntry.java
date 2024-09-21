@@ -19,7 +19,7 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
     protected final UpdatesListWidget parentList;
     protected long lastClickAt;
 
-    UpdatesListEntry(UpdateEntry entry, UpdatesListWidget parentList) {
+    public UpdatesListEntry(UpdateEntry entry, UpdatesListWidget parentList) {
         this.updateEntry = entry;
         this.parentList = parentList;
         this.client = MinecraftClient.getInstance();
@@ -54,7 +54,7 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int delta) {
-        //parentList.select(this);
+        parentList.select(this);
 
         if (Util.getMeasuringTimeMs() - this.lastClickAt < 250) {
             // double click, deselect this entry from download list

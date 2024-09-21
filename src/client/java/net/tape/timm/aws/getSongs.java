@@ -57,7 +57,7 @@ public class getSongs {
                 }
                 break;
             case awsHelper.NO_LOCAL:
-                serverFile.renameTo(localFile);
+                serverFile.renameTo(songsFile);
                 updatesReturnObj = awsHelper.validateLocal(localFile, bucketName, client);
                 if (updatesReturnObj.code() != awsHelper.SUCCESS) {
                     return new GetUpdatesReturn(updatesReturnObj.code(), null);

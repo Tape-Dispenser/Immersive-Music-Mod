@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
 
   "custom": false,
 
@@ -389,37 +389,6 @@
       "revision": 0
     },
 
-    "general-03": {
-      "file/id": "General_003.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "deep_cold_ocean-02": {
-      "file/id": "Deep_Cold_Ocean_002.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "cold_ocean-02": {
-      "file/id": "Cold_Ocean_002.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "forest-01": {
-      "file/id": "Forest_001.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
 
     "ocean-01": {
       "file/id": "Ocean_001.ogg",
@@ -477,59 +446,11 @@
       "revision": 0
     },
 
-    "deep_dark-06": {
-      "file/id": "DeepDark_006.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "ocean_night-01": {
-      "file/id": "Ocean_Night_001.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "snow_plains-04": {
-      "file/id": "SnowPlains_004.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "jungle-02": {
-      "file/id": "Jungle_002.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
-    "forest-03": {
-      "file/id": "Forest_003.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
     "menu-09": {
       "file/id": "Menu_009.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "",
-      "revision": 0
-    },
-
-    "birch_forest_night-01": {
-      "file/id": "BirchForest_Night_001.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Frozen Stars",
       "revision": 0
     },
 
@@ -589,14 +510,6 @@
       "revision": 0
     },
 
-    "soul_sand_valley-03": {
-      "file/id": "SoulSandValley_003.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "",
-      "revision": 0
-    },
-
     "enter_nether-01": {
       "file/id": "EnterNether_001.ogg",
       "is_file?": true,
@@ -621,35 +534,11 @@
       "revision": 0
     },
 
-    "underground-01": {
-      "file/id": "Above_Yzero_1.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Cobbled Stone",
-      "revision": 0
-    },
-
-    "underground-02": {
-      "file/id": "Above_Yzero_2.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Limestone Layers",
-      "revision": 0
-    },
-
     "flower_forest-02": {
       "file/id": "FlowerForest_002.ogg",
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Pins",
-      "revision": 0
-    },
-
-    "taiga_night-01": {
-      "file/id": "Taiga_Night_001.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Check F3",
       "revision": 0
     },
 
@@ -698,70 +587,6 @@
       "is_file?": true,
       "author": "Gold Eagle Productions",
       "song_name": "Lava Pools",
-      "revision": 0
-    },
-
-    "plains-04": {
-      "file/id": "Plains_004.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Just calm down",
-      "revision": 0
-    },
-
-    "plains-05": {
-      "file/id": "Plains_005.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Four Way Glances",
-      "revision": 0
-    },
-
-    "forest-05": {
-      "file/id": "Forest_005.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Wander",
-      "revision": 0
-    },
-
-    "forest-06": {
-      "file/id": "Forest_006.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Wander II",
-      "revision": 0
-    },
-
-    "dripstone_caves-03": {
-      "file/id": "DripstoneCaves_003.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Resonant Walls",
-      "revision": 0
-    },
-
-    "dripstone_caves-04": {
-      "file/id": "DripstoneCaves_004.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Promise",
-      "revision": 0
-    },
-
-    "warm_ocean_night-01": {
-      "file/id": "WarmOcean_Night_001.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Shifting Currents",
-      "revision": 0
-    },
-
-    "cherry_grove-05": {
-      "file/id": "CherryBlossom_005.ogg",
-      "is_file?": true,
-      "author": "Caner Crebes",
-      "song_name": "Tradition",
       "revision": 0
     },
 

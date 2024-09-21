@@ -15,6 +15,8 @@ import java.util.*;
 
 public class SongRegistry {
 
+    private static boolean started = false;
+
     static final int ADD_SUCCESS = 0;
     static final int MISSING_FAIL = -1; // you tried to add a song that doesn't exist locally
     static final int RESOURCE_FAIL = -2; // you tried to add a resource song on the fly
@@ -52,8 +54,8 @@ public class SongRegistry {
         try {
             json = Files.readString(songListPath.toPath());
         } catch (IOException e) {
-            timmMain.LOGGER.error("Failed to find songList.json!");
-            throw new RuntimeException(e);
+            timmMain.LOGGER.warn("Failed to find songList.json!");
+            return;
         }
 
         // load json file into JsonObject
@@ -96,6 +98,7 @@ public class SongRegistry {
                 songList.put(songID, song);
             }
         }
+        started = true;
     }
 
     public static Song songFromID(String id) {
@@ -168,4 +171,6 @@ public class SongRegistry {
         }
         return JSON_FAIL;
     }
+
+    public static boolean isStarted() {return started;}
 }

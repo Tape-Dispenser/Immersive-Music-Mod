@@ -8,6 +8,8 @@ import net.minecraft.text.Text;
 import net.tape.timm.audio.FileSong;
 import net.tape.timm.audio.Song;
 import net.tape.timm.audio.SongRegistry;
+import net.tape.timm.aws.UpdateEntry;
+import net.tape.timm.aws.awsHelper;
 import net.tape.timm.aws.getSongs;
 import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.SimpleButton;
@@ -38,6 +40,7 @@ public class UpdateConfirmScreen extends Screen {
     private UpdatesListEntry selected;
 
     private double scrollPercent = 0;
+    private boolean checkUpdatesError = false;
 
 
     @Override
@@ -118,9 +121,8 @@ public class UpdateConfirmScreen extends Screen {
 
     @Override
     public void init() {
-        if ( getSongs.updates.code() < 0 ) {
-            // we had an error, bring up an error screen and cancel update process
-            this.close();
+        if (getSongs.updates.code() != awsHelper.SUCCESS && getSongs.updates.code() != awsHelper.NO_LOCAL) {
+            this.checkUpdatesError = true;
         }
 
         // initialize updateList
@@ -133,6 +135,17 @@ public class UpdateConfirmScreen extends Screen {
                 this
         );
         this.updateList.setX(10);
+
+        // add all files in GetUpdatesReturn to update list widget
+        for (File fileToUpdate : getSongs.updates.filesToUpdate()) {
+            Song song = searchForSongInJSON(fileToUpdate);
+            if (song == null) {
+                timmMain.LOGGER.warn("Could not find file \"{}\" in songList.json", fileToUpdate.getName());
+                continue;
+            }
+            UpdateEntry entry = new UpdateEntry(song, fileToUpdate);
+            this.updateList.addEntry(new UpdatesListEntry(entry, this.updateList));
+        }
 
         // initialize accept button
         /*
@@ -184,7 +197,11 @@ public class UpdateConfirmScreen extends Screen {
     public UpdatesListEntry getSelectedEntry() { return this.selected; }
 
     public void updateSelectedEntry(UpdatesListEntry entry) {
+        if (entry == null) {
+            return;
+        }
 
+        this.selected = entry;
     }
 
 }
