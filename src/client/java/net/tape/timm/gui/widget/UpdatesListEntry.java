@@ -42,14 +42,29 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
         RenderSystem.disableBlend();
 
         Text name = Text.literal(updateEntry.song().getSongName());
+        Text authorLine = Text.literal(String.format("By: %s", updateEntry.song().getAuthor()));
+        Text fileLine = Text.literal(String.format("File name: %s", updateEntry.song().getPathOrId()));
         StringVisitable trimmedName = name;
+        StringVisitable trimmedAuthor = authorLine;
+        StringVisitable trimmedFile = fileLine;
         int maxNameWidth = entryWidth - iconSize - 3;
         TextRenderer font = this.client.textRenderer;
         if (font.getWidth(name) > maxNameWidth) {
             StringVisitable ellipsis = StringVisitable.plain("...");
             trimmedName = StringVisitable.concat(font.trimToWidth(name, maxNameWidth - font.getWidth(ellipsis)), ellipsis);
         }
+        if (font.getWidth(authorLine) > maxNameWidth) {
+            StringVisitable ellipsis = StringVisitable.plain("...");
+            trimmedAuthor = StringVisitable.concat(font.trimToWidth(authorLine, maxNameWidth - font.getWidth(ellipsis)), ellipsis);
+        }
+        if (font.getWidth(fileLine) > maxNameWidth) {
+            StringVisitable ellipsis = StringVisitable.plain("...");
+            trimmedFile = StringVisitable.concat(font.trimToWidth(fileLine, maxNameWidth - font.getWidth(ellipsis)), ellipsis);
+        }
         context.drawText(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, 0xFFFFFF, false);
+        context.drawText(font, Language.getInstance().reorder(trimmedAuthor), x + iconSize + 3, y + 1 + 10, 0xAAAAAA, false);
+        context.drawText(font, Language.getInstance().reorder(trimmedFile), x + iconSize + 3, y + 1 + 20, 0xAAAAAA, false);
+
     }
 
     @Override
