@@ -27,6 +27,7 @@ public class timmMain implements ClientModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+
 		LOGGER.info("Loading default config values...");
 		modConfig.init();
 		LOGGER.info("Loaded default config values.");

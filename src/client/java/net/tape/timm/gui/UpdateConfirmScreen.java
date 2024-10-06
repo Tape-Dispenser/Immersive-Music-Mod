@@ -166,7 +166,7 @@ public class UpdateConfirmScreen extends Screen {
 
 
 
-
+        addSelectableChild(this.updateList);
     }
 
     @Override

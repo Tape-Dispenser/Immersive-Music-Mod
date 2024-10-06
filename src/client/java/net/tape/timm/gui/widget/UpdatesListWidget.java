@@ -56,7 +56,7 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesList
     public void select(UpdatesListEntry entry) {
         this.setSelected(entry);
         if (entry != null) {
-            Song song = entry.getUpdateEntry().song();
+            Song song = entry.getUpdateEntry().getSong();
             this.client.getNarratorManager().narrate(Text.translatable("narrator.select", song.getSongName()).getString());
         }
     }
@@ -158,19 +158,19 @@ public class UpdatesListWidget extends AlwaysSelectedEntryListWidget<UpdatesList
     }
 
     @Override
-    public boolean mouseClicked(double double_1, double double_2, int int_1) {
-        this.updateScrollingState(double_1, double_2, int_1);
-        if (!this.isMouseOver(double_1, double_2)) {
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        this.updateScrollingState(mouseX, mouseY, button);
+        if (!this.isMouseOver(mouseX, mouseY)) {
             return false;
         } else {
-            UpdatesListEntry entry = this.getEntryAtPos(double_1, double_2);
+            UpdatesListEntry entry = this.getEntryAtPos(mouseX, mouseY);
             if (entry != null) {
-                if (entry.mouseClicked(double_1, double_2, int_1)) {
+                if (entry.mouseClicked(mouseX, mouseY, button)) {
                     this.setFocused(entry);
                     this.setDragging(true);
                     return true;
                 }
-            } else if (int_1 == 0 && this.clickedHeader((int) (double_1 - (double) (this.getX() + this.width / 2 - this.getRowWidth() / 2)), (int) (double_2 - (double) this.getY()) + (int) this.getScrollAmount() - 4)) {
+            } else if (button == 0 && this.clickedHeader((int) (mouseX - (double) (this.getX() + this.width / 2 - this.getRowWidth() / 2)), (int) (mouseY - (double) this.getY()) + (int) this.getScrollAmount() - 4)) {
                 return true;
             }
 
