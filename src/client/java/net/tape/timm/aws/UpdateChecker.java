@@ -3,7 +3,7 @@ package net.tape.timm.aws;
 import net.tape.timm.modConfig;
 import net.tape.timm.timmMain;
 
-public class CheckUpdates extends Thread{
+public class UpdateChecker extends Thread{
     public void run() {
         try {
             getSongs.initS3Client();
@@ -15,5 +15,9 @@ public class CheckUpdates extends Thread{
                 getSongs.updates = new GetUpdatesReturn(awsHelper.UNKNOWN_ERROR, null);
             }
         }
+    }
+    public void kill() {
+        getSongs.destroyS3Client();
+        this.interrupt();
     }
 }

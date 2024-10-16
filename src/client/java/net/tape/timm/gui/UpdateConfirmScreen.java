@@ -9,6 +9,7 @@ import net.tape.timm.audio.FileSong;
 import net.tape.timm.audio.Song;
 import net.tape.timm.audio.SongRegistry;
 import net.tape.timm.aws.UpdateEntry;
+import net.tape.timm.aws.UpdateGetter;
 import net.tape.timm.aws.awsHelper;
 import net.tape.timm.aws.getSongs;
 import net.tape.timm.configManager;
@@ -32,6 +33,10 @@ public class UpdateConfirmScreen extends Screen {
 
     int txtcol = 0xffffff;
     private final Screen parent;
+
+    private boolean downloadStarted = false;
+
+    private UpdateGetter updateGetter;
 
     private UpdatesListWidget updateList;
     private SimpleButton acceptButton;
@@ -148,25 +153,34 @@ public class UpdateConfirmScreen extends Screen {
         }
 
         // initialize accept button
-        /*
 
         this.acceptButton = new SimpleButton(
                 this,
-                button -> {
-
-                },
-
+                button -> {acceptButtonPress();},
+                "timm.update.confirm.accept.text",
+                "timm.update.confirm.accept.tooltip",
+                10,
+                25
         );
 
-         */
 
         // initialize decline button
+        this.declineButton = new SimpleButton(
+                this,
+                button -> {this.close();},
+                "timm.update.confirm.decline.text",
+                "timm.update.confirm.decline.tooltip",
+                -10,
+                25
+        );
 
         // initialize toggle updates button
 
 
 
         addSelectableChild(this.updateList);
+        addDrawableChild(this.acceptButton);
+        addDrawableChild(this.declineButton);
     }
 
     @Override
@@ -178,11 +192,25 @@ public class UpdateConfirmScreen extends Screen {
         }
         this.updateList.render(ctx, mouseX, mouseY, delta);
 
+        if (!downloadStarted) {
+            return;
+        }
 
+        if (!updateGetter.isAlive()) {
+            this.close();
+        }
+
+    }
+
+    private void acceptButtonPress() {
+        updateGetter = new UpdateGetter();
+        updateGetter.start();
+        downloadStarted = true;
     }
 
     @Override
     public void close() {
+        getSongs.destroyS3Client();
         mc.setScreen(parent);
     }
 

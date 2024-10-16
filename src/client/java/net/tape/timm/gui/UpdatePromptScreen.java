@@ -6,7 +6,8 @@ import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CheckboxWidget;
 import net.minecraft.text.Text;
-import net.tape.timm.aws.CheckUpdates;
+import net.tape.timm.aws.UpdateChecker;
+import net.tape.timm.aws.getSongs;
 import net.tape.timm.configManager;
 import net.tape.timm.gui.widget.SimpleButton;
 import net.tape.timm.modConfig;
@@ -31,7 +32,7 @@ public class UpdatePromptScreen extends Screen{
 
     private CheckboxWidget alwaysUpdate;
 
-    private CheckUpdates updateChecker;
+    private UpdateChecker updateChecker;
 
     @Override
     public boolean shouldPause() {
@@ -45,7 +46,7 @@ public class UpdatePromptScreen extends Screen{
 
     @Override
     public void init() {
-        updateChecker = new CheckUpdates();
+        updateChecker = new UpdateChecker();
 
         alwaysUpdate = CheckboxWidget.builder(Text.translatable("timm.update.prompt.alwaysUpdate.text"), mc.textRenderer)
                 .checked(modConfig.alwaysCheckUpdates)
@@ -103,6 +104,10 @@ public class UpdatePromptScreen extends Screen{
             ctx.drawCenteredTextWithShadow(mc.textRenderer, Text.translatable("timm.update.prompt.waiting"), this.width/2, 50, txtcol);
             if (!updateChecker.isAlive()) {
                 timmMain.LOGGER.info("Check for updates Successful");
+                if (getSongs.updates != null) {
+                    int fileCount = getSongs.updates.filesToUpdate().size();
+                    timmMain.LOGGER.info(String.format("Found %d files to update", fileCount));
+                }
                 // set screen to update confirm screen
                 mc.setScreen(new UpdateConfirmScreen(this.parent));
             }
@@ -125,7 +130,7 @@ public class UpdatePromptScreen extends Screen{
 
     public void cancelButtonClick() {
         if (updateChecker.isAlive()) {
-            updateChecker.interrupt();
+            updateChecker.kill();
             updateChecker.getUncaughtExceptionHandler();
             this.close();
         }

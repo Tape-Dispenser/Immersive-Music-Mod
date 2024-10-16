@@ -46,33 +46,27 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
         RenderSystem.disableBlend();
 
         // text rendering logic
-        Text name = Text.literal(updateEntry.getSong().getSongName());
-        Text authorLine = Text.literal(String.format("By: %s", updateEntry.getSong().getAuthor()));
-        Text fileLine = Text.literal(String.format("File name: %s", updateEntry.getSong().getPathOrId()));
-        StringVisitable trimmedName = name;
-        StringVisitable trimmedAuthor = authorLine;
-        StringVisitable trimmedFile = fileLine;
-        int maxNameWidth = entryWidth - iconSize - 3;
         TextRenderer font = this.client.textRenderer;
-        // if any text entries are too long trim them to size and add an ellipsis to the end
-        if (font.getWidth(name) > maxNameWidth) {
-            StringVisitable ellipsis = StringVisitable.plain("...");
-            trimmedName = StringVisitable.concat(font.trimToWidth(name, maxNameWidth - font.getWidth(ellipsis)), ellipsis);
-        }
-        if (font.getWidth(authorLine) > maxNameWidth) {
-            StringVisitable ellipsis = StringVisitable.plain("...");
-            trimmedAuthor = StringVisitable.concat(font.trimToWidth(authorLine, maxNameWidth - font.getWidth(ellipsis)), ellipsis);
-        }
-        if (font.getWidth(fileLine) > maxNameWidth) {
-            StringVisitable ellipsis = StringVisitable.plain("...");
-            trimmedFile = StringVisitable.concat(font.trimToWidth(fileLine, maxNameWidth - font.getWidth(ellipsis)), ellipsis);
-        }
+        int maxTextWidth = entryWidth - iconSize - 3;
+        // trim text lengths if needed
+        StringVisitable trimmedName = trimText(updateEntry.getSong().getSongName(), font, maxTextWidth);
+        StringVisitable trimmedAuthor = trimText(String.format("By: %s", updateEntry.getSong().getAuthor()), font, maxTextWidth);
+        StringVisitable trimmedFile = trimText(String.format("File name: %s", updateEntry.getSong().getPathOrId()), font, maxTextWidth);
         // render the text
         context.drawText(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, 0xFFFFFF, false);
         context.drawText(font, Language.getInstance().reorder(trimmedAuthor), x + iconSize + 3, y + 1 + 10, 0xAAAAAA, false);
         context.drawText(font, Language.getInstance().reorder(trimmedFile), x + iconSize + 3, y + 1 + 20, 0xAAAAAA, false);
         // if entry is disabled, render a transparent grey box on top
 
+    }
+
+    public StringVisitable trimText(String text, TextRenderer font, int maxWidth) {
+        StringVisitable output = Text.literal(text);
+        if (font.getWidth(output) > maxWidth) {
+            StringVisitable ellipsis = StringVisitable.plain("...");
+            output = StringVisitable.concat(font.trimToWidth(output, maxWidth - font.getWidth(ellipsis)), ellipsis);
+        }
+        return output;
     }
 
     @Override
