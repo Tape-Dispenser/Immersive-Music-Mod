@@ -13,6 +13,7 @@ public class registerCommands {
         nowPlaying.register(dispatch);
         stop.register(dispatch);
         skip.register(dispatch);
+        blockAtPlayer.register(dispatch);
     }
 
 

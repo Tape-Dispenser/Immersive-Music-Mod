@@ -8,10 +8,12 @@ import java.io.File;
 public class UpdateGetter extends Thread {
     public void run() {
         try {
-            for (File update : getSongs.updates.filesToUpdate()) {
-                timmMain.LOGGER.info(update.toString());
+            for (File fileToUpdate : getSongs.updates.filesToUpdate()) {
                 // download file
+                String awsFile = fileToUpdate.getName();
+                awsHelper.downloadFile(awsFile, fileToUpdate, getSongs.bucketName, getSongs.client);
                 // once file is downloaded, add it to song registry
+
 
             }
         } catch (Exception e) {

@@ -19,9 +19,9 @@ import java.util.Set;
 
 public class getSongs {
 
-    static final String bucketName = "timmsballs";
+    static public final String bucketName = "timmsballs";
     static final Region region = Region.getRegion(Regions.US_EAST_2);
-    static AmazonS3Client client;
+    static public AmazonS3Client client;
 
     public static GetUpdatesReturn updates = null;
 
