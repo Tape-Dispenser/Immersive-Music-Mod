@@ -13,13 +13,13 @@ public class configSlider extends SliderWidget {
     public configSlider(int x, int y, int w, int h, String key, double val, String real, ReleaseAction callback, MakeReadable callback1) {
         super(x, y, w, h, Text.stringifiedTranslatable(key, real), val);
         this.releaseLambda = callback;
-        this.readableLamda = callback1;
+        this.readableLambda = callback1;
         this.translationKey = key;
 
     }
 
     final protected ReleaseAction releaseLambda;
-    final protected MakeReadable readableLamda;
+    final protected MakeReadable readableLambda;
     private long ticks;
     final private String translationKey;
 
@@ -32,7 +32,7 @@ public class configSlider extends SliderWidget {
 
     @Override
     protected void updateMessage() {
-        String readableValue = this.readableLamda.makeReadable(this.ticks);
+        String readableValue = this.readableLambda.makeReadable(this.ticks);
         this.setMessage(Text.stringifiedTranslatable(translationKey, readableValue));
     }
 
