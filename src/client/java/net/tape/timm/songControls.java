@@ -35,6 +35,11 @@ public class songControls {
     }
 
     public static void play(Song song) {
+
+        if (modConfig.debugLogging) {
+            LOGGER.info(String.format("Now Playing: %s", song.soundEvent.getId().toString()));
+        }
+
         if (song != null) {
             if (nowPlaying() != null)
                 mc.getSoundManager().stop(lastSoundInstance);
