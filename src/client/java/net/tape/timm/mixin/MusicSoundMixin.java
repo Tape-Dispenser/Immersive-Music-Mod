@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(MusicTracker.class)
 public class MusicSoundMixin {
-	@Inject(method = "play(Lnet/minecraft/sound/MusicSound;)V", at = @At(value = "HEAD"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD) // TODO: this will run every tick, a cleaner system is needed!!!!!
+	@Inject(method = "play(Lnet/minecraft/sound/MusicSound;)V", at = @At(value = "HEAD"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private void playMixin(MusicSound sound, CallbackInfo info) {
 		SoundEvent se = sound.getSound().value();
 		songControls.play(se);
