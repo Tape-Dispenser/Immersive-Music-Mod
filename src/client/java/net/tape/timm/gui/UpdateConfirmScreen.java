@@ -41,6 +41,8 @@ public class UpdateConfirmScreen extends Screen {
     private UpdatesListWidget updateList;
     private SimpleButton acceptButton;
     private SimpleButton declineButton;
+    private SimpleButton enableAllButton;
+    private SimpleButton disableAllButton;
 
     private UpdatesListEntry selected;
 
@@ -133,8 +135,8 @@ public class UpdateConfirmScreen extends Screen {
         // initialize updateList
         this.updateList = new UpdatesListWidget(
                 this.width - 20, // update list width
-                this.height - 60, // update list height
-                50, // update list ypos (ask mojang why it doesn't take an xpos as a constructor parameter)
+                this.height - 100, // update list height
+                70, // update list ypos (ask mojang why it doesn't take an xpos as a constructor parameter)
                 36, // update entry height
                 this.updateList,
                 this
@@ -160,7 +162,7 @@ public class UpdateConfirmScreen extends Screen {
                 "timm.update.confirm.accept.text",
                 "timm.update.confirm.accept.tooltip",
                 10,
-                25
+                -5
         );
 
 
@@ -171,9 +173,28 @@ public class UpdateConfirmScreen extends Screen {
                 "timm.update.confirm.decline.text",
                 "timm.update.confirm.decline.tooltip",
                 -10,
-                25
+                -5
         );
 
+        // initialize enable all button
+        this.enableAllButton = new SimpleButton(
+                this,
+                button -> {},
+                "",
+                "",
+                10,
+                25 + SimpleButton.DEFAULT_HEIGHT + 5
+        );
+
+        // initialize disable all button
+        this.disableAllButton = new SimpleButton(
+                this,
+                button -> {},
+                "",
+                "",
+                -10,
+                25 + SimpleButton.DEFAULT_HEIGHT + 5
+        );
         // initialize toggle updates button
 
 
@@ -181,6 +202,8 @@ public class UpdateConfirmScreen extends Screen {
         addSelectableChild(this.updateList);
         addDrawableChild(this.acceptButton);
         addDrawableChild(this.declineButton);
+        addDrawableChild(this.enableAllButton);
+        addDrawableChild(this.disableAllButton );
     }
 
     @Override

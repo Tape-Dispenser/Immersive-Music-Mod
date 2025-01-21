@@ -27,6 +27,9 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
 
     }
 
+    private static final Identifier CHECK_LOCATION = Identifier.of("timm", "textures/gui/check.png");
+    private static final Identifier X_LOCATION = Identifier.of("timm", "textures/gui/x.png");
+
     @Override
     public Text getNarration() {
         return Text.literal(this.updateEntry.getSong().getSongName());
@@ -40,14 +43,23 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
         context.drawTexture(this.getIconTexture(), x, y, 0.0F, 0.0F, iconSize, iconSize, iconSize, iconSize);
-        if (!this.updateEntry.isEnabled()){
-            context.fill(x, y, x+entryWidth, y+entryHeight, 69420, 0x404040);
-        }
         RenderSystem.disableBlend();
+
+        // render icon to say if entry is disabled or not
+        Identifier icon = CHECK_LOCATION;
+        RenderSystem.setShaderColor(0.0F, 1.0F, 0.0F, 1.0F);
+        if (!this.updateEntry.isEnabled()) {
+            RenderSystem.setShaderColor(1.0F, 0.0F, 0.0F, 1.0F);
+            icon = X_LOCATION;
+        }
+        RenderSystem.enableBlend();
+        context.drawTexture(icon, entryWidth-iconSize, y, 0.0F, 0.0F, iconSize, iconSize, iconSize, iconSize);
+        RenderSystem.disableBlend();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         // text rendering logic
         TextRenderer font = this.client.textRenderer;
-        int maxTextWidth = entryWidth - iconSize - 3;
+        int maxTextWidth = entryWidth - (iconSize * 2) - 6;
         // trim text lengths if needed
         StringVisitable trimmedName = trimText(updateEntry.getSong().getSongName(), font, maxTextWidth);
         StringVisitable trimmedAuthor = trimText(String.format("By: %s", updateEntry.getSong().getAuthor()), font, maxTextWidth);
@@ -56,7 +68,8 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
         context.drawText(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, 0xFFFFFF, false);
         context.drawText(font, Language.getInstance().reorder(trimmedAuthor), x + iconSize + 3, y + 1 + 10, 0xAAAAAA, false);
         context.drawText(font, Language.getInstance().reorder(trimmedFile), x + iconSize + 3, y + 1 + 20, 0xAAAAAA, false);
-        // if entry is disabled, render a transparent grey box on top
+        // render icon on right side to say if its disabled or not
+
 
     }
 
