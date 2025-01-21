@@ -45,5 +45,9 @@
   "timm.update.confirm.accept.tooltip": "Download selected files to update",
   "timm.update.confirm.decline.text": "Decline",
   "timm.update.confirm.decline.tooltip": "Proceed to Main Menu without downloading updates.",
+  "timm.update.confirm.enableAll.text": "Enable All",
+  "timm.update.confirm.enableAll.tooltip": "Enable all songs in the list to download",
+  "timm.update.confirm.disableAll.text": "Disable All",
+  "timm.update.confirm.disableAll.tooltip": "Disable all songs in the list from downloading",
   "timm.": ""
 }

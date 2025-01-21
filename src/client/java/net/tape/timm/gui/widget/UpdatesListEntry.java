@@ -109,4 +109,12 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
     public UpdateEntry getUpdateEntry() {
         return this.updateEntry;
     }
+
+    public void enable() {
+        this.updateEntry.setEnabled(true);
+    }
+
+    public void disable() {
+        this.updateEntry.setEnabled(false);
+    }
 }

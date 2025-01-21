@@ -179,21 +179,21 @@ public class UpdateConfirmScreen extends Screen {
         // initialize enable all button
         this.enableAllButton = new SimpleButton(
                 this,
-                button -> {},
-                "",
-                "",
+                button -> {enableAllClick();},
+                "timm.update.confirm.enableAll.text",
+                "timm.update.confirm.enableAll.tooltip",
                 10,
-                25 + SimpleButton.DEFAULT_HEIGHT + 5
+                45
         );
 
         // initialize disable all button
         this.disableAllButton = new SimpleButton(
                 this,
-                button -> {},
-                "",
-                "",
+                button -> {disableAllClick();},
+                "timm.update.confirm.disableAll.text",
+                "timm.update.confirm.disableAll.tooltip",
                 -10,
-                25 + SimpleButton.DEFAULT_HEIGHT + 5
+                45
         );
         // initialize toggle updates button
 
@@ -229,6 +229,18 @@ public class UpdateConfirmScreen extends Screen {
         updateGetter = new UpdateGetter();
         updateGetter.start();
         downloadStarted = true;
+    }
+
+    private void enableAllClick() {
+        for (UpdatesListEntry entry : this.updateList.children()) {
+            entry.enable();
+        }
+    }
+
+    private void disableAllClick() {
+        for (UpdatesListEntry entry : this.updateList.children()) {
+            entry.disable();
+        }
     }
 
     @Override
