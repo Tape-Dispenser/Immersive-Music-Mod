@@ -27,7 +27,6 @@ public class ClientTickMixin {
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	private void init(CallbackInfo info) {
 
-
 		if (!songControls.soundEngineStarted) {
 			return;
 		}
@@ -40,27 +39,11 @@ public class ClientTickMixin {
 			return;
 		}
 
-		if (songControls.inTimer) {
-
-			if (songControls.timer > 0) {
-				songControls.timer -= 1;
+		if (!songControls.inTimer) {
+			if (songControls.nowPlaying() != null) {
 				return;
 			}
-
-			// timer has run out, play new song
-			songControls.inTimer = false;
-			songControls.play(SongSelector.pickSong(songControls.song_rng));
-
-			// debug logging
-			if (modConfig.debugLogging) {
-				Song x = songControls.nowPlaying();
-				if (x != null) {
-					LOGGER.info(String.format("now playing : %s (%s)", x.getSongName(), x.getPathOrId()));
-				} else {
-					LOGGER.warn("failed to pick song!");
-				}
-			}
-		} else if (songControls.nowPlaying() == null) { // not in timer, and current song has run out
+			// not in timer, and current song has run out
 			// set timer and rng delay time
 			songControls.inTimer = true;
 			long x; // delay time
@@ -75,6 +58,27 @@ public class ClientTickMixin {
 			// debug logging
 			if (modConfig.debugLogging) {
 				LOGGER.info("ticks until next song: ".concat(String.valueOf(x)));
+			}
+			return;
+		}
+
+		// in delay timer
+
+		if (songControls.timer > 0) {
+			songControls.timer -= 1;
+			return;
+		}
+		// timer has run out, play new song
+		songControls.inTimer = false;
+		songControls.play(SongSelector.pickSong(songControls.song_rng));
+
+		// debug logging
+		if (modConfig.debugLogging) {
+			Song x = songControls.nowPlaying();
+			if (x != null) {
+				LOGGER.info(String.format("now playing : %s (%s)", x.getSongName(), x.getPathOrId()));
+			} else {
+				LOGGER.warn("failed to pick song!");
 			}
 		}
 	}

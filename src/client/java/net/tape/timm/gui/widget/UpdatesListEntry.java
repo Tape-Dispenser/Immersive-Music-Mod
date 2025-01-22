@@ -68,9 +68,6 @@ public class UpdatesListEntry extends AlwaysSelectedEntryListWidget.Entry<Update
         context.drawText(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, 0xFFFFFF, false);
         context.drawText(font, Language.getInstance().reorder(trimmedAuthor), x + iconSize + 3, y + 1 + 10, 0xAAAAAA, false);
         context.drawText(font, Language.getInstance().reorder(trimmedFile), x + iconSize + 3, y + 1 + 20, 0xAAAAAA, false);
-        // render icon on right side to say if its disabled or not
-
-
     }
 
     public StringVisitable trimText(String text, TextRenderer font, int maxWidth) {
