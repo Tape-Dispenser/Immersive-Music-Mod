@@ -17,11 +17,12 @@ public class SongRegistry {
 
     private static boolean started = false;
 
-    static final int ADD_SUCCESS = 0;
-    static final int MISSING_FAIL = -1; // you tried to add a song that doesn't exist locally
-    static final int RESOURCE_FAIL = -2; // you tried to add a resource song on the fly
-    static final int EXISTS_FAIL = -3; // you tried to add a song that already exists in the registry
-    static final int JSON_FAIL = -4; // you tried to add a song that doesn't exist in songList.json
+    public static final int ADD_SUCCESS = 0;
+    public static final int MISSING_FAIL = -1; // you tried to add a song that doesn't exist locally
+    public static final int RESOURCE_FAIL = -2; // you tried to add a resource song on the fly
+    public static final int EXISTS_FAIL = -3; // you tried to add a song that already exists in the registry
+    public static final int JSON_FAIL = -4; // you tried to add a song that doesn't exist in songList.json
+    public static final int NULL_FAIL = -5; // you tried to add a null song
 
     public static Map<String, Song> songList = new HashMap<>();
 
@@ -129,6 +130,10 @@ public class SongRegistry {
     }
 
     public static int addSong(Song songToAdd) {
+        if (songToAdd == null) {
+            return NULL_FAIL;
+        }
+
         if (!songToAdd.isFile()) {
             return RESOURCE_FAIL;
         }
@@ -173,4 +178,63 @@ public class SongRegistry {
     }
 
     public static boolean isStarted() {return started;}
+
+    public static Song searchForSongInJSON(File file) {
+        JsonObject songList = getSongList();
+        if (songList == null) {
+            throw new RuntimeException("Error parsing songList.json: Either the file is missing or songList.json is missing the songs object");
+        }
+        Set<Map.Entry<String, JsonElement>> entrySet = songList.entrySet();
+        for (Map.Entry<String, JsonElement> entry : entrySet) {
+            // check if song object is an actual JSON object
+            JsonObject songObj;
+            try {
+                songObj = entry.getValue().getAsJsonObject();
+            } catch (IllegalStateException e) {
+                timmMain.LOGGER.warn("Song {} formatted incorrectly!", entry.getKey());
+                continue;
+            }
+            String fileName;
+            // get song metadata
+            boolean isFile;
+            String filePath;
+            String author;
+            String songName;
+            try {
+                isFile = songObj.get("is_file?").getAsBoolean();
+            } catch (IllegalStateException e) {
+                timmMain.LOGGER.warn("Song {} missing \"is_file?\" field!", entry.getKey());
+                continue;
+            }
+            try {
+                fileName = songObj.get("file/id").getAsString();
+                filePath = String.valueOf(new File(configManager.timmMusicDir, fileName));
+            } catch (IllegalStateException e) {
+                timmMain.LOGGER.warn("Song {} missing \"file/id\" field!", entry.getKey());
+                continue;
+            }
+            try {
+                songName = songObj.get("song_name").getAsString();
+            } catch (IllegalStateException e) {
+                timmMain.LOGGER.warn("Song {} missing \"song_name\" field!", entry.getKey());
+                continue;
+            }
+            try {
+                author = songObj.get("author").getAsString();
+            } catch (IllegalStateException e) {
+                timmMain.LOGGER.warn("Song {} missing \"author\" field!", entry.getKey());
+                continue;
+            }
+
+            if (!isFile) {
+                continue;
+            }
+
+            if (!Objects.equals(fileName, file.getName())) {
+                continue;
+            }
+            return new FileSong(filePath, songName, author);
+        }
+        return null;
+    }
 }

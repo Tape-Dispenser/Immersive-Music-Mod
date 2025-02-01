@@ -68,64 +68,6 @@ public class UpdateConfirmScreen extends Screen {
         return false;
     }
 
-    private Song searchForSongInJSON(File file) {
-        File songListPath = new File(configManager.timmMusicDir, "songList.json");
-        JsonObject songList = SongRegistry.getSongList();
-        if (songList == null) {
-            throw new RuntimeException("Error parsing songList.json: Either the file is missing or songList.json is missing the songs object");
-        }
-        Set<Map.Entry<String, JsonElement>> entrySet = songList.entrySet();
-        for (Map.Entry<String, JsonElement> entry : entrySet) {
-            // check if song object is an actual JSON object
-            JsonObject songObj;
-            try {
-                songObj = entry.getValue().getAsJsonObject();
-            } catch (IllegalStateException e) {
-                timmMain.LOGGER.warn(String.format("Song %s formatted incorrectly!", entry.getKey()));
-                continue;
-            }
-            // get song metadata
-            boolean isFile;
-            String filePath;
-            String author;
-            String songName;
-            try {
-                isFile = songObj.get("is_file?").getAsBoolean();
-            } catch (IllegalStateException e) {
-                timmMain.LOGGER.warn(String.format("Song %s missing \"is_file?\" field!", entry.getKey()));
-                continue;
-            }
-            try {
-                filePath = songObj.get("file/id").getAsString();
-            } catch (IllegalStateException e) {
-                timmMain.LOGGER.warn(String.format("Song %s missing \"file/id\" field!", entry.getKey()));
-                continue;
-            }
-            try {
-                songName = songObj.get("song_name").getAsString();
-            } catch (IllegalStateException e) {
-                timmMain.LOGGER.warn(String.format("Song %s missing \"song_name\" field!", entry.getKey()));
-                continue;
-            }
-            try {
-                author = songObj.get("author").getAsString();
-            } catch (IllegalStateException e) {
-                timmMain.LOGGER.warn(String.format("Song %s missing \"author\" field!", entry.getKey()));
-                continue;
-            }
-
-            if (!isFile) {
-                continue;
-            }
-
-            if (!Objects.equals(filePath, file.getName())) {
-                continue;
-            }
-            return new FileSong(filePath, songName, author);
-        }
-        return null;
-    }
-
     @Override
     public void init() {
         if (getSongs.updates.code() != awsHelper.SUCCESS && getSongs.updates.code() != awsHelper.NO_LOCAL) {
@@ -145,7 +87,9 @@ public class UpdateConfirmScreen extends Screen {
 
         // add all files in GetUpdatesReturn to update list widget
         for (File fileToUpdate : getSongs.updates.filesToUpdate()) {
-            Song song = searchForSongInJSON(fileToUpdate);
+            File localFileToUpdate = new File(configManager.timmMusicDir, String.valueOf(fileToUpdate));
+            timmMain.LOGGER.info(String.valueOf(localFileToUpdate));
+            Song song = SongRegistry.searchForSongInJSON(localFileToUpdate);
             if (song == null) {
                 timmMain.LOGGER.warn("Could not find file \"{}\" in songList.json", fileToUpdate.getName());
                 continue;
