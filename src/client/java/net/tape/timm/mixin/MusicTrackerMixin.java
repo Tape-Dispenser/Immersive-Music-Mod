@@ -10,8 +10,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MusicTracker.class)
-public class MusicSoundMixin {
-	@Inject(method = "play(Lnet/minecraft/sound/MusicSound;)V", at = @At(value = "HEAD"), cancellable = true) // TODO: this will run every tick, a cleaner system is needed!!!!!
+public class MusicTrackerMixin {
+	// mojank needs to stop doing stupid shit like this
+	// what the fuck was wrong with MusicSound
+	@Inject(method = "play(Lnet/minecraft/client/sound/MusicInstance;)V", at = @At(value = "HEAD"), cancellable = true) // TODO: this will run every tick, a cleaner system is needed!!!!!
 	private void playMixin(CallbackInfo info) {
 		info.cancel();
 	}
