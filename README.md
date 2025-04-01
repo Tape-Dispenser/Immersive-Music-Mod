@@ -1,5 +1,8 @@
 # The Immersive Music Mod
 
+# ANNOUNCEMENT
+I am no longer developing for The Immersive Music Mod. For anyone who wishes to continue development for the project, feel free to dm me on discord `@tape_os` with any questions you may have about the codebase.
+
 ## Download:
 https://modrinth.com/mod/immersivemusicmod
 
